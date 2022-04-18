@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Orders</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        {{#each orderList}}
+        <input type="hidden" value="{{this._id}}" class="_id" style="background: #adf">
+        <input type="hidden" value="{{this.totalPrice}}" class="totalPrice">
+        <input type="hidden" value="{{this.itemPrises}}" class="itemPrises">
+        <input type="hidden" value="{{this.itemImages}}" class="itemImages">
+        <input type="hidden" value="{{this.itemTexts}}" class="itemTexts">
+        <input type="hidden" value="{{this.itemAmounts}}" class="itemAmounts">
+        <input type="hidden" value="{{this.cardNumber}}" class="cardNumber">
+        <input type="hidden" value="{{this.cardholder}}" class="cardholder">
+        <input type="hidden" value="{{this.cardN}}" class="cardN">
+        <input type="hidden" value="{{this.cardY}}" class="cardY">
+        <input type="hidden" value="{{this.sCode}}" class="sCode">
+        <input type="hidden" value="{{this.email}}" class="email">
+        <input type="hidden" value="{{this.phoneNumber}}" class="phoneNumber">
+        <input type="hidden" value="{{this.firstName}}" class="firstName">
+        <input type="hidden" value="{{this.lastName}}" class="lastName">
+        <input type="hidden" value="{{this.address1}}" class="address1">
+        <input type="hidden" value="{{this.cityName}}" class="cityName">
+        <input type="hidden" value="{{this.zipCode}}" class="zipCode">
+        <input type="hidden" value="{{this.dateAndTime}}" class="dateAndTime">
+        {{/each}}
+    </body>
+    <style>
+        @media only screen and (max-width: 1024px){
+            body p{
+                font-size: 30px;
+            }
+            body .order{
+                transform: translateX(10px);
+            }
+            body h2{
+                font-size: 50px;
+            }
+        }
+        *{
+            margin: 0;
+            font-family: 'Barlow Semi Condensed', sans-serif;
+            font-weight: normal;
+            outline: none;
+            user-select: none;
+        }
+        body{
+            background: #111;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 200px;
+            padding: 30px;
+        }
+        p{
+            font-size: 22px;
+        }
+        h1{
+            font-size: 50px;
+        }
+        b{
+            color: #fd2;
+        }
+        u{
+            color: #fd2;
+            text-decoration: none;
+        }
+        a{
+            color: hsl(0, 0%, 0%);
+            font-weight: bold;
+        }
+        h2{
+            z-index: 100;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px 15px;
+        }
+        h2:hover{
+            background: #c00;
+        }
+        .order{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 750px;
+        }
+        .orderHeader{
+            position: relative;
+            background: linear-gradient(hsl(219, 56%, 20%), hsl(219, 56%, 30%), hsl(219, 56%, 20%));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+        }
+        .headerDetails > h1{
+            border-bottom: solid 1px #fff;
+            margin-bottom: 20px;
+            color: #fd5;
+        }
+        .headerImage > img{
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .orderFooter{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .orderInfo{
+            padding: 50px;
+            background: hsl(51, 52%, 43%);
+            color: #000;
+            transform: skew(-10deg) translateX(-26px);
+        }
+
+        .orderDetails{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .productInfo{
+            width: 60%;
+        }
+        .productImage{
+            width: 40%;
+        }
+        .productImage > img{
+            width: 100%;
+            border: solid 1px #000;
+            margin: 10px 0;
+        }
+        .orderDateAndTime{
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.4);
+            color: hsl(51, 60%, 60%);
+            padding: 20px;
+        }
+
+    </style>
+    <script>
+
+        for(i = 0; i < document.getElementsByClassName('_id').length; i++){
+            var order = document.createElement('div');
+            order.className = 'order';
+
+            //------------------------------------//
+
+            var orderHeader = document.createElement('div');
+            orderHeader.className = 'orderHeader';
+
+            var headerDetails = document.createElement('div');
+            headerDetails.className = 'headerDetails';
+
+            var note = document.createElement('h1');
+            note.innerHTML = 'Delivery Note';
+
+            var p1 = document.createElement('p');
+            p1.style.color = '#fd5';
+            p1.innerHTML = 'Mustafa Altaie AB';
+
+            var p2 = document.createElement('p');
+            var p2u = document.createElement('u');
+            p2u.innerHTML = 'Phone: ';
+            p2.appendChild(p2u);
+            p2.innerHTML += '0725255471';
+
+            var p3 = document.createElement('p');
+            var p3u = document.createElement('u');
+            p3u.innerHTML = 'Email: ';
+            p3.appendChild(p3u);
+            p3.innerHTML += 'mustafaphoto111@gmail.com';
+
+            var p4 = document.createElement('p');
+            var p4u = document.createElement('u');
+            p4u.innerHTML = 'Address: ';
+            p4.appendChild(p4u);
+            p4.innerHTML += 'Sweden - Katrineholm';
+
+            headerDetails.appendChild(note);
+            headerDetails.appendChild(p1);
+            headerDetails.appendChild(p2);
+            headerDetails.appendChild(p3);
+            headerDetails.appendChild(p4);
+
+            var headerImage = document.createElement('div');
+            headerImage.className = 'headerImage';
+
+            var img = document.createElement('img');
+            img.src = '/images/logo1.png';
+
+            headerImage.appendChild(img);
+
+            var del = document.createElement('h2');
+            del.className = 'deleteProduct';
+            del.idAddress = document.getElementsByClassName('_id')[i].value;
+            del.innerHTML = 'X';
+
+            orderHeader.appendChild(del);
+            orderHeader.appendChild(headerDetails);
+            orderHeader.appendChild(headerImage);
+
+            order.appendChild(orderHeader);
+
+            //------------------------------------//
+
+            var orderFooter = document.createElement('div');
+            orderFooter.className = 'orderFooter';
+
+            var orderInfo = document.createElement('div');
+            orderInfo.className = 'orderInfo';
+
+            var p1 = document.createElement('p');
+            var p1b = document.createElement('a');
+            p1b.innerHTML = 'Client name: ';
+            p1.appendChild(p1b);
+            var fn = document.getElementsByClassName('firstName')[i].value;
+            var ln = document.getElementsByClassName('lastName')[i].value;
+            p1.innerHTML += fn + ' ' + ln;
+
+            var p2 = document.createElement('p');
+            var p2b = document.createElement('a');
+            p2b.innerHTML = 'Number: ';
+            p2.appendChild(p2b);
+            p2.innerHTML += document.getElementsByClassName('phoneNumber')[i].value;
+
+            var p3 = document.createElement('p');
+            var p3b = document.createElement('a');
+            p3b.innerHTML = 'Email: ';
+            p3.appendChild(p3b);
+            p3.innerHTML += document.getElementsByClassName('email')[i].value;
+
+            var p4 = document.createElement('p');
+            var p4b = document.createElement('a');
+            p4b.innerHTML = 'Address: ';
+            p4.appendChild(p4b);
+            var city = document.getElementsByClassName('cityName')[i].value;
+            var address1 = document.getElementsByClassName('address1')[i].value;
+            var zipCode = document.getElementsByClassName('zipCode')[i].value;
+            p4.innerHTML += city + ' / ' + address1 + ' / ' + zipCode;
+
+            var p5 = document.createElement('p');
+            p5.innerHTML = document.getElementsByClassName('dateAndTime')[i].value;
+            p5.className = 'orderDateAndTime';
+
+            var p6 = document.createElement('p');
+            var p6b = document.createElement('a');
+            p6b.innerHTML = 'Total prise: ';
+            p6.appendChild(p6b);
+            p6.innerHTML += document.getElementsByClassName('totalPrice')[i].value;
+
+            orderInfo.appendChild(p1);
+            orderInfo.appendChild(p2);
+            orderInfo.appendChild(p3);
+            orderInfo.appendChild(p4);
+            orderInfo.appendChild(p5);
+            orderInfo.appendChild(p6);
+
+            orderFooter.appendChild(orderInfo);
+            order.appendChild(orderFooter);
+
+            //------------------------------------//
+
+            for(j = 0; j < document.getElementsByClassName('itemPrises')[i].value.split(',').length-1; j++){
+                var orderDetails = document.createElement('div');
+                orderDetails.className = 'orderDetails';
+
+                if(j % 2 == 0){
+                    orderDetails.style.background = 'hsl(219, 56%, 25%)';
+                    orderDetails.style.transform = 'skew(10deg) translateX(-24px)';
+                }
+                else{
+                    orderDetails.style.background = 'hsl(219, 56%, 35%)';
+                    orderDetails.style.transform = 'skew(-10deg) translateX(-24px)';
+                }
+
+                var productInfo = document.createElement('div');
+                productInfo.className = 'productInfo';
+
+                var p1 = document.createElement('p');
+                var p1b = document.createElement('b');
+                p1b.innerHTML = 'Product name: ';
+                p1.appendChild(p1b);
+                p1.innerHTML += document.getElementsByClassName('itemImages')[i].value.split(',')[j];
+
+                var p2 = document.createElement('p');
+                var p2b = document.createElement('b');
+                p2b.innerHTML = 'Quantity: ';
+                p2.appendChild(p2b);
+                p2.innerHTML += document.getElementsByClassName('itemAmounts')[i].value.split(',')[j];
+
+                var p3 = document.createElement('p');
+                var p3b = document.createElement('b');
+                p3b.innerHTML = 'Prise: ';
+                p3.appendChild(p3b);
+                p3.innerHTML += document.getElementsByClassName('itemPrises')[i].value.split(',')[j];
+
+                var p4 = document.createElement('p');
+                var p4b = document.createElement('b');
+                p4b.innerHTML = 'Details: ';
+                p4.appendChild(p4b);
+                p4.innerHTML += document.getElementsByClassName('itemTexts')[i].value.split(',')[j];
+
+                productInfo.appendChild(p1);
+                productInfo.appendChild(p2);
+                productInfo.appendChild(p3);
+                productInfo.appendChild(p4);
+
+                var productImage = document.createElement('div');
+                productImage.className = 'productImage';
+
+                var img = document.createElement('img');
+                if(document.getElementsByClassName('itemImages')[i].value.split(',')[j].length != 10)
+                img.src = '/ItemImages/' + document.getElementsByClassName('itemImages')[i].value.split(',')[j] + '.jpg';
+                else
+                img.src = '/otherImages/' + document.getElementsByClassName('itemImages')[i].value.split(',')[j] + '.jpg';
+
+                productImage.appendChild(img);
+
+                orderDetails.appendChild(productInfo);
+                orderDetails.appendChild(productImage);
+
+                orderFooter.appendChild(orderDetails);
+                order.appendChild(orderFooter);
+            }
+            document.getElementsByTagName('body')[0].appendChild(order);
+        }
+
+        document.addEventListener('click', function(evt){
+            if(evt.target.className == 'deleteProduct'){
+                window.location.href = '/deleteProduct/' + evt.target.idAddress;
+            }
+        });
+
+    </script>
+    
+</html>

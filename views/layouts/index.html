@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <script src="mustafaButton.js"></script>
+    <body>
+        <nav>
+            <img src="images/account.png" id="accountIcon">
+            <div id="navLogo">
+                <img src="images/logo1.png">
+            </div>
+            <div id="navOptions">
+                <p>Home</p>
+                {{#each navOptionList}}
+                <p class="navTap">{{this.optionName}}</p>
+                {{/each}}
+                {{#each content}}
+                <p style="color: hsl(60, 25%, 55%);" id="navContentTextNav">{{this.contentName}}</p>
+                {{/each}}
+            </div>
+        </nav>
+
+        {{#each NewContentList}}
+        <input type="hidden" value="{{this._id}}" class="NewContentList_id">
+        <input type="hidden" value="{{this.contentTitle}}" class="contentTitle">
+        <input type="hidden" value="{{this.newContentUniqueNumber}}" class="newContentUniqueNumber">
+        {{/each}}
+
+        <div id="contentList"></div>
+
+        <div id="clockWrapper">
+            <div id="milM"><div style="width: 50%; height: 100%; border-radius: 50% 0 0 50%"></div></div>
+            <div id="milH"><div style="width: 50%; height: 100%; border-radius: 50% 0 0 50%"></div></div>
+            <div id="milS"><div style="background: rgb(255, 10, 5); width: 60%; height: 100%; border-radius: 50% 0 0 50%"></div></div>
+            <div id="point"></div>
+        </div>
+
+        <div id="sectionHome">
+            <div id="homeTextCenter">
+                {{#each homeTextData}}
+                <h1>{{this.first}}</h1>
+                <h3>{{this.second}}</h3>
+                <p>{{this.third}}</p>
+                {{/each}}
+            </div>
+            <p id="homePicSlideToLeft"><</p>
+            <p id="homePicSlideToRight">></p>
+            <div id="homePicSlide"></div>
+            {{#each motionSpeedValue}}
+            <input type="hidden" value="{{this.rangeVal}}" id="motionSpeedValue">
+            {{/each}}
+            <input type="hidden" value="{{homePicAllFileLength}}" id="homePicAllFileLength">
+        </div>
+
+        <b id="homeLearnMore">Learn More</b>
+
+        <div id="section1">
+            {{#each imageSizeValue}}
+            <input type="hidden" value="{{this.sizeValue}}" id="section1SizeData">
+            {{/each}}
+            {{#each spaceValue}}
+            <input type="hidden" value="{{this.spacevalue}}" id="section1SpaceData">
+            {{/each}}
+
+            <span id="goldenMarkWrapper">
+                <span id="goldenMark">
+                    <h1>Mustafa Altaie</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur</p>
+                </span>
+            </span>
+
+            <input type="hidden" value="{{section1ImagesDataLngth}}" id="section1ImagesDataLngth">
+            
+            <div id="sectionOctogan"></div>
+        </div>
+
+        <div id="sectionSpecialOffers">
+            {{#each NewOfferData}}
+            <input type="hidden" value="{{this._id}}" class="offerImage_idDb">
+            <input type="hidden" value="{{this.offerImageName}}" class="offerImageNameDB">
+            <input type="hidden" value="{{this.offerTitle}}" class="offerTitleDB">
+            <input type="hidden" value="{{this.offerText}}" class="offerTextDB">
+            {{/each}}
+
+            {{#each sliderWidthData}}
+            <input type="hidden" value="{{this._id}}" id="sliderWidth_id">
+            <input type="hidden" value="{{this.sliderWdth}}" id="sliderWidthData">
+            {{/each}}
+
+            {{#each sliderHeightData}}
+            <input type="hidden" value="{{this._id}}" id="sliderHeight_id">
+            <input type="hidden" value="{{this.sliderHght}}" id="sliderHeightData">
+            {{/each}}
+
+            <div id="specialOfferWrapperMain">
+                <div id="specialOfferWrapper"></div>
+            </div>
+            
+            <div id="specialOfferChannels"></div>
+        </div>
+
+        <div id="fotterDiv">
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero at soluta quaerat consequatur ipsum quis quibusdam necessitatibus cum nulla voluptatum quasi quos aut enim totam repellendus, a ducimus praesentium magnam.</p>
+            </div>
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero at soluta quaerat consequatur ipsum quis quibusdam necessitatibus cum nulla voluptatum quasi quos aut enim totam repellendus, a ducimus praesentium magnam.</p>
+            </div>
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero at soluta quaerat consequatur ipsum quis quibusdam necessitatibus cum nulla voluptatum quasi quos aut enim totam repellendus, a ducimus praesentium magnam.</p>
+            </div>
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero at soluta quaerat consequatur ipsum quis quibusdam necessitatibus cum nulla voluptatum quasi quos aut enim totam repellendus, a ducimus praesentium magnam.</p>
+            </div>
+        </div>
+
+        <div id='signInUpContainer'>
+            <div id="signUpContainer">
+                <form id="signUpForm" action="newAccount" method="post" enctype="multipart/form-data">
+                    <h1>Signup</h1>
+                    <input name="email" id="email" placeholder="Email address" spellcheck="false">
+                    <input name="mobile" id="mobile" placeholder="Mobile number" spellcheck="false">
+                    <input name="firstName" id="firstName" placeholder="First name" spellcheck="false">
+                    <input name="lastName" id="lastName" placeholder="Last name" spellcheck="false">
+                    <input name="password" id="password" type="password" placeholder="Password" spellcheck="false">
+                    <input type="password" placeholder="Confirm password" spellcheck="false">
+                    <p id="signUpBtn" style="background: linear-gradient(to right, hsl(60, 30%, 20%), hsl(60, 10%, 10%)); color: hsl(60, 50%, 60%)">Add image</p>
+                    <button id="signUpSubmit" style="display: none"></button>
+                    <a id="signIn">Already have an account? Signin here</a>
+                    <input type="file" name="file" id="accountImage" style="display: none">
+                </form>
+            </div>
+            <div id="signInContainer">
+                <div id="signInForm">
+                    <h1>Login</h1>
+                    <p>Enter your details below to continue</p>
+                    <input id="accountEmail" placeholder="Email address" spellcheck="false" style="border: none; border-bottom: 1px hsl(60, 25%, 35%) solid">
+                    <input id="accountPassword" type="password" placeholder="Password" spellcheck="false" style="border: none; border-bottom: 1px hsl(60, 25%, 35%) solid">
+                    <a>Forgot password? Click here</a>
+                    <button onclick="logIn()">Login</button>
+                    <a id="signUp">Don't have an account? Signup here</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="personalData">
+            {{#each NewAccountData}}
+            <input type="text" value="{{this.email}}" class="accountEmailData">
+            <input type="text" value="{{this.mobile}}" class="accountMobileData">
+            <input type="text" value="{{this.firstName}}" class="accountFirstNameData">
+            <input type="text" value="{{this.lastName}}" class="accountLastNameData">
+            <input type="text" value="{{this.password}}" class="accountPasswordData">
+            {{/each}}
+        </div>
+
+        <div id="signUpImage">
+            <p id="changeMyImage">Change image</p>
+            <p id="signOut">Sign out</p>
+        </div>
+
+        <form action="changeAccountImage" method="post" enctype="multipart/form-data" style="display: none">
+            <input type="file" name="file" id="signUpImageInput">
+            <input type="text" name="signUpImageFirstName" id="signUpImageFirstName">
+            <input type="text" name="signUpImageLastName" id="signUpImageLastName">
+            <button id="signUpImageInputBtn"></button>
+        </form>
+
+        <form action="contactUs" method="post" id="contactUsPaper">
+            <textarea name="message" id="message" spellcheck="false"></textarea>
+            <input type="hidden" name="sender" id="sender">
+            <input type="hidden" name="number" id="senderNumber">
+            <input type="hidden" name="email" id="senderEmail">
+            <input type="hidden" name="date" id="contactUsDate">
+            <p id="sendMessageP">Send my message</p>
+            <button id="sendMessageB" style="display: none"></button>
+        </form>
+
+        <div id="envelopeContainer">
+            <img src="/images/envelope.png">
+            <div id="envelopeFromToDiv">
+                <p id="envelopeFrom"></p>
+                <p id="envelopeTo">To: Mustafa Altaie AB</p> 
+            </div>
+        </div>
+    </body>
+
+    <style>
+        @media only screen and (max-width: 1000px){
+            body nav{
+                z-index: 200;
+                padding: 30px;
+                font-size: 50px;
+            }
+            body .lines{
+                transform: rotate(20deg) translateY(-70px);
+            }
+            body #navLogo img{
+                height: 150px;
+            }
+            body #navB{
+                display: block;
+            }
+            body #navOptions{
+                position: fixed;
+                flex-direction: column;
+                width: 100%;
+                right: 0;
+                top: 210px;
+                background: rgba(0, 0, 0, 0);
+            }
+            body #navOptions p{
+                font-size: 60px;
+                padding: 60px;
+                margin: -1px 0;
+                background: #111;
+                width: 100%;
+                height: 71px;
+                transition: 0.4s;
+            }
+            body #accountIcon{
+                position: absolute;
+                right: 20%;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 120px;
+                height: 120px;
+                border-right: none;
+            }
+            body #contentList{
+                width: 100%;
+                right: unset;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            body #contentList p{
+                padding: 50px 0;
+                font-size: 60px;
+                transition: transform 0.5s, opacity 0.3s, margin 0.1s;
+            }
+            body #homePicSlideToLeft, body #homePicSlideToRight{
+                z-index: 200;
+            }
+            body #clockWrapper{
+                display: none;
+            }
+            body .homePic{
+                object-position: right 100%;
+            }
+            body #signUpImage{
+                position: absolute;
+                right: 50px;
+            }
+            body #signUpImage > p{
+                font-size: 50px;
+                padding: 40px;
+            }
+            body #signInUpContainer > div{
+                width: 800px;
+                height: 800px;
+            }
+            body #signInUpContainer h1{
+                font-size: 70px;
+            }
+            body #signInUpContainer input, body #signInUpContainer p, body #signInUpContainer a, body #signInUpContainer button, body #signUpBtn{
+                font-size: 40px;
+            }
+            body #contactUsPaper{
+                top: 300px;
+                left: 0;
+                width: 700px;
+                height: 400px;
+            }
+            body #contactUsPaper > textarea{
+                font-size: 50px;
+            }
+            body #contactUsPaper > p{
+                font-size: 40px;
+            }
+            body #envelopeContainer{
+                top: 450px;
+                left: 0;
+                width: 700px;
+                height: 500px;
+            }
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Barlow Semi Condensed', sans-serif;
+            font-size: 18px;
+            user-select: none;
+        }
+        body{
+            background: #111;
+        }
+        body::-webkit-scrollbar{
+            background: #111;
+            width: 15px;
+        }
+        body::-webkit-scrollbar-thumb{
+            background: hsl(60, 20%, 20%);
+            border: solid 2px #111;
+            padding: 0 1px;
+            border-radius: 15px;
+        }
+        body::-webkit-scrollbar-thumb:hover{
+            background: hsl(60, 20%, 30%);
+        }
+        nav{
+            position: relative;
+            background: #111;
+            color: hsl(60, 18%, 80%);;
+            border-bottom: solid 1px #333;
+            display: flex;
+            padding: 20px;
+            user-select: none;
+        }
+        .lines{
+            position: absolute;
+            height: 100%;
+            width: 1px;
+            transform: rotate(20deg) translateY(-20px);
+            opacity: 0.04;
+            pointer-events: none;
+        }
+        #navLogo{
+            cursor: pointer;
+        }
+        #navLogo img{
+            padding: 0 20px;
+            height: 55px;
+            pointer-events: none;
+        }
+        #navB{
+            display: none;
+        }
+        #navOptions{
+            z-index: 100;
+            position: absolute;
+            background: #111;
+            display: flex;
+            right: 150px;
+            top: 20px;
+            align-items: center;
+            transition: 0.2s;
+        }
+        #navOptions p{
+            padding: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            text-align: center;
+            border-right: solid 1px #333;
+            transition: 0.05s;
+        }
+        #navOptions p:hover{
+            transform: translateY(-3px);
+        }
+        #accountIcon{
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            padding: 10px;
+            border-right: solid 1px #333;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        #contentList{
+            z-index: 100;
+            position: fixed;
+            width: 180px;
+            right: 190px;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+        #contentList p{
+            background: #111;
+            color: hsl(60, 25%, 55%);
+            border-bottom: solid 1px #333;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            word-spacing: 2px;
+            transition: transform 0.3s, opacity 0.3s, margin 0.05s;
+        }
+        #contentList p:hover{
+            margin: 0 -5px;
+            color: hsl(60, 40%, 75%);
+        }
+        
+        #homePicSlideToLeft, #homePicSlideToRight{
+            z-index: 90;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            color: #ddd;
+            font-size: 70px;
+            border-radius: 50%;
+            text-align: center;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        #homePicSlideToRight{
+            right: 0;
+        }
+        #homePicSlideToLeft:hover, #homePicSlideToRight:hover{
+            background: rgba(0, 0, 0, 0.6);
+        }
+        #homePicSlideToLeft:hover{
+            width: 40px;
+            padding: 0 50px 0 10px;
+        }
+        #homePicSlideToRight:hover{
+            width: 40px;
+            padding: 0 10px 0 50px;
+        }
+
+        #clockWrapper{
+            position: absolute;
+            top: 10px;
+            right: 35px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        #clockWrapper > div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #milM{
+            z-index: 10;
+            height: 1px;
+            width: 100%;
+        }
+        #milM > div{
+            background: hsl(81, 39%, 70%);
+        }
+        #milH{
+            height: 1px;
+            width: 70%;
+        }
+        #milH > div{
+            background: hsl(81, 39%, 70%);
+        }
+        #milS{
+            z-index: 20;
+            height: 1px;
+            width: 90%;
+        }
+        #point{
+            z-index: 30;
+            height: 10px;
+            width: 10px;
+            background: #000;
+            border-radius: 50%;
+        }
+        #lineIn{
+            width: 100%;
+            height: 1px;
+        }
+        #line{
+            width: 10%;
+            height: 100%;
+            background: #fff;
+        }
+
+        #homeTextCenter{
+            z-index: 90;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 450px;
+        }
+        #homeTextCenter > h1{
+            font-size: 50px;
+        }
+        #homeTextCenter > h3{
+            font-size: 30px;
+            margin: 5px 0 10px 0;
+            border-bottom: solid 1px #000;
+        }
+        #homeTextCenter > p{
+            font-size: 20px;
+        }
+
+        #homePicSlide{
+            position: relative;
+            height: 100%;
+            display: flex;
+            background: #111;
+        }
+        .homePic{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: left 0%;
+            opacity: 0;
+            pointer-events: none;
+            transition: object-position 20s, opacity 4s;
+        }
+
+        #homeLearnMore{
+            z-index: 100;
+            position: absolute;
+            left: 50%;
+            top: 80%;
+            transform: translateX(-50%);
+            background: #111;
+            color: #ddd;
+            padding: 10px 30px;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        #section1{
+            position: relative;
+        }
+        #goldenMarkWrapper{
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 200px;
+            height: 100px;
+            transform: translateX(-100%);
+            display: flex;
+            align-items: flex-end;
+            overflow-y: hidden;
+        }
+        #goldenMark{
+            position: absolute;
+            width: 150px;
+            height: 75px;
+            padding: 100px 25px 25px 25px;
+            background: rgb(180, 96, 0);
+            border-radius: 50%;
+            text-align: center;
+            text-shadow: 1px 1px 1px rgb(250, 168, 74);
+        }
+        #goldenMark > h1{
+            font-size: 22px;
+            text-shadow: -1px -1px 1px rgb(250, 168, 74);
+        }
+        #sectionOctogan{
+            position: relative;
+            background-image: url('images/green2.jpg');
+            padding: 100px 200px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        #sectionOctogan > div{
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(-90deg);
+            filter: drop-shadow(0 0 1px #fff);
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.07s;
+        }
+        #sectionOctogan > div:hover{
+            filter: drop-shadow(0 0 1px #fff) brightness(70%);
+        }
+        .sectionOctoganImage{
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        .itemsDemo{
+            position: relative;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            height: 600px;
+        }
+        .itemInformation{
+            position: absolute;
+            font-size: 30px;
+            background: hsl(60, 12%, 16%);
+            color: #ddd;
+            width: 60%;
+            padding: 40px 20% 100px 20%;
+            text-align: center;
+            bottom: 0;
+        }
+        .itemsDemo > b{
+            position: absolute;
+            background: #111;
+            color: #fff;
+            padding: 10px 40px;
+            left: 50%;
+            transform: translate(-50%, 360px);
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+
+        #sectionSpecialOffers{
+            position: relative;
+            background: #222219;
+        }
+        #specialOfferWrapperMain{
+            position: relative;
+            width: 70%;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+        #specialOfferWrapperMain::-webkit-scrollbar{
+            display: none;
+        }
+        #specialOfferWrapper{
+            position: relative;
+            display: flex;
+        }
+        #specialOfferWrapper > div{
+            position: relative;
+        }
+        .specialOfferImage{
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .specialOfferInfo{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80%;
+            padding: 40px 10%;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .specialOfferInfo > h1{
+            font-size: 50px;
+            font-weight: normal;
+        }
+        .specialOfferInfo > p{
+            font-size: 25px;
+            margin: 30px 0 55px 0;
+        }
+        .specialOfferInfo > b{
+            font-size: 30px;
+            background: #3a0;
+            padding: 10px 30px;
+            font-weight: normal;
+            cursor: pointer;
+            border-radius: 50px;
+        }
+        .specialOfferInfo > b:hover{
+            background: #4c0;
+        }
+        #specialOfferChannels{
+            position: absolute;
+            top: 90%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        #specialOfferChannels > div{
+            width: 15px;
+            height: 15px;
+            margin: 0 4px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: 70px;
+            transition: margin-top 0.1s, transform 0.03s;
+        }
+        #specialOfferChannels > div:hover{
+            transform: translateY(-2px);
+        }
+
+        #fotterDiv{
+            position: relative;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            padding: 100px 0;
+        }
+        #fotterDiv > div{
+            width: 10%;
+            padding: 0 5%;
+            color: #ddd;
+        }
+
+        #signInUpContainer{
+            z-index: 200;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            color: hsl(60, 25%, 80%);
+            overflow: hidden;
+            pointer-events: none;
+            display: none;
+        }
+        #signInUpContainer > div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            border-radius: 5px;
+            transition: 0.4s;
+            pointer-events: all;
+        }
+        #signInContainer{
+            background: hsl(60, 25%, 20%);
+            border: solid 1px #000;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        #signUpContainer{
+            background: #111;
+            transform: translate(-50%, -50%) rotate(-5deg);
+        }
+        #signInForm, #signUpForm{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+        }
+        #signInUpContainer h1{
+            font-size: 40px;
+            font-weight: normal;
+            color: hsl(60, 40%, 50%);
+            margin-bottom: 20px;
+        }
+        #signInUpContainer input:-webkit-autofill{
+            transition-delay: 3600s;
+        }  
+        #signInUpContainer input{
+            border: 1px solid hsl(60, 20%, 20%);
+            background: rgba(0, 0, 0, 0);
+            color: hsl(60, 45%, 45%);
+            outline: none;
+            margin-top: -1px;
+            font-size: 22px;
+            padding: 10px;
+        }
+        #signInUpContainer input::-webkit-input-placeholder{
+            color: hsl(60, 25%, 35%);
+        }
+        #signInUpContainer p{
+            margin-bottom: 10px;
+            font-size: 25px;
+            white-space: nowrap;
+            color: hsl(60, 30%, 45%);
+            padding: 5px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+        }
+        #signInUpContainer a{
+            margin: 10px 0;
+            font-size: 22px;
+            white-space: nowrap;
+            cursor: pointer;
+            color: hsl(60, 50%, 60%);
+        }
+        #signInUpContainer button, #signUpBtn{
+            padding: 10px 0;
+            border: solid 1px #111;
+            color: hsl(60, 50%, 60%);
+            cursor: pointer;
+            font-size: 22px;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-align: center;
+            background: linear-gradient(to right, hsl(60, 30%, 20%), hsl(60, 10%, 10%));
+        }
+        #signInUpContainer button:hover{
+            background: linear-gradient(to right, hsl(60, 10%, 10%), hsl(60, 30%, 20%));
+        }
+
+        #signUpImage{
+            z-index: 200;
+            position: fixed;
+            text-align: center;
+            display: none;
+        }
+        #signUpImage > p{
+            background: #111;
+            color: hsl(60, 25%, 50%);
+            font-size: 20px;
+            padding: 10px;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        #signUpImage > p:hover{
+            color:hsl(60, 30%, 75%)
+        }
+
+
+        #contactUsPaper{
+            z-index: 100;
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 450px;
+            height: 280px;
+            background-image: url('/images/paper.jpg');
+            background-position: center;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        #contactUsPaper > textarea{
+            width: 90%;
+            height: 90%;
+            resize: none;
+            border: none;
+            outline: none;
+            padding: 5%;
+            background: rgba(0, 0, 0, 0);
+            color: hsl(60, 30%, 70%);
+            text-shadow: 1px 1px 1px #000;
+            font-family: 'Annie Use Your Telescope', cursive;
+            font-size: 30px;
+            text-align: center;
+        }
+        #contactUsPaper > textarea::-webkit-scrollbar{
+            display: none;
+        }
+        #contactUsPaper > p{
+            color: #111;
+            background: hsl(60, 30%, 40%);
+            padding: 5px 10px;
+            transform: translateY(-50%);
+            font-size: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #contactUsPaper > p:hover{
+            background: hsl(60, 30%, 50%);
+        }
+
+        #envelopeContainer{
+            z-index: 100;
+            position: fixed;
+            top: 230px;
+            left: 20px;
+            width: 450px;
+            height: 330px;
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        #envelopeContainer > img{
+            width: 100%;
+            height: 100%;
+            border-radius: 0 0 5px 5px;
+        }
+
+        #envelopeFromToDiv{
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            pointer-events: none;
+        }
+        #envelopeFromToDiv > p{
+            font-size: 35px;
+            color:hsl(60, 40%, 60%);
+            font-family: 'Babylonica', cursive;
+            padding: 10px 30px;
+            white-space: nowrap;
+            text-shadow: 1px 1px 1px #000;
+        }
+    </style>
+
+    <script>
+        function runMustafaBtn(){
+            var btnProperties = ({
+                zIndex: 10,
+                position: 'absolute',
+                idName: "navB",
+                place: 'nav',
+                color: '#ddd',
+                size: 130,
+                top: '40px',
+                left: '82%',
+                speed: 0.3
+            });
+            mustafaButton(btnProperties);
+        }
+        runMustafaBtn();
+
+        sectionHome.style.height = document.documentElement.clientHeight - document.documentElement.clientHeight/4 + 'px';
+
+        var currentHomePicN;
+        var homePicCounter = 0;
+        var homePicCounterI = 0;
+
+        if(document.querySelectorAll('#motionSpeedValue').length == 0)
+        var homePicSliderSpeed = 500;
+        else
+        var homePicSliderSpeed = motionSpeedValue.value * 100;
+
+        for(i = 0; i < homePicAllFileLength.value; i++){
+            var img = document.createElement('img');
+            img.className = "homePic";
+            img.id = "homePic" + i;
+            img.src = "/homePics/homePic" + i + ".jpg";
+            homePicSlide.appendChild(img);
+        }
+
+        for(i = 0; i < document.getElementsByClassName('homePic').length; i++)
+        document.getElementsByClassName('homePic')[i].style.transition = 'object-position ' + homePicSliderSpeed/100*2 + 's, opacity ' + homePicSliderSpeed/100/2 + 's';
+
+
+        if(document.getElementsByClassName('homePic').length > 1){
+            setInterval(function(){
+                homePicCounterI++;
+                if(homePicCounterI >= 10){
+                    homePicCounterI = 0;
+                    homePicCounter++;
+                    if(homePicCounter >= document.getElementsByClassName('homePic').length){
+                        homePicCounter = 0;
+                    }
+                    homePicSlider(homePicCounter);
+                }
+            }, homePicSliderSpeed);
+        }
+        else{
+            homePicSlideToLeft.style.display = "none";
+            homePicSlideToRight.style.display = "none";
+            setInterval(function(){
+                document.getElementsByClassName('homePic')[0].style.objectPosition = 'left 100%';
+                homePicCounter++;
+                if(homePicCounter > 1){
+                    homePicCounter = 0;
+                    document.getElementsByClassName('homePic')[0].style.objectPosition = 'left 0%';
+                }
+            }, homePicSliderSpeed*10);
+        }
+
+        function homePicSlider(n){
+            for(i = 0; i < document.getElementsByClassName('homePic').length; i++){
+                if(window.matchMedia("(max-width: 1000px)").matches)
+                document.getElementsByClassName('homePic')[i].style.objectPosition = 'right 100%';
+                else
+                document.getElementsByClassName('homePic')[i].style.objectPosition = 'left 0%';
+                document.getElementsByClassName('homePic')[i].style.opacity = 0;
+            }
+            if(window.matchMedia("(max-width: 1000px)").matches)
+            document.getElementsByClassName('homePic')[n].style.objectPosition = 'left 100%';
+            else
+            document.getElementsByClassName('homePic')[n].style.objectPosition = 'right 100%';
+            document.getElementsByClassName('homePic')[n].style.opacity = 1;
+            currentHomePicN = n;
+        }
+        setTimeout(function(){homePicSlider(0)}, 10);
+
+        document.getElementById('homePicSlideToLeft').onclick = function(){
+            if(homePicCounter == 0) homePicCounter = document.getElementsByClassName('homePic').length;
+            homePicCounterI = 0;
+            homePicCounter--;
+            homePicSlider(homePicCounter);
+        }
+
+        document.getElementById('homePicSlideToRight').onclick = function(){
+            homePicCounterI = 0;
+            homePicCounter++;
+            if(homePicCounter >= document.getElementsByClassName('homePic').length) homePicCounter = 0;
+            homePicSlider(homePicCounter);
+        }
+
+
+        //------------Nav Lines----------//
+
+        if(window.matchMedia("(min-width: 1000px)").matches){
+            for(i = 0; i < document.documentElement.clientWidth-50; i++){
+                var line = document.createElement('div');
+                line.className = "lines";
+                var ii = Math.ceil(Math.random()*9)
+                line.style.background = '#' + ii + ii + ii;
+                line.style.left = i + 'px';
+                if(i >= 200 && i <= 750) line.style.opacity = 0.00014 * i
+                document.getElementsByTagName('nav')[0].appendChild(line);
+            }
+        }
+
+        document.addEventListener('scroll', function(){
+            if(window.matchMedia("(min-width: 1000px)").matches){
+                if(document.documentElement.scrollTop > 0){
+                    navOptions.style.right = 0;
+                    navOptions.style.position = "fixed";
+                    contentList.style.right = '40px';
+                    navOptions.style.border = "solid 1px #333";
+                    contentList.style.transform = 'translateY(-21px)';
+                }
+                else{
+                    navOptions.style.right = "150px";
+                    navOptions.style.position = "absolute";
+                    navOptions.style.border = "none";
+                    contentList.style.right = "190px";
+                    contentList.style.transform = 'translateY(0px)';
+                }
+
+                if(document.documentElement.scrollTop >= sectionOctogan.offsetTop + sectionOctogan.offsetHeight/2){
+                    var ii = 0;
+                    setInterval(function(){
+                        sectionOctogan.getElementsByTagName('div')[ii].style.transform = 'rotate(-45deg)';
+                        ii++;
+                    }, 100);
+                }
+
+                var nm = 0;
+
+                if(document.documentElement.scrollTop >= document.body.scrollHeight - 722 - fotterDiv.offsetHeight){
+                    var loop = setInterval(function(){
+                        document.getElementById('specialoffer' + nm).style.marginTop = 0;
+                        nm++;
+                        if(nm >= document.getElementsByClassName('offerImage_idDb').length){
+                            clearInterval(loop);
+                        }
+                    }, 50);
+                }
+            }
+        });
+
+        var navBCase = 0;
+        document.addEventListener('click', function(evt){
+            if(evt.target.id == "navB"){
+                if(navBCase == 0){
+                    navCounter(0);
+                    navBCase = 1;
+                }
+                else{
+                    navCounter(100);
+                    navBCase = 0;
+                }
+            }
+            else if(navBCase == 1){
+                navB.click();
+                navBCase = 0;
+            }
+        });
+
+        document.addEventListener('mousedown', function(evt){
+            if(evt.target.id != 'navContentTextNav'
+            && evt.target.className != "contentTitles")
+            showMenuF(100, 0, 'none');
+
+            if(evt.target.parentNode.id != 'signUpForm'
+            && evt.target.parentNode.id != 'signInForm'
+            && evt.target.parentNode.id != 'signInUpContainer'
+            && evt.target.parentNode.id != 'signUpContainer'
+            && evt.target.parentNode.id != 'signInContainer'
+            && evt.target.id != 'accountIcon'){
+                signInUpContainer.style.display = 'none';
+            }
+
+            if(evt.target.id != 'accountIcon'
+            && evt.target.parentNode.id != 'signUpImage'){
+                signUpImage.style.display = 'none';
+                signUpImageFirstName.value = '';
+                signUpImageLastName.value = '';
+                signUpImageInput.value = '';
+                changeMyImage.innerHTML = 'Change image';
+            }
+
+            if(evt.target.innerHTML != 'Contact Us'
+            && evt.target.parentNode.id != 'contactUsPaper'){
+                envelopeAndPaper(20, 0, 'none');
+            }
+        });
+
+
+
+        function navCounter(n){
+            for(i = 0; i < document.getElementById('navOptions').childElementCount; i++){
+                if(i % 2 == 0)   navOptions.getElementsByTagName('P')[i].style.transform = "translateX(-" + n + "%) rotate(-" + n*0.5 + "deg)";
+                else             navOptions.getElementsByTagName('P')[i].style.transform = "translateX(" + n + "%) rotate(" + n*0.5 + "deg)";
+            }
+        }
+
+        if(window.matchMedia("(max-width: 1000px)").matches) navCounter(100);
+        else navOptions.appendChild(accountIcon);
+
+
+        if(window.matchMedia("(max-width: 1000px)").matches){
+            if(navOptions.childElementCount >= 9){
+                for(i = 0; i < navOptions.childElementCount; i++){
+                    navOptions.getElementsByTagName('p')[i].style.padding = ((document.documentElement.clientHeight-300)/navOptions.childElementCount)/5 + 'px';
+                    navOptions.getElementsByTagName('p')[i].style.height = ((document.documentElement.clientHeight-300)/navOptions.childElementCount)/2 + 'px';
+                }
+            }
+        }
+
+
+        for(i = 0; i < document.getElementsByClassName('NewContentList_id').length; i++){
+            var p = document.createElement('p');
+            p.id = "contentTitles" + i;
+            p.className = 'contentTitles';
+            p.innerHTML = document.getElementsByClassName('contentTitle')[i].value;
+            p.linkAddress = document.getElementsByClassName('newContentUniqueNumber')[i].value;
+            contentList.appendChild(p);
+        }
+
+        document.getElementById('navContentTextNav').onclick = function(){
+            showMenuF(0, 1, 'unset');
+        }
+
+        function showMenuF(n, o, p){
+            for(i = 0; i < contentList.childElementCount; i++){
+                contentList.style.pointerEvents = p;
+                contentList.getElementsByTagName('P')[i].style.opacity = o;
+                if(window.matchMedia("(max-width: 1000px)").matches){
+                    if(i % 2 == 0) contentList.getElementsByTagName('P')[i].style.transform = 'translateX(-' + n*4 + 'px) rotate(-' + n/2 + 'deg)';
+                    else contentList.getElementsByTagName('P')[i].style.transform = 'translateX(' + n*4 + 'px) rotate(' + n/2 + 'deg)';
+                }
+                else{
+                    if(i % 2 == 0) contentList.getElementsByTagName('P')[i].style.transform = 'translateX(-' + n + 'px) rotate(-' + n/4 + 'deg)';
+                    else contentList.getElementsByTagName('P')[i].style.transform = 'translateX(' + n + 'px) rotate(' + n/4 + 'deg)';
+                }
+            }
+        }
+        showMenuF(100, 0, 'none');
+
+        document.getElementById('contentList').onclick = function(evt){
+            if(evt.target.className == "contentTitles"){
+                window.location.href = 'products/' + document.getElementById(evt.target.id).linkAddress;
+            }
+        }
+
+
+        for(i = 0; i < section1ImagesDataLngth.value; i++){
+            var div = document.createElement('div');
+                var img = document.createElement('img');
+                img.src = 'section1Images/' + i + '.jpg';
+                img.className = 'sectionOctoganImage';
+            div.appendChild(img);
+            sectionOctogan.appendChild(div);
+        }
+
+        for(i = 0; i < sectionOctogan.childElementCount; i++){
+            document.getElementsByClassName('sectionOctoganImage')[i].style.width = section1SizeData.value + 'px';
+            sectionOctogan.getElementsByTagName('div')[i].style.width = section1SizeData.value + 'px';
+            document.getElementsByClassName('sectionOctoganImage')[i].style.height = section1SizeData.value + 'px';
+            sectionOctogan.getElementsByTagName('div')[i].style.height = section1SizeData.value + 'px';
+        }
+
+        for(i = 0; i < sectionOctogan.childElementCount; i++){
+            sectionOctogan.getElementsByTagName('div')[i].style.margin = section1SpaceData.value + 'px';
+        }
+
+        for(i = 0; i < homePicAllFileLength.value; i++){
+            var div = document.createElement('div');
+            div.id = 'section1Div' + i;
+            div.className = "itemsDemo";
+            div.style.backgroundImage = "url('homePics/homePic" + i + ".jpg')";
+                var p = document.createElement('p');
+                p.className = 'itemInformation';
+                p.id = "itemInformation" + i;
+                readFile(i, 'itemInformation');
+                var b = document.createElement('b');
+                b.innerHTML = "Go to store";
+            div.appendChild(p);
+            div.appendChild(b);
+            section1.appendChild(div);
+        }
+
+        function readFile(n, e){
+            fetch("homePicsText/homePicText" + n + ".txt")
+            .then(function(response){
+                return response.text();
+            })
+            .then(function(text){
+                document.getElementsByClassName(e)[n].innerHTML = text;
+            });
+        }
+        readFile(0);
+
+        document.getElementById('section1').onclick = function(evt){
+            if(evt.target.tagName == 'B')
+            window.location.href = "products";
+        }
+
+        document.getElementById('homeLearnMore').onclick = function(){
+            var scrollTopAmount = document.getElementById('section1Div' + currentHomePicN).offsetTop + document.getElementById('itemInformation' + currentHomePicN).offsetTop + document.getElementById('itemInformation' + currentHomePicN).offsetHeight/2;
+            window.scroll({
+                top: scrollTopAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // -------------------- Create slider from incoming data from mongoose -------------------- //
+
+        for(i = 0; i < document.getElementsByClassName('offerImage_idDb').length; i++){
+            var div = document.createElement('div');
+            div.id = 'offer' + parseInt(i + 1);
+                var img = document.createElement('img');
+                img.src = 'section offer images/' + document.getElementsByClassName('offerImageNameDB')[i].value + '.jpg';
+                img.className = 'specialOfferImage';
+                var div2 = document.createElement('div');
+                div2.className = 'specialOfferInfo';
+                    var h1 = document.createElement('h1');
+                    h1.innerHTML = document.getElementsByClassName('offerTitleDB')[i].value;
+                    var p = document.createElement('p');
+                    p.innerHTML = document.getElementsByClassName('offerTextDB')[i].value;
+                    var b = document.createElement('b');
+                    b.innerHTML = 'Learn More';
+                div2.appendChild(h1);
+                div2.appendChild(p);
+                div2.appendChild(b);
+            div.appendChild(img);
+            if(h1.innerHTML != '' && p.innerHTML != '')
+            div.appendChild(div2);
+            specialOfferWrapper.appendChild(div);
+        }
+
+        for(i = 0; i < document.getElementsByClassName('offerImage_idDb').length; i++){
+            var div = document.createElement('div');
+            div.id = 'specialoffer' + i;
+            div.className = 'specialoffer';
+            specialOfferChannels.appendChild(div);
+        }
+
+        // -------------------- special offers -------------------- //
+
+        specialOfferWrapperMain.style.width = sliderWidthData.value + '%';
+        specialOfferWrapperMain.style.height = sliderHeightData.value + 'px';
+
+        for(i = 0; i < document.getElementsByClassName('specialOfferImage').length; i++)
+        document.getElementsByClassName('specialOfferImage')[i].style.width = specialOfferWrapperMain.offsetWidth + 'px';
+
+        for(i = 0; i < document.getElementsByClassName('specialOfferImage').length; i++)
+        document.getElementsByClassName('specialOfferImage')[i].style.height = specialOfferWrapperMain.offsetHeight + 'px';
+
+        function selectSpecialOffern(n){
+            specialOfferWrapper.style.left = -n + 'px';
+            for(i = 0; i < specialOfferChannels.childElementCount; i++)
+            specialOfferChannels.getElementsByTagName('div')[i].style.background = '#777';
+            document.getElementById('specialoffer' + n/specialOfferWrapperMain.offsetWidth).style.background = '#f20';
+        }
+        selectSpecialOffern(0);
+
+
+        document.getElementById('specialOfferChannels').onclick = function(evt){
+            if(evt.target.className == 'specialoffer'){
+                var n = evt.target.id.substr(12, evt.target.id.length);
+                selectSpecialOffern(n*specialOfferWrapperMain.offsetWidth);
+            }
+        }
+
+
+        var specialOfferWrapperMovePerm = 0;
+        var currentLeft = 0;
+
+        document.getElementById('specialOfferWrapper').addEventListener('mousedown', function(evt){
+            specialOfferWrapperMovePerm = 1;
+            currentLeft = specialOfferWrapper.offsetLeft - event.clientX;
+            specialOfferWrapper.style.left = event.clientX + currentLeft + 'px';
+            document.addEventListener('mousemove', function(){
+                specialOfferWrapper.style.transition = '0s';
+                if(specialOfferWrapperMovePerm == 1)
+                specialOfferWrapper.style.left = event.clientX + currentLeft + 'px';
+                if(specialOfferWrapper.offsetLeft > 0)
+                specialOfferWrapper.style.left = 0;
+                if(specialOfferWrapper.offsetLeft < -(specialOfferChannels.childElementCount-1)*specialOfferWrapperMain.offsetWidth)
+                specialOfferWrapper.style.left = -(specialOfferChannels.childElementCount-1)*specialOfferWrapperMain.offsetWidth + 'px';
+            });
+        });
+
+        document.addEventListener('mouseup', function(evt){
+            specialOfferWrapper.style.transition = '0.2s';
+            specialOfferWrapperMovePerm = 0;
+            var moveRatio = Math.round((specialOfferChannels.childElementCount*specialOfferWrapperMain.offsetWidth - ((specialOfferChannels.childElementCount-1)*specialOfferWrapperMain.offsetWidth - (specialOfferWrapper.offsetLeft*-1)))/specialOfferWrapperMain.offsetWidth);
+            selectSpecialOffern((moveRatio - 1) * specialOfferWrapperMain.offsetWidth);
+        });
+
+
+        // -------------------- SignUpIn -------------------- //
+
+        var imageExt = '.jpg .JPG jpeg JPEG .bmp .BMP .gif .GIF .png .PNG';
+
+
+        document.getElementById('signUp').onclick = function(){
+            signInContainer.style.transform = 'translate(-50%, -50%) rotate(60deg)';
+            signUpContainer.style.transform = 'translate(-50%, -50%) rotate(-40deg)';
+            if(window.matchMedia('(min-width: 1024px)').matches){
+                signUpContainer.style.left = signUpContainer.offsetLeft - 350 + 'px';
+                signInContainer.style.left = signInContainer.offsetLeft + 300 + 'px';
+            }
+            else{
+                signUpContainer.style.left = signUpContainer.offsetLeft - 520 + 'px';
+                signInContainer.style.left = signInContainer.offsetLeft + 520 + 'px';
+            }
+            setTimeout(function(){
+                signUpContainer.style.zIndex = 100;
+                signInContainer.style.transform = 'translate(-50%, -50%) rotate(-5deg)';
+                signInContainer.style.left = '50%';
+                signUpContainer.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+                signUpContainer.style.left = '50%';
+            }, 500);
+        }
+
+        document.getElementById('signIn').onclick = function(){
+            signUpContainer.style.transform = 'translate(-50%, -50%) rotate(60deg)';
+            signInContainer.style.transform = 'translate(-50%, -50%) rotate(-40deg)';
+            if(window.matchMedia('(min-width: 1024px)').matches){
+                signUpContainer.style.left = signUpContainer.offsetLeft + 300 + 'px';
+                signInContainer.style.left = signInContainer.offsetLeft - 350 + 'px';
+            }
+            else{
+                signUpContainer.style.left = signUpContainer.offsetLeft + 520 + 'px';
+                signInContainer.style.left = signInContainer.offsetLeft - 520 + 'px';
+            }
+            setTimeout(function(){
+                signUpContainer.style.zIndex = 'unset';
+                signUpContainer.style.transform = 'translate(-50%, -50%) rotate(-5deg)';
+                signUpContainer.style.left = '50%';
+                signInContainer.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+                signInContainer.style.left = '50%';
+            }, 500);
+        }
+
+
+        for(i = 0; i < 6; i++){
+            if(i % 2 == 0)
+            signUpForm.getElementsByTagName('input')[i].style.borderRight = 'none';
+            else
+            signUpForm.getElementsByTagName('input')[i].style.borderLeft = 'none';
+        }
+
+
+        document.getElementById('accountIcon').onclick = function(){
+            if(localStorage.MustafaAltaiePageLogIn == 1){
+                signUpImage.style.display = 'block';
+                if(window.matchMedia('(min-width: 1024px)').matches){
+                    signUpImage.style.left = navOptions.offsetLeft + navOptions.offsetWidth - signUpImage.offsetWidth + 'px';
+                    signUpImage.style.top = navOptions.offsetTop + navOptions.offsetHeight + 'px'; 
+                }
+                else{
+                    signUpImage.style.top = accountIcon.offsetTop + accountIcon.offsetHeight - 5 + 'px';
+                }
+            }
+            else
+            signInUpContainer.style.display = 'block';
+        }
+
+
+        document.getElementById('signUpBtn').onclick = function(){
+            if(signUpBtn.innerHTML == 'Add image')
+            accountImage.click();
+            else{
+                signUpSubmit.click();
+                document.getElementById('signUpBtn').style.pointerEvents = 'none';
+                localStorage.MustafaAltaiePageAccountName = email.value;
+            }
+        }
+
+        document.getElementById('accountImage').onchange = function(){
+            if(imageExt.includes(accountImage.value != '' && accountImage.value.substr(accountImage.value.length-4, accountImage.value.length))){
+                signUpBtn.innerHTML = 'Create account';
+            }
+        }
+
+        if(localStorage.MustafaAltaiePageAccountName != undefined
+        && localStorage.MustafaAltaiePageLogIn != 1){
+            signInUpContainer.style.display = 'block';
+            accountEmail.value = localStorage.MustafaAltaiePageAccountName;
+            accountPassword.focus();
+        }
+
+
+        for(i = 0; i < document.getElementsByClassName('accountEmailData').length; i++){
+            if(document.getElementsByClassName('accountEmailData')[i].value == localStorage.MustafaAltaiePageAccountName){
+                var myEmail = document.createElement('input');
+                myEmail.value = document.getElementsByClassName('accountEmailData')[i].value;
+                myEmail.id = 'myEmail';
+                myEmail.type = 'hidden';
+
+                var myNumber= document.createElement('input');
+                myNumber.value = document.getElementsByClassName('accountMobileData')[i].value;
+                myNumber.id = 'myNumber';
+                myNumber.type = 'hidden';
+
+                var myFirstName = document.createElement('input');
+                myFirstName.value = document.getElementsByClassName('accountFirstNameData')[i].value;
+                myFirstName.id = 'myFirstName';
+                myFirstName.type = 'hidden';
+
+                var myLastName = document.createElement('input');
+                myLastName.value = document.getElementsByClassName('accountLastNameData')[i].value;
+                myLastName.id = 'myLastName';
+                myLastName.type = 'hidden';
+
+                var myPassword = document.createElement('input');
+                myPassword.value = document.getElementsByClassName('accountPasswordData')[i].value;
+                myPassword.id = 'myPassword';
+                myPassword.type = 'hidden';
+
+                document.getElementsByTagName('body')[0].appendChild(myEmail);
+                document.getElementsByTagName('body')[0].appendChild(myNumber);
+                document.getElementsByTagName('body')[0].appendChild(myFirstName);
+                document.getElementsByTagName('body')[0].appendChild(myLastName);
+                document.getElementsByTagName('body')[0].appendChild(myPassword);
+            }
+        }
+
+        document.getElementById('personalData').remove();
+
+        function logIn(){
+            if(accountEmail.value == myEmail.value
+            && accountPassword.value == myPassword.value){
+                setSignInPhoto();
+                signInUpContainer.style.display = 'none';
+                localStorage.MustafaAltaiePageLogIn = 1;
+            }
+            else
+            alert('Wrong Email or password');
+        }
+
+        function setSignInPhoto(){
+            accountIcon.src = '/accountPictures/' + myFirstName.value + myLastName.value + '.jpg';
+            if(window.matchMedia('(min-width: 1024px)').matches){
+                accountIcon.style.width = '60px';
+                accountIcon.style.height = '60px';
+            }
+            else{
+                accountIcon.style.width = '120px';
+                accountIcon.style.height = '120px';
+            }
+            accountIcon.style.padding = 0;
+        }
+
+        if(localStorage.MustafaAltaiePageLogIn == 1){
+            setSignInPhoto();
+        }
+
+        document.getElementById('changeMyImage').onclick = function(){
+            if(changeMyImage.innerHTML == 'Change image')
+            signUpImageInput.click();
+            else{
+                signUpImage.style.pointerEvents = 'none';
+                signUpImageInputBtn.click();
+            }
+        }
+
+        document.getElementById('signUpImageInput').onchange = function(){
+            if(imageExt.includes(signUpImageInput.value.substr(signUpImageInput.value.length-4, signUpImageInput.value.length))){
+                changeMyImage.innerHTML = 'Confirm changes';
+                signUpImageFirstName.value = myFirstName.value;
+                signUpImageLastName.value = myLastName.value;
+            }
+            else alert('File must be image');
+        }
+
+        document.getElementById('signOut').onclick = function(){
+            localStorage.MustafaAltaiePageLogIn = 0;
+            signUpImage.style.pointerEvents = 'none';
+            window.location.reload();
+        }
+
+
+        function envelopeAndPaper(left, opacity, pntEvnt){
+            contactUsPaper.style.pointerEvents = pntEvnt;
+            contactUsPaper.style.opacity = opacity;
+            contactUsPaper.style.left = left + 'px';
+            envelopeContainer.style.opacity = opacity;
+            envelopeContainer.style.left = left + 'px';
+        }
+
+        navOptions.addEventListener('click', function(evt){
+            if(evt.target.innerHTML == 'Contact Us'){
+                if(localStorage.MustafaAltaiePageLogIn == 1){
+                    envelopeAndPaper(150, 1, 'unset');
+                    message.focus();
+                    envelopeFrom.innerHTML = 'From: ' + myFirstName.value + ' ' + myLastName.value;
+                }
+                else{
+                    alert('Please login first');
+                    signInUpContainer.style.display = 'block';
+                }
+            }
+        });
+
+        document.getElementById('sendMessageP').onclick = function(){
+            contactUsPaper.style.top = envelopeContainer.offsetTop - 5 + 'px';
+            sender.value = myFirstName.value + ' ' + myLastName.value;
+            senderNumber.value = myNumber.value;
+            senderEmail.value = myEmail.value;
+            contactUsDate.value = new Date().toLocaleString();
+            setTimeout(function(){
+                envelopeAndPaper(-contactUsPaper.offsetWidth - 10);
+            }, 400);
+            setTimeout(function(){
+                sendMessageB.click();
+            }, 1000);
+        }
+
+    </script>
+    <script src="clock.js"></script>
+</html>

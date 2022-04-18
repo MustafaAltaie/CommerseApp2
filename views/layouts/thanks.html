@@ -1,0 +1,36 @@
+<body>
+    <img src="/images/logo1.png">
+    <p>Thank you <b>{{clientName}}</b> for your purchase.</p>
+</body>
+
+<style>
+    *{
+        font-family: 'Barlow Semi Condensed', sans-serif;
+    }
+    body{
+        background: #111;
+        text-align: center;
+        padding: 100px;
+        color: hsl(60, 30%, 40%);
+        font-size: 22px;
+    }
+    p{
+        border-top: solid 1px hsl(60, 20%, 20%);
+        padding: 20px 0;
+    }
+    b{
+        font-weight: normal;
+        color: hsl(60, 70%, 70%);
+    }
+    img{
+        width: 100px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    document.getElementsByTagName('img')[0].onclick = function(){
+        window.location.href = '/';
+        document.getElementsByTagName('img')[0].style.pointerEvents = 'none';
+    }
+</script>

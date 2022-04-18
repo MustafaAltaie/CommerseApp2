@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mustafa</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="itemInfo">
+            <div id="imageWrapper">
+                <img src="../ItemImages/HeadphoneAcer1424313480.jpg">
+            </div>
+            <div id="infoWrapper">
+                <h1><del></del>199$</h1>
+                <p>Acer Headphone. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <input type="number" min=1 value=1 id="nmbrOfItms">
+                <b>Add to cart</b>
+            </div>
+        </div>
+    </body>
+    <style>
+        @media only screen and (max-width: 1024px){
+            body #itemInfo{
+                flex-direction: column;
+            }
+            body #itemInfo > div{
+                width: 100%;
+            }
+            body #infoWrapper > b{
+                font-size: 50px;
+            }
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+            font-size: 2.5vh;
+        }
+        body{
+            background: hsl(60, 12%, 25%);
+            color: #fff;
+        }
+        #itemInfo{
+            display: flex;
+            align-items: center;
+        }
+        #itemInfo > div{
+            width: 50%;
+            height: 100%;
+            padding: 30px 0;
+        }
+        #infoWrapper{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            gap: 50px;
+        }
+        #infoWrapper > input{
+            padding: 30px 0;
+            width: 100px;
+            text-align: center;
+        }
+        #infoWrapper > p{
+            width: 80%;
+        }
+        #infoWrapper > h1{
+            font-size: 7vh;
+        }
+        #infoWrapper > b{
+            background: #000;
+            padding: 30px 70px;
+            cursor: pointer;
+        }
+        #imageWrapper > img{
+            width: 90%;
+            height: 90%;
+            margin: 5%;
+            object-fit: cover;
+        }
+    </style>
+    <script>
+        document.addEventListener("click", function(evt){
+            if(evt.target.tagName == "B"){
+                infoWrapper.style.pointerEvents = "none";
+                window.location.href = "/addToCart/HeadphoneAcer1424313480/" + nmbrOfItms.value + "/199/" + "Acer Headphone. Lorem ipsum dolor sit amet consectetur adipisicing elit./" + 73042;
+                if(localStorage.MustafaAltaiePage == undefined) localStorage.MustafaAltaiePage = "";
+                localStorage.MustafaAltaiePage += "HeadphoneAcer1424313480,";
+            }
+        });
+
+        var prise = 199;
+
+        document.addEventListener("change", function(evt){
+            if(evt.target.tagName == "INPUT"){
+                document.getElementsByTagName("h1")[0].innerHTML = prise * document.getElementsByTagName("input")[0].value + "$";
+            }
+        });
+    </script>
+</html>

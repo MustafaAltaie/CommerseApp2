@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Products</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@200&display=swap" rel="stylesheet">
+    </head>
+    <script src="mustafaButton.js"></script>
+
+    <body>
+        {{#each cartItemList}}
+        <input type="hidden" value="{{this._id}}" class="itemCart_id">
+        <input type="hidden" value="{{this.imageName}}" class="itemCartImageName">
+        <input type="hidden" value="{{this.amount}}" class="itemCartAmount">
+        <input type="hidden" value="{{this.prise}}" class="itemCartPrise">
+        <input type="hidden" value="{{this.details}}" class="itemCartDetails">
+        <input type="hidden" value="{{this.promoCode}}" class="itemCartPromoCode">
+        {{/each}}
+
+        <input type="hidden" id="localStorageText">
+
+        <h1 id="pleaseWaitText">Please wait a moment</h1>
+
+        <div id="productAdvancedSettings">
+            <div id="viewAllProductType"></div>
+            <div id="filterItemPrise"></div>
+        </div>
+
+        <h4 id="searchMenu">Menu</h4>
+
+        <div id="sectionProductsMain">
+            <button id="showFilterMenu" onclick="openFilterMenu()">Advanced Search</button>
+
+            <img src="images/cart.png" id="cartIcon">
+
+            <p id="nmCartItems">0</p>
+
+            <div id="productNav">
+                <p id="allItems">All items</p>
+            </div>
+
+            <div id="cartWrapper">
+                <h1 id="emptyCartText">The cart is empty</h1>
+                <h2 id="completeShop">Checkout</h2>
+            </div>
+
+            {{#each ItemDataList}}
+            <input type="hidden" value="{{this._id}}" class="ItemDataList_id">
+            <input type="hidden" value="{{this.itemCategory}}" class="ItemDataListItemCategory">
+            <input type="hidden" value="{{this.itemName}}" class="ItemDataListItemName">
+            <input type="hidden" value="{{this.itemPrise}}" class="ItemDataListItemPrise">
+            <input type="hidden" value="{{this.itemtext}}" class="ItemDataListItemtext">
+            <input type="hidden" value="{{this.itemUniqueId}}" class="ItemDataListUniqueId">
+            <input type="hidden" value="{{this.fewLeft}}" class="ItemDataListFewLeft">
+            <input type="hidden" value="{{this.itemOldPrise}}" class="ItemDataListOldPrise">
+            <input type="hidden" value="{{this.itemNewPrise}}" class="ItemDataListNewPrise">
+            <input type="hidden" value="{{this.itemSaleAmount}}" class="ItemDataListSaleAmount">
+            <input type="hidden" value="{{this.itemPromoCode}}" class="ItemDataListPromoCode">
+            {{/each}}
+
+            <div id="sectionProducts"></div>
+        </div>
+
+
+        <form action="completePurchase" method="post" id="purchaseForm">
+            <input type="hidden" name="totalPrice" id="totalPrice">
+            <input type="hidden" name="itemPrises" id="itemPrises">
+            <input type="hidden" name="itemImages" id="itemImages">
+            <input type="hidden" name="itemTexts" id="itemTexts">
+            <input type="hidden" name="itemAmounts" id="itemAmounts">
+            <div id="paymentWrapper">
+                <img src="images/cards.jpg">
+                <input type="number" name="cardNumber" id="cardNumber" placeholder="Card Number*" autocomplete="off">
+                <input name="cardholder" id="cardholder" placeholder="Cardholder*">
+                <div id="cardMY">
+                    <input type="number" name="cardN" id="cardM" min=1 max=12 placeholder="MM">
+                    <p>/</p>
+                    <input type="number" name="cardY" id="cardY" min=22 max=99 placeholder="YY">
+                </div>
+                <div id="cardSCode">
+                    <input type="number" name="sCode" id="sCode" placeholder="Security Code*">
+                    <img src="images/card3digits.jpg">
+                    <p id="sCodeNot">3 digits on the back of the card</p>
+                </div>
+                <button id="payNow">Pay Now</button>
+                <b id="cancelPayment" onclick="purchaseDiv('personalInfo', 'paymentWrapper'); cardNumberStyle('number', '20px', 'left', 'unset'); sCode.value=''">Cancel Payment</b>
+            </div>
+            <div id="personalInfo">
+                <h1>Contact details</h1>
+                <input type="email" name="email" id="email" placeholder="Email*">
+                <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Contact number*">
+                <h1>Delivery Address</h1>
+                <input name="firstName" id="firstName" placeholder="First Name*">
+                <input name="lastName" id="lastName" placeholder="Last Name*">
+                <h1>Shipping Address</h1>
+                <input name="address1" id="address1" placeholder="Address Line (Optional)">
+                <input name="cityName" id="cityName" placeholder="City Name*">
+                <input name="zipCode" id="zipCode" placeholder="Zip Code*">
+                <input type="hidden" name="dateAndTime" id="dateAndTime">
+                <b id="toShipping">Continue To Payment</b>
+            </div>
+        </form>
+    </body>
+
+    <style>
+        @media only screen and (max-width: 1000px){
+            body #productAdvancedSettings label, body #productAdvancedSettings b{
+                font-size: 30px;
+            }
+            body #productAdvancedSettings > div{
+                width: 50%;
+                padding: 40px 10px 40px 30px;
+            }
+            body #productNav{
+                flex-direction: column;
+                transform: translateX(-100%);
+            }
+            body #productNav p, body .subProductNav > b{
+                padding: 40px 130px;
+                margin: -1px 0 0 0;
+                font-size: 40px;
+            }
+            body #sectionProducts{
+                padding: 50px 0;
+            }
+
+            body #sectionProducts > div{
+                width: 40%;
+            }
+            body #sectionProducts > div > img{
+                height: 400px;
+                object-fit: cover;
+            }
+            body #sectionProducts > div > p{
+                font-size: 40px;
+                margin: 30px 0;
+            }
+            body #sectionProducts > div > h1{
+                font-size: 50px;
+            }
+            body #sectionProducts > div > b, body #completeShop, body .itemInCartDel{
+                font-size: 40px;
+            }
+
+            body h4{
+                display: block;
+            }
+
+            body #cartWrapper{
+                width: 850px;
+                max-height: 75%;
+            }
+            body .itemInCartContainer{
+                height: 250px;
+            }
+            body .itemInCartInput, body .itemInCartPromoCodeInput{
+                height: 80px;
+                width: 200px;
+                font-size: 20px;
+            }
+            body .itemInCartPromoCodeInput{
+                top: 140px;
+            }
+            body .itemInCartPromoCodeBtn{
+                left: 155px;
+                top: 142px;
+                padding: 20px;
+                font-size: 30px;
+            }
+            body .itemInCartImage{
+                width: 250px;
+            }
+            body .itemInCartAmount, body .itemInCartPrise{
+                font-size: 100px;
+                margin: 0 10px;
+            }
+            body .itemInCartEdit{
+                padding: 10px 20px;
+                font-size: 40px;
+            }
+
+            body #purchaseForm{
+                left: -1000px;
+                width: 1000px;
+            }
+            body #purchaseForm h1{
+                font-size: 60px;
+            }
+            body #purchaseForm input{
+                margin: 20px 0;
+                font-size: 40px;
+            }
+            body #cancelPayment, body #toShipping, body #payNow{
+                font-size: 40px;
+                padding: 10px 0;
+            }
+            body #cardMY > input{
+                width: 100px;
+            }
+            body #cardMY > p{
+                font-size: 50px;
+            }
+            body #cardSCode > p{
+                font-size: 35px;
+            }
+            body #cardSCode > input{
+                width: 250px;
+            }
+            body #cardSCode > img{
+                width: 80px;
+                height: 60px;
+            }
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Barlow Semi Condensed', sans-serif;
+            font-size: 20px;
+            user-select: none;
+            font-weight: normal;
+            -webkit-overflow-scrolling: touch;
+            outline: none;
+        }
+        body{
+            background: #111;
+        }
+        body::-webkit-scrollbar{
+            background: #111;
+            width: 15px;
+        }
+        body::-webkit-scrollbar-thumb{
+            background: #333;
+            border: solid 1px #111;
+            padding: 0 1px;
+            border-radius: 15px;
+        }
+        body::-webkit-scrollbar-thumb:hover{
+            background: #444;
+        }
+        h4{
+            z-index: 50;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            color: #fff;
+            display: none;
+            font-size: 40px;
+        }
+        #pleaseWaitText{
+            z-index: 200;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: rgb(221, 169, 0);
+            background: #111;
+            padding: 50px;
+            white-space: nowrap;
+            border-radius: 30px;
+            display: none;
+        }
+        #productAdvancedSettings{
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #050505;
+            color: #ccc;
+        }
+        #productAdvancedSettings b{
+            color: #6cf;
+            font-size: 20px;
+        }
+        #productAdvancedSettings > div{
+            width: 20%;
+            font-size: 25px;
+            padding: 20px 0 20px 70px;
+        }
+        #viewAllProductType{
+            border-right: solid 1px #444;
+        }
+        #productAdvancedSettings input{
+            -webkit-appearance: none;
+            width: 13px;
+            height: 13px;
+            border: 1px solid #6cf;
+            border-radius: 50%;
+            outline: none;
+            margin-right: 10px;
+        }
+        #productAdvancedSettings input:checked{
+            border: 1px solid #fff;
+            background: #fff;
+        }
+        #productAdvancedSettings label{
+            padding: 5px 0;
+        }
+        #productAdvancedSettings label:hover{
+            color: #fff;
+        }
+        #productAdvancedSettings label:hover > b{
+            color: #fd0;
+        }
+
+        #sectionProductsMain{
+            position: relative;
+            transition: 0.1s;
+        }
+        
+        #cartIcon{
+            z-index: 100;
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            width: 40px;
+            cursor: pointer;
+            filter: brightness(150%) grayscale(100%);
+        }
+        #cartIcon:hover{
+            filter: brightness(100%) grayscale(0%);
+            margin-top: -2px;
+        }
+        #nmCartItems{
+            z-index: 110;
+            position: fixed;
+            top: 5px;
+            right: 28px;
+            color: #fff;
+            background: #d00;
+            border-radius: 50%;
+            width: 18px;
+            height: 10px;
+            padding: 0 0 10px 0;
+            font-size: 16px;
+            text-align: center;
+            pointer-events: none;
+            display: none;
+        }
+
+        #showFilterMenu{
+            z-index: 100;
+            position: absolute;
+            right: 80px;
+            top: 10px;
+            cursor: pointer;
+            display: none;
+            background: rgba(51, 51, 51, 0);
+            border: none;
+            color: #ddd;
+        }
+        #showFilterMenu:hover{
+            color: #fd5;
+            margin-top: -2px;
+        }
+
+        #productNav{
+            z-index: 50;
+            position: absolute;
+            display: flex;
+            transition: transform 0.2s;
+        }
+        #productNav p, .subProductNav > b{
+            padding: 20px 30px;
+            text-align: center;
+            margin: 0 -1px 0 0;
+            background: rgb(34, 34, 34);
+            border: solid 1px #000;
+            color: #fff;
+            transition: 0.05s;
+            font-size: 22px;
+        }
+        #productNav p:hover, .subProductNav > b:hover{
+            background: rgb(40, 40, 40);
+            color: rgb(255, 202, 27);
+        }
+
+        .subProductNav{
+            z-index: 50;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+        }
+        .subProductNav > b{
+            padding: 20px 0;
+            margin: -1px 0 0 0;
+        }
+
+        #cartWrapper{
+            z-index: 120;
+            position: fixed;
+            padding: 20px 20px 0 20px;
+            width: 700px;
+            min-height: 150px;
+            max-height: 80%;
+            overflow-y: scroll;
+            border-radius: 30px;
+            background: rgb(20, 20, 20);
+            top: 50px;
+            right: 10px;
+            border: solid 1px rgba(255, 220, 79, 0.3);
+            display: none;
+        }
+        #cartWrapper::-webkit-scrollbar{
+            display: none;
+        }
+        #emptyCartText{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 70px;
+            white-space: nowrap;
+            color:#aaa;
+            pointer-events: none;
+        }
+        #completeShop{
+            z-index: 100;
+            position: fixed;
+            transform: translate(10px, -55px);
+            color: #fd2;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: none;
+        }
+        .itemInCartContainer{
+            position: relative;
+            width: 100%;
+            height: 150px;
+            background: rgb(0, 0, 0);
+            box-shadow: 0 0 1px 1px #222 inset, 0 0 1px 1px #222 inset, 0 0 1px 1px #222 inset;
+            border-radius: 30px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transform: rotate(0deg);
+            transition: 0.2s;
+        }
+        .itemInCartInput, .itemInCartPromoCodeInput{
+            position: absolute;
+            height: 40px;
+            width: 200px;
+            left: 30px;
+            top: 20px;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+        }
+        .itemInCartPromoCodeInput{
+            top: 80px;
+        }
+        .itemInCartPromoCodeBtn{
+            position: absolute;
+            background: #111;
+            color: #fff;
+            left: 178px;
+            top: 81px;
+            padding: 7px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            display: none;
+        }
+        .itemInCart{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgb(30, 30, 30);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        .itemInCart:hover{
+            background: rgb(35, 35, 35);
+        }
+        .itemInCartImage{
+            height: 100%;
+            width: 170px;
+            border-radius: 20px;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .itemInCartAmount{
+            width: 70px;
+        }
+        .itemInCartAmount, .itemInCartPrise{
+            font-size: 70px;
+            color: rgb(221, 169, 0);
+            text-align: center;
+            pointer-events: none;
+        }
+        .itemInCartDetails{
+            color: #ddd;
+            font-size: 25px;
+            width: 200px;
+            margin: 0 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+        .itemInCartEdit{
+            position: absolute;
+            bottom: 0;
+            right: -1px;
+            border-radius: 50% 0 0 50%;
+            background: #900;
+            border: solid 1px #f00;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            transition: padding 0.1s;
+        }
+        .itemInCartEdit:hover{
+            padding: 5px 15px 15px 5px;
+        }
+        .itemInCartDel{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 35px;
+            height: 35px;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .itemInCartDel:hover{
+            background: #a00;
+            transform: rotate(-20deg);
+        }
+
+        #sectionProducts{
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            padding: 140px 50px 100px 50px;
+            background: #111;
+        }
+
+        #sectionProducts > div{
+            position: relative;
+            width: 240px;
+            text-align: center;
+            background: #222;
+            margin-bottom: 50px;
+            padding: 10px;
+            color: #fff;
+            border-radius: 4px;
+        }
+        #sectionProducts > div:hover{
+            background: #333;
+        }
+        #sectionProducts > div > img{
+            width: 100%;
+            height: 250px;
+            border-radius: 4px;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        #sectionProducts > div > p{
+            margin: 10px 0;
+            overflow-y: scroll;
+            word-spacing: 1.5px;
+            text-shadow: 1px 1px 1px #000;
+        }
+        #sectionProducts > div > p::-webkit-scrollbar{
+            display: none;
+        }
+        #sectionProducts > div > h1{
+            position: relative;
+            float: left;
+            font-size: 28px;
+            color: #09c;
+        }
+        #sectionProducts > div > b{
+            background: #111;
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            float: right;
+        }
+        #sectionProducts > div > b:hover{
+            background: #069;
+        }
+        #sectionProducts del{
+            color: #d33;
+            font-size: 25px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        #sectionProducts del:before {
+            position: absolute;
+            content: "";
+            left: -5px;
+            top: 50%;
+            right: 55%;
+            border-top: 1px solid;
+            border-color: inherit;
+            transform: rotate(-30deg);
+        }
+        #sectionProducts > div > h2, #sectionProducts > div > h3{
+            z-index: 10;
+            position: absolute;
+            background: #950;
+            color: #fff;
+            padding: 5px 10px;
+            transform: skewY(-7deg) translateX(-10px);
+            top: 0;
+            text-shadow: 1px 1px 1px #000;
+        }
+        #sectionProducts > div > h3{
+            background: #380;
+            padding: 5px 40px;
+        }
+
+        #purchaseForm{
+            z-index: 400;
+            position: fixed;
+            top: 0;
+            left: -500px;
+            width: 500px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.2s;
+        }
+        #purchaseForm > div{
+            position: absolute;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            background: #e8f0fe;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        #purchaseForm h1{
+            font-size: 35px;
+            margin: 30px 0 0 0;
+            color: #079;
+        }
+        #purchaseForm input{
+            border: none;
+            border-bottom: solid 1px #222;
+            background: rgba(0, 0, 0, 0);
+            margin: 10px 0;
+        }
+        #purchaseForm img{
+            pointer-events: none;
+        }
+        #cancelPayment, #toShipping{
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            margin: 10px 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #cancelPayment:hover{
+            background: #555;
+        }
+        #toShipping{
+            background: #380;
+        }
+        #toShipping:hover{
+            background: #4a0;
+        }
+        #payNow{
+            border-radius: 4px;
+            border: none;
+            background: #380;
+            color: white;
+            padding: 5px 0;
+            margin-top: 10px;
+        }
+        #payNow:hover{
+            background: #4a0;
+        }
+        #cardMY{
+            display: flex;
+        }
+        #cardMY > input{
+            width: 50px;
+            text-align: center;
+        }
+        #cardMY > p{
+            font-size: 25px;
+            transform: translateY(10px);
+            margin: 0 10px
+        }
+        #cardSCode{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #cardSCode > p{
+            font-size: 18px;
+        }
+        #cardSCode > input{
+            width: 120px;
+            font-size: 18px;
+            text-align: center;
+        }
+        #cardSCode > img{
+            width: 40px;
+            height: 30px;
+        }
+        #paymentWrapper{
+            padding: 50px 20px;
+            transform: rotateY(90deg);
+        }
+        #paymentWrapper > img{
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        #personalInfo{
+            padding: 20px;
+        }
+    </style>
+
+    <script>
+
+        document.addEventListener('click', function(evt){
+            if(evt.target.innerHTML == 'Learn more')
+            window.location.href = 'products/' + evt.target.id;
+
+            if(filterMenu == 1
+            && evt.target.id != "showFilterMenu"
+            && evt.target.parentNode.id != "productAdvancedSettings"
+            && evt.target.parentNode.id != "viewAllProductType"
+            && evt.target.parentNode.id != "filterItemPrise"
+            && evt.target.id != "productAdvancedSettings"
+            && evt.target.tagName != "B")
+            openFilterMenu();
+
+            if(evt.target.id != 'searchMenu'
+            && evt.target.parentNode.id != 'filterItemPrise'
+            && evt.target.parentNode.id != 'productNav')
+            if(window.matchMedia('(max-width: 1024px)').matches)
+            productNav.style.transform = 'translateX(-100%)';
+        });
+
+
+        var heighestPrise = 0;
+        var pricesArray = [];
+
+        function createItem(){
+            for(i = 0; i < document.getElementsByClassName('ItemDataList_id').length; i++){
+                var div = document.createElement('div');
+                var itmCat = document.getElementsByClassName('ItemDataListItemCategory')[i].value;
+                div.id = itmCat + document.querySelectorAll('.' + itmCat).length;
+                div.className = itmCat;
+                div.idAddress = document.getElementsByClassName('ItemDataList_id')[i].value;
+                div.uniqImgId = document.getElementsByClassName('ItemDataListUniqueId')[i].value;
+                div.category = itmCat;
+                div.name = document.getElementsByClassName('ItemDataListItemName')[i].value;
+                div.prise = document.getElementsByClassName('ItemDataListItemPrise')[i].value;
+                if(parseInt(div.prise) >= heighestPrise) heighestPrise = div.prise;
+                div.text = document.getElementsByClassName('ItemDataListItemtext')[i].value.split('.')[0];
+                div.image = 'ItemImages/' + itmCat + div.name + div.uniqImgId + '.jpg';
+                div.fewLeft = document.getElementsByClassName('ItemDataListFewLeft')[i].value;
+                div.oldPrise = document.getElementsByClassName('ItemDataListOldPrise')[i].value;
+                div.newPrise = document.getElementsByClassName('ItemDataListNewPrise')[i].value;
+                div.saleAmount = document.getElementsByClassName('ItemDataListSaleAmount')[i].value;
+                div.promoCode = document.getElementsByClassName('ItemDataListPromoCode')[i].value;
+
+                    var fewLeftLabel = document.createElement('h2');
+                    fewLeftLabel.innerHTML = 'Only few left in stock';
+
+                    var oldPrs = document.createElement('h3');
+                    oldPrs.innerHTML = div.saleAmount + '% OFF';
+
+                    var h1 = document.createElement('h1');
+                    h1.innerHTML = div.prise + '$';
+
+                    if(div.newPrise != ''){
+                        div.prise = div.newPrise;
+                        h1.innerHTML = '<del>' + div.oldPrise + '$' + '</del>' + div.prise + '$';
+                    }
+
+                    var img = document.createElement('img');
+                    img.src = 'ItemImages/' + itmCat + div.name + div.uniqImgId + '.jpg';
+
+                    var p = document.createElement('p');
+                    p.innerHTML = div.text;
+
+                    var b = document.createElement('b');
+                    b.id = itmCat + div.name + div.uniqImgId;
+                    b.innerHTML = "Learn more";
+
+                div.appendChild(img);
+                div.appendChild(p);
+                div.appendChild(h1);
+                div.appendChild(b);
+                if(div.fewLeft == 1){
+                    div.appendChild(fewLeftLabel);
+                    oldPrs.style.top = '40px';
+                }
+                if(div.saleAmount != '')
+                div.appendChild(oldPrs);
+                sectionProducts.appendChild(div);
+                createFilterItemMenu(div.name);
+                pricesArray.push(div.prise);
+            }
+        }
+        createItem();
+
+        pricesArray = pricesArray.sort((a, b) => a - b);
+
+        for(i = 1; i < pricesArray.length; i++){
+            if(filterItemPrise.getElementsByClassName(pricesArray[i]).length == 0){
+                var input = document.createElement('input');
+                input.type = 'radio';
+                input.id = pricesArray[i];
+                input.className = pricesArray[i];
+                var label = document.createElement('label');
+                label.innerHTML = 'Prices for ' + '<b>' + pricesArray[i] + '$</b> or under';
+                label.htmlFor = input.id;
+                var br = document.createElement('br');
+                filterItemPrise.appendChild(input);
+                filterItemPrise.appendChild(label);
+                filterItemPrise.appendChild(br);
+            }
+        }
+
+
+        var moreThanOneCompany = 1;
+
+        if(sectionProducts.childElementCount > 0)
+        firstCompany = document.getElementsByClassName('ItemDataListItemName')[0].value;
+
+
+        var firstCompany;
+        var chosenPrice = '';
+
+
+        for(i = 0; i < sectionProducts.childElementCount; i++){
+            if(document.getElementsByClassName('ItemDataListItemName')[i].value != firstCompany)
+            moreThanOneCompany = 2;
+        }
+
+        if(sectionProducts.childElementCount >= 2){
+            filterItemPrise.getElementsByTagName('input')[filterItemPrise.getElementsByTagName('input').length-1].checked = true;
+            filterItemPrise.getElementsByTagName('label')[filterItemPrise.getElementsByTagName('label').length-1].innerHTML = '<b>All prices</b>';
+            if(moreThanOneCompany > 1){
+                showFilterMenu.style.display = "block";
+                chosenPrice = heighestPrise;
+            }
+        }
+
+        function createItemNav(){
+            for(i = 0; i < sectionProducts.childElementCount; i++){
+                var p = document.createElement('p');
+                p.id = sectionProducts.getElementsByTagName('DIV')[i].category;
+                p.innerHTML = sectionProducts.getElementsByTagName('DIV')[i].className;
+                p.style.textTransform = 'capitalize';
+                p.className = sectionProducts.getElementsByTagName('DIV')[i].className;
+                if(productNav.querySelectorAll('.' + sectionProducts.getElementsByTagName('DIV')[i].className).length == 0)
+                productNav.appendChild(p);
+            }
+        }
+        createItemNav();
+
+        var createdSubNavCase = 0;
+
+        function createSubNav(classNam){
+            var div = document.createElement('div');
+            div.className = 'subProductNav';
+            var nmOfP = document.getElementsByClassName(classNam);
+            for(i = 1; i < nmOfP.length; i++){
+                var b = document.createElement('b');
+                b.innerHTML = nmOfP[i].name;
+                b.className = nmOfP[i].name;
+                b.id = nmOfP[i].category;
+                if(div.getElementsByClassName(nmOfP[i].name).length == 0)
+                div.appendChild(b);
+            }
+            sectionProductsMain.appendChild(div);
+            createdSubNavCase = 1;
+        }
+
+
+        function createFilterItemMenu(itemType){
+            var input = document.createElement('input');
+            input.type = 'checkbox';
+            input.id = 'all' + itemType + 'Products';
+            input.checked = true;
+            input.itemTypeName = itemType;
+            var label = document.createElement('label');
+            label.innerHTML = 'Show me all ' + '<b>' + itemType + '</b> products';
+            label.htmlFor = input.id;
+            var br = document.createElement('br');
+            if(viewAllProductType.querySelectorAll('#' + input.id).length == 0){
+                viewAllProductType.appendChild(input);
+                viewAllProductType.appendChild(label);
+                viewAllProductType.appendChild(br);
+            }
+        }
+
+
+
+        var chosenCategory = '';
+        var chosenItemName = '';
+
+        function showSubNav(html, id, clas){
+            createSubNav(html);
+            if(window.matchMedia("(min-width: 1000px)").matches){
+                document.getElementsByClassName('subProductNav')[0].style.left = document.getElementById(id).offsetLeft + 'px';
+                document.getElementsByClassName('subProductNav')[0].style.top = document.getElementById(id).offsetHeight - 1 + 'px';
+            }
+            else{
+                document.getElementsByClassName('subProductNav')[0].style.left = document.getElementById(id).offsetLeft + document.getElementById(id).offsetWidth + 'px';
+                document.getElementsByClassName('subProductNav')[0].style.top = document.getElementById(id).offsetTop + 'px';
+            }
+            document.getElementsByClassName('subProductNav')[0].style.width = document.getElementById(id).offsetWidth + 'px';
+            chosenCategory = clas;
+        }
+
+
+        sectionProductsMain.addEventListener('mousemove', function(evt){
+            if(evt.target.tagName == "P"){
+                if(createdSubNavCase == 1)
+                document.getElementsByClassName('subProductNav')[0].remove();
+                showSubNav(evt.target.innerHTML, evt.target.id, evt.target.className);
+            }
+            else if(evt.target.tagName != "B"){
+                document.getElementsByClassName('subProductNav')[0].remove();
+                createdSubNavCase = 0;
+            }
+        });
+
+
+        sectionProductsMain.addEventListener('click', function(evt){
+            if(evt.target.tagName == "P"){
+                if(createdSubNavCase == 1)
+                document.getElementsByClassName('subProductNav')[0].remove();
+                showSubNav(evt.target.innerHTML, evt.target.id, evt.target.className);
+                showSelectedItem();
+                currentCatigory = evt.target.className;
+                currentItemName = '';
+            }
+            else if(evt.target.id != "sectionProductsMain"){
+                document.getElementsByClassName('subProductNav')[0].remove();
+                createdSubNavCase = 0;
+            }
+
+            if(evt.target.id == "allItems"){
+                for(i = 0; i < sectionProducts.childElementCount; i++)
+                sectionProducts.getElementsByTagName('div')[i].style.display = "block";
+            }
+
+            if(evt.target.tagName == "B"){
+                chosenItemName = evt.target.className;
+                currentCatigory = evt.target.id;
+                currentItemName = evt.target.className;
+                showSelectedItem(1);
+                if(filterMenu == 1)
+                showFilterMenu.click();
+            }
+
+            if(evt.target.tagName == "P" && evt.target.parentNode.id == 'productNav'
+            || evt.target.tagName == 'B' && evt.target.parentNode.className == 'subProductNav')
+            for(i = 0; i < viewAllProductType.getElementsByTagName('INPUT').length; i++)
+            viewAllProductType.getElementsByTagName('INPUT')[i].checked = true;
+        });
+
+
+        function showSelectedItem(n){
+            document.getElementById(parseInt(heighestPrise)).click();
+            hiddenAllItems();
+            for(i = 0; i < sectionProducts.getElementsByClassName(chosenCategory).length; i++){
+                if(!n)
+                sectionProducts.getElementsByClassName(chosenCategory)[i].style.display = "block";
+                if(sectionProducts.getElementsByClassName(chosenCategory)[i].name == chosenItemName)
+                sectionProducts.getElementsByClassName(chosenCategory)[i].style.display = "block";
+            }
+        }
+
+        var filterMenu = 0;
+
+        function openFilterMenu(){
+            if(filterMenu == 0){
+                sectionProductsMain.style.transform = "translateY(" + productAdvancedSettings.offsetHeight + "px)";
+                filterMenu = 1;
+            }
+            else{
+                sectionProductsMain.style.transform = "translateY(0px)";
+                filterMenu = 0
+            }
+        }
+
+
+        document.getElementById('productAdvancedSettings').onclick = function(evt){
+            if(evt.target.id.substr(0, 3) == 'all'){
+                hiddenAllItems();
+                showItemByType();
+                currentCatigory = '';
+                currentItemName = '';
+            }
+        }
+
+        function hiddenAllItems(){
+            for(i = 0; i < sectionProducts.childElementCount; i++)
+            sectionProducts.getElementsByTagName('div')[i].style.display = "none";
+        }
+
+
+        function showItemByType(){
+            for(j = 0; j < viewAllProductType.getElementsByTagName('INPUT').length; j++){
+                if(viewAllProductType.getElementsByTagName('INPUT')[j].checked == true){
+                    for(i = 0; i < sectionProducts.childElementCount; i++){
+                        if(sectionProducts.getElementsByTagName('div')[i].name == viewAllProductType.getElementsByTagName('INPUT')[j].itemTypeName
+                        && parseInt(sectionProducts.getElementsByTagName('div')[i].prise) <= chosenPrice)
+                        sectionProducts.getElementsByTagName('div')[i].style.display = "block";
+                    }
+                }
+            }
+        }
+
+
+        function choseOnePrise(n){
+            for(i = 0; i < filterItemPrise.getElementsByTagName('input').length; i++)
+            filterItemPrise.getElementsByTagName('input')[i].checked = false;
+            document.getElementById(n).checked = true;
+        }
+
+        var currentCatigory = '';
+        var currentItemName = '';
+        var itemFilterCase = 0;
+
+        filterItemPrise.addEventListener('click', function(evt){
+            for(i = 0; i < viewAllProductType.getElementsByTagName('input').length; i++){
+                if(viewAllProductType.getElementsByTagName('input')[i].checked == false){
+                    itemFilterCase = 1;
+                    break;
+                }
+                else
+                itemFilterCase = 0;
+            }
+
+            var prs = evt.target.id;
+            if(evt.target.tagName == 'INPUT'){
+                chosenPrice = evt.target.id;
+                choseOnePrise(evt.target.id);
+                hiddenAllItems();
+                for(i = 0; i < sectionProducts.childElementCount; i++){
+                    if(currentCatigory == '' && currentItemName == ''
+                    && itemFilterCase == 0){
+                        if(parseInt(sectionProducts.getElementsByTagName('div')[i].prise) <= parseInt(prs))
+                        sectionProducts.getElementsByTagName('div')[i].style.display = "block";
+                    }
+                    else if(currentCatigory != '' && currentItemName == ''){
+                        if(parseInt(sectionProducts.getElementsByTagName('div')[i].prise) <= parseInt(prs)
+                        && sectionProducts.getElementsByTagName('div')[i].category == currentCatigory
+                        && itemFilterCase == 0)
+                        sectionProducts.getElementsByTagName('div')[i].style.display = "block";
+                    }
+                    else if(currentCatigory != '' && currentItemName != ''){
+                        if(parseInt(sectionProducts.getElementsByTagName('div')[i].prise) <= parseInt(prs)
+                        && sectionProducts.getElementsByTagName('div')[i].category == currentCatigory
+                        && sectionProducts.getElementsByTagName('div')[i].name == currentItemName
+                        && itemFilterCase == 0)
+                        sectionProducts.getElementsByTagName('div')[i].style.display = "block";
+                    }
+                    else if(itemFilterCase == 1 && currentCatigory == '' && currentItemName == ''){
+                        for(j = 0; j < viewAllProductType.getElementsByTagName('INPUT').length; j++){
+                            if(viewAllProductType.getElementsByTagName('INPUT')[j].checked == true){
+                                for(i = 0; i < sectionProducts.childElementCount; i++){
+                                    if(sectionProducts.getElementsByTagName('div')[i].name == viewAllProductType.getElementsByTagName('INPUT')[j].itemTypeName
+                                    && parseInt(sectionProducts.getElementsByTagName('div')[i].prise) <= parseInt(prs))
+                                    sectionProducts.getElementsByTagName('div')[i].style.display = "block";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+        if(sectionProducts.querySelectorAll('DIV').length == 0)
+        allItems.innerHTML = "There are no items in our store as of yet!'<br>' Soon we will add some of our amazing products.'<br>' Stay tuned!";
+        else
+        allItems.innerHTML = 'All items';
+
+        localStorageText.value = localStorage.MustafaAltaiePage;
+        var crtItmLngth = localStorageText.value.split(',').length-1;
+        nmCartItems.innerHTML = crtItmLngth;
+
+        if(crtItmLngth > 0){
+            nmCartItems.style.display = 'block';
+            emptyCartText.style.display = 'none';
+            completeShop.style.display = 'block';
+            setTimeout(function(){
+                cartWrapper.style.display = 'block';
+                setTimeout(function(){ rotateCartItems(0) }, 10);
+                setTimeout(function(){
+                    completeShop.style.background = '#290'
+                    completeShop.style.color = '#fff';
+                }, 500);
+                setTimeout(function(){
+                    completeShop.style.background = 'unset'
+                    completeShop.style.color = '#fd2';
+                }, 1000);
+            }, 2000);
+        }
+
+        document.getElementById('completeShop').onmouseenter = (function(){
+            completeShop.style.background = '#290';
+            completeShop.style.color = '#fff';
+        });
+
+        document.getElementById('completeShop').onmouseleave = (function(){
+            completeShop.style.background = 'unset';
+            completeShop.style.color = '#fd2';
+        });
+
+
+        document.addEventListener('mousedown', function(evt){
+            if(evt.target.className == 'itemInCartEdit')
+            document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).style.transform = 'translateX(250px)';
+            if(evt.target.className == 'itemInCart')
+            document.getElementById(evt.target.id).style.transform = 'translateX(0px)';
+
+            if(evt.target.className == 'itemInCartDel'){
+                var itmNm = document.getElementById(evt.target.id).imageName;
+                var str = localStorageText.value.replace(itmNm + ',', '');
+                localStorage.MustafaAltaiePage = str;
+                setTimeout(function(){
+                    window.location.href = '/delCartItem/' + document.getElementById(evt.target.id).idAddress;
+                }, 100);
+                document.getElementsByTagName('body')[0].style.pointerEvents = 'none';
+                pleaseWaitText.style.display = 'block';
+            }
+
+            if(evt.target.className != 'itemInCartContainer'
+            && cartWrapper.style.display == 'block'
+            && evt.target.id != 'cartWrapper'
+            && evt.target.className != 'itemInCartEdit'
+            && evt.target.className != 'itemInCartInput'
+            && evt.target.className != 'itemInCartPromoCodeInput'
+            && evt.target.className != 'itemInCartPromoCodeBtn'
+            && evt.target.className != 'itemInCart'
+            && evt.target.id != 'completeShop'){
+                cartWrapper.style.display = 'none';
+                setTimeout(function(){ rotateCartItems(30) }, 1);
+                for(i = 0; i < crtItmLngth; i++)
+                cartWrapper.getElementsByClassName('itemInCart')[i].style.transform = 'translateX(0px)';
+            }
+            if(evt.target.id == "cartIcon"){
+                cartWrapper.style.display = 'block';
+                setTimeout(function(){ rotateCartItems(0) }, 1);
+            }
+
+            if(purchaseForm.offsetLeft > -10
+            && evt.target.parentNode.id != 'purchaseForm'
+            && evt.target.parentNode.id != 'paymentWrapper'
+            && evt.target.parentNode.id != 'personalInfo'
+            && evt.target.parentNode.id != 'cardSCode'
+            && evt.target.parentNode.id != 'cardMY'){
+                purchaseForm.style.left = -purchaseForm.offsetWidth + 'px';
+                sectionProducts.style.filter = 'brightness(100%) grayscale(0%)';
+            }
+        });
+
+        document.addEventListener('click', function(evt){
+            if(evt.target.className == 'itemInCartEdit'){
+                evt.preventDefault();
+                evt.stopPropagation();
+                evt.stopImmediatePropagation();
+                return false;
+            }
+        });
+
+
+
+        for(i = 0; i < crtItmLngth; i++){
+            var div = document.createElement('div');
+            div.id = 'itemInCart' + i + 'Container';
+            div.className = 'itemInCartContainer';
+
+            var input = document.createElement('input');
+            input.type = 'number';
+            input.id = 'itemInCart' + i + 'Input';
+            input.className = 'itemInCartInput';
+            input.min = 1;
+            input.value = document.getElementsByClassName('itemCartAmount')[i].value;
+
+            div.prise = document.getElementsByClassName('itemCartPrise')[i].value * input.value / input.value;
+
+            var input2 = document.createElement('input');
+            input2.id = 'itemInCart' + i + 'PromoCode';
+            input2.className = 'itemInCartPromoCodeInput';
+            input2.placeholder = 'Have a promo code?'
+            input2.promoCode = document.getElementsByClassName('itemCartPromoCode')[i].value;
+
+            var inputBtn = document.createElement('b');
+            inputBtn.id = 'itemInCart' + i + 'PromoCodeBtn';
+            inputBtn.className = 'itemInCartPromoCodeBtn';
+            inputBtn.innerHTML = 'OK';
+
+            var div2 = document.createElement('div');
+            div2.id = 'itemInCart' + i;
+            div2.className = 'itemInCart';
+
+            var img1 = document.createElement('b');
+            img1.innerHTML = 'Edit';
+            img1.className = 'itemInCartEdit';
+            img1.id = 'itemInCart' + i + 'Edit';
+
+            var img2 = document.createElement('img');
+            var imgNam = document.getElementsByClassName('itemCartImageName')[i].value;
+            if(imgNam.length != 10)
+            img2.src = 'ItemImages/' + imgNam + '.jpg';
+            else
+            img2.src = 'otherImages/' + imgNam + '.jpg';
+            img2.className = 'itemInCartImage';
+
+            div.image = imgNam;
+
+            var amnt = document.createElement('p');
+            amnt.className = 'itemInCartAmount';
+            amnt.id = 'itemInCart' + i + 'Amount';
+            amnt.innerHTML = input.value;
+
+            var dtls = document.createElement('p');
+            dtls.className = 'itemInCartDetails';
+            dtls.id = 'itemInCart' + i + 'Details';
+            var details = document.getElementsByClassName('itemCartDetails')[i].value;
+            dtls.innerHTML = details.split('.')[0] + '...';
+
+            div.text = details;
+
+            var prs = document.createElement('p');
+            prs.className = 'itemInCartPrise';
+            prs.id = 'itemInCart' + i + 'Prise';
+            prs.innerHTML = document.getElementsByClassName('itemCartPrise')[i].value * input.value + '$';
+
+            var del = document.createElement('p');
+            del.className = 'itemInCartDel';
+            del.id = 'itemInCartDel' + i;
+            del.idAddress = document.getElementsByClassName('itemCart_id')[i].value;
+            del.imageName = imgNam;
+            del.innerHTML = 'X';
+
+            div2.appendChild(img1);
+            div2.appendChild(img2);
+            div2.appendChild(amnt);
+            div2.appendChild(dtls);
+            div2.appendChild(prs);
+            div2.appendChild(del);
+
+            div.appendChild(input);
+            div.appendChild(input2);
+            div.appendChild(inputBtn);
+            div.appendChild(div2);
+
+            for(j = 0; j < crtItmLngth; j++){
+                //if(localStorageText.value.split(',')[j] == imgNam)
+                cartWrapper.appendChild(div);
+            }
+        }
+
+
+        function rotateCartItems(n){
+           for(i = 0; i < crtItmLngth; i++){
+                if(i % 2 == 0)
+                cartWrapper.getElementsByClassName('itemInCartContainer')[i].style.transform = 'rotate(' + n + 'deg)';
+                else
+                cartWrapper.getElementsByClassName('itemInCartContainer')[i].style.transform = 'rotate(-' + n + 'deg)';
+            }
+        }
+        rotateCartItems(30);
+
+
+        var totalPrise = 0;
+
+        cartWrapper.addEventListener('change', function(evt){
+            if(evt.target.className == 'itemInCartInput'){
+                totalPrise = 0;
+                var val = document.getElementById(evt.target.id).value;
+                var oneItemPrise = document.getElementById(evt.target.id.substr(0, evt.target.id.length-5) + 'Container').prise;
+                document.getElementById(evt.target.id.substr(0, evt.target.id.length-5) + 'Prise').innerHTML = val * oneItemPrise + '$';
+                document.getElementById(evt.target.id.substr(0, evt.target.id.length-5) + 'Amount').innerHTML = val;
+                getTotalPrise();
+            }
+        });
+
+        cartWrapper.addEventListener('input', function(evt){
+            if(evt.target.className == 'itemInCartPromoCodeInput'){
+                if(document.getElementById(evt.target.id).value != '')
+                document.getElementById(evt.target.id + 'Btn').style.display = 'block';
+                else
+                document.getElementById(evt.target.id + 'Btn').style.display = 'none';
+            }
+        });
+
+        cartWrapper.addEventListener('click', function(evt){
+            if(evt.target.className == 'itemInCartPromoCodeBtn'){
+                if(document.getElementById(evt.target.id.substr(0, evt.target.id.length-3)).value == document.getElementById(evt.target.id.substr(0, evt.target.id.length-3)).promoCode){
+                    var itemInCartN = evt.target.id.substr(0, evt.target.id.length-12);
+                    document.getElementById(itemInCartN+'Prise').innerHTML = '0$';
+                    document.getElementById(itemInCartN+'Input').value = 1;
+                    document.getElementById(itemInCartN+'Amount').innerHTML = 1;
+                    document.getElementById(itemInCartN+'Edit').style.pointerEvents = 'none';
+                    document.getElementById(itemInCartN).style.transform = 'translateX(0px)';
+                    setTimeout(function(){
+                        document.getElementById(itemInCartN+'Input').remove();
+                        totalPrise = 0;
+                        getTotalPrise();
+                    }, 300);
+                }
+                else{
+                    document.getElementById(evt.target.id.substr(0, evt.target.id.length-3)).value = '';
+                    document.getElementById(evt.target.id).style.display = 'none';
+                }
+            }
+        });
+
+
+        function getTotalPrise(){
+            for(i = 0; i < document.getElementsByClassName('itemInCartContainer').length; i++){
+                var prise = document.getElementsByClassName('itemInCartPrise')[i].innerHTML;
+                var currentItemPrise = prise.substr(0, prise.length-1);
+                totalPrise += parseInt(currentItemPrise);
+            }
+            completeShop.innerHTML = 'Checkout: ' + totalPrise + '$';
+        }
+        getTotalPrise();
+
+
+        document.getElementById('completeShop').onclick = function(){
+            purchaseForm.style.left = 0;
+            sectionProducts.style.filter = 'brightness(30%) grayscale(100%)';
+            cartWrapper.style.display = 'none';
+            rotateCartItems(30);
+            email.focus();
+            itemPrises.value = '';
+            itemImages.value = '';
+            itemTexts.value = '';
+            itemAmounts.value = '';
+            dateAndTime.value = new Date().toLocaleString();
+            fillPurchaseInputs();
+        }
+
+
+        function fillPurchaseInputs(){
+            totalPrice.value = totalPrise + '$';
+            for(i = 0; i < crtItmLngth; i++){
+                itemPrises.value = itemPrises.value + document.getElementById('itemInCart' + i + 'Container').getElementsByClassName('itemInCartPrise')[0].innerHTML + ',';
+                itemImages.value = itemImages.value + document.getElementById('itemInCart' + i + 'Container').image + ',';
+                itemTexts.value = itemTexts.value + document.getElementById('itemInCart' + i + 'Container').text + ',';
+                itemAmounts.value = itemAmounts.value + document.getElementById('itemInCart' + i + 'Container').getElementsByClassName('itemInCartAmount')[0].innerHTML + ',';
+            }
+        }
+
+
+        document.getElementById('toShipping').onclick = function(){
+            if(email.value == "" || phoneNumber.value == ""
+            || firstName.value == "" || lastName.value == ""
+            || cityName.value == "" || zipCode.value == "")
+            alert('Fill every feild with star');
+            else{
+                purchaseDiv('paymentWrapper', 'personalInfo');
+                cardNumber.focus();
+            }
+        }
+
+
+        function purchaseDiv(show, hide){
+            cardholder.value = firstName.value + ' ' + lastName.value;
+            setTimeout(function(){
+                document.getElementById(show).style.transform = 'rotateY(0deg)';
+                document.getElementById(show).style.pointerEvents = 'unset';
+            }, 200);
+            document.getElementById(hide).style.transform = 'rotateY(90deg)';
+            document.getElementById(hide).style.pointerEvents = 'none';
+        }
+
+
+        var ii = 0;
+        var cardNumberStore;
+
+        function cardNumberStyle(t, f, t2, p){
+            cardNumber.type = t;
+            cardNumber.style.fontSize = f;
+            cardNumber.style.textAlign = t2;
+            cardNumber.style.pointerEvents = p;
+        }
+
+        paymentWrapper.addEventListener('click', function(evt){
+            if(cardNumber.value.length == 16){
+                cardNumberStyle('unset', '30px', 'center', 'none');
+                cardNumberStore = cardNumber.value;
+                cardNumber.value = '';
+                for(i = 0; i < cardNumberStore.length; i++){
+                    ii++;
+                    var num1 = cardNumberStore.substr(i, 1);
+                    cardNumber.value += num1;
+                    if(ii >= 4){
+                        cardNumber.value += '  ';
+                        ii = 0;
+                    }
+                }
+                cardNumber.value = cardNumber.value.substr(0, cardNumber.value.length-1);
+            }
+        });
+
+        document.getElementById('cardholder').oninput = function(){
+            if(cardholder.value.substr(cardholder.value.length-1, cardholder.value.length) <= 9
+            && cardholder.value.substr(cardholder.value.length-1, cardholder.value.length) != ' '){
+                cardholder.value = cardholder.value.substr(0, cardholder.value.length-1)
+            }
+        }
+
+        var currentInput;
+
+        paymentWrapper.addEventListener('keydown', function(e){
+            currentInput = e.target.id;
+            if(e.keyCode == 17)
+            document.getElementById(currentInput).blur();
+        });
+
+        paymentWrapper.addEventListener('contextmenu', function(evt){
+            currentInput = evt.target.id;
+            document.getElementById(currentInput).blur();
+        });
+
+        document.getElementById('cardM').oninput = function(){
+            if(cardM.value.length > 2 || cardM.value > 12)
+            cardM.value = '';
+        }
+
+        document.getElementById('cardY').oninput = function(){
+            if(cardY.value.length > 2)
+            cardY.value = '';
+        }
+
+        document.getElementById('sCode').oninput = function(){
+            if(sCode.value.length > 3){
+                sCode.value = '';
+                sCodeNot.style.fontWeight = 'bold';
+                setTimeout(function(){
+                    sCodeNot.style.fontWeight = 'normal';
+                    setTimeout(function(){ sCodeNot.style.fontWeight = 'bold' }, 300);
+                    setTimeout(function(){ sCodeNot.style.fontWeight = 'normal' }, 600);
+                }, 300);
+            }
+        }
+
+        document.getElementById('searchMenu').onclick = function(){
+            if(window.matchMedia('(max-width: 1024px)').matches)
+            productNav.style.transform = 'translateX(0%)';
+        }
+
+    </script>
+    <script src="clock.js"></script>
+</html>

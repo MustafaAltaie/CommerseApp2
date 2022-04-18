@@ -1,0 +1,164 @@
+<head>
+    <title>Messages</title>
+    <meta charset="UTF-8">
+</head>
+
+{{#each messageList}}
+<input type="hidden" value="{{this._id}}" class="_id">
+<input type="hidden" value="{{this.sender}}" class="name">
+<input type="hidden" value="{{this.email}}" class="email">
+<input type="hidden" value="{{this.number}}" class="number">
+<input type="hidden" value="{{this.message}}" class="message">
+<input type="hidden" value="{{this.date}}" class="date">
+{{/each}}
+
+<body>
+    <div id="messageContainer"></div>
+</body>
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: 'Barlow Semi Condensed', sans-serif;
+        font-weight: normal;
+    }
+    body{
+        background: #aaa;
+        color: #ccc;
+    }
+    #messageContainer{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 30px;
+        gap: 30px;
+        justify-content: center;
+    }
+    .message{
+        position: relative;
+        width: 420px;
+        background-image: url('/images/paper.jpg');
+        border-radius: 10px;
+    }
+    .message:hover > b{
+        display: block;
+    }
+    .message > div{
+        width: 100%;
+    }
+    .sec1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 10px;
+        padding: 10px 0;
+        background: #064453;
+        border-radius: 10px;
+    }
+    .sec1 > img{
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: solid 1px #ccc;
+    }
+    h1{
+        font-size: 40px;
+    }
+    .sec2{
+        margin-bottom: 20px;
+    }
+    p{
+        font-size: 22px;
+        padding: 0 30px;
+        height: 100px;
+        color:hsl(46, 49%, 71%);
+        overflow: scroll;
+    }
+    p::-webkit-scrollbar{
+        display: none;
+    }
+    b{
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 20px;
+        color: #fff;
+        background: #a00;
+        border-radius: 0 10px 0 0;
+        cursor: pointer;
+        padding: 5px 20px;
+        user-select: none;
+        display: none;
+    }
+    b:hover{
+        background: #c10;
+    }
+    u{
+        position: absolute;
+        font-size: 20px;
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    for(i = 0; i < document.getElementsByClassName('_id').length; i++){
+        var message = document.createElement('div');
+        message.className = 'message';
+
+        var remove = document.createElement('b');
+        remove.innerHTML = 'Delete';
+        remove.id = document.getElementsByClassName('_id')[i].value;
+
+        var sec1 = document.createElement('div');
+        sec1.className = 'sec1';
+
+        var image = document.createElement('img');
+        image.src = '/accountPictures/' + document.getElementsByClassName('name')[i].value.replace(' ', '') + '.jpg';
+
+        var div = document.createElement('div');
+
+        var name1 = document.createElement('h1');
+        name1.innerHTML = document.getElementsByClassName('name')[i].value;
+
+        var email = document.createElement('h3');
+        email.innerHTML = document.getElementsByClassName('email')[i].value;
+
+        var number = document.createElement('h3');
+        number.innerHTML = 'Number: ' + document.getElementsByClassName('number')[i].value;
+
+        div.appendChild(name1);
+        div.appendChild(email);
+        div.appendChild(number);
+
+        sec1.appendChild(image);
+        sec1.appendChild(div);
+
+        var sec2 = document.createElement('div');
+        sec2.className = 'sec2';
+
+        var theMessage = document.createElement('p');
+        theMessage.innerHTML = document.getElementsByClassName('message')[i].value;
+
+        sec2.appendChild(theMessage);
+
+        var dateAndTime = document.createElement('u');
+        dateAndTime.innerHTML = document.getElementsByClassName('date')[i].value;
+
+        message.appendChild(remove);
+        message.appendChild(sec1);
+        message.appendChild(sec2);
+        message.appendChild(dateAndTime);
+
+        messageContainer.appendChild(message);
+    }
+
+    document.addEventListener('click', function(evt){
+        if(evt.target.innerHTML == 'Delete'){
+            window.location.href = '/deleteMessage/' + evt.target.id;
+        }
+    })
+</script>

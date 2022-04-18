@@ -1,0 +1,2592 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <meta charset="UTF-8">
+    </head>
+    <script src="mustafaButton.js"></script>
+    <body>
+        <div id="xxx">
+            <div id="yyy"></div>
+        </div>
+        <nav>
+            <div id="navLogo">
+                <img src="images/logo4.png">
+            </div>
+            <form action="/navOptions" method="POST" id="navForm">
+                <input type="hidden" name="_id" id="nav_id">
+                <input name="optionName" id="navTitle" placeholder="Nav title">
+                <p id="navTitleB">Add</p>
+                <button id="navTitleBtb" style="display: none"></button>
+            </form>
+            <div id="navOptions">
+                {{#each navOptionList}}
+                <input type="hidden" value="{{this.optionName}}" class="navbarTitle">
+                <input type="hidden" value="{{this._id}}" class="navbar_id">
+                {{/each}}
+                {{#each content}}
+                <input type="hidden" id="navContentText" value="{{this.contentName}}">
+            </div>
+        </nav>
+        <form action="/contentName" method="POST" style="display: none">
+            <input name="_id" value="{{this._id}}">
+            <input name="contentName" id="contentNameText">
+            <button id="contentNameB">OK</button>
+        </form>{{/each}}
+
+        <b id="navSettingBtn">...</b>
+
+        <div id="navSetting">
+            <p id="chngCntntBtn">Change content title</p>
+            <input id="navSettingText">
+            <p id="addNewNavBtn">Add new nav</p>
+        </div>
+
+        <div id="contentSetting">
+            <p id="addContent">Add content</p>
+            <p id="showMenu">Show menu</p>
+        </div>
+
+        <form action="newContent" method="POST" id="newContentForm" enctype="multipart/form-data">
+            <input type="hidden" name="_id" id="content_id">
+            <input name="contentTitle" id="contentTitle" placeholder="Content title" autocomplete="off" class="contentInfo">
+            <input name="contentPrise" type="number" id="contentPrise" placeholder="Content prise" autocomplete="off" class="contentInfo">
+            <input type="file" name="contentFile" id="contentImage" style="display: none" class="contentInfo">
+            <textarea name="contentDescription" id="contentDescription" placeholder="Content desctiption" autocomplete="off" class="contentInfo"></textarea>
+            <input type="hidden" name="contentOldRouter" id="contentOldRouter" class="contentInfo">
+            <input type="hidden" name="contentOldTitle" id="contentOldTitle" class="contentInfo">
+            <input type="hidden" name="newContentUniqueNumber" id="newContentUniqueNumber">
+            <p id="newContentB">Add Image</p>
+            <button id="newContentBtn" style="display: none"></button>
+        </form>
+
+        {{#each NewContentList}}
+        <input type="hidden" value="{{this._id}}" class="NewContentList_id">
+        <input type="hidden" value="{{this.contentTitle}}" class="contentTitle">
+        <input type="hidden" value="{{this.contentPrise}}" class="contentPrise">
+        <input type="hidden" value="{{this.contentDescription}}" class="contentDescription">
+        <input type="hidden" value="{{this.newContentUniqueNumber}}" class="newContentUniqueNumber">
+        {{/each}}
+
+        <div id="contentList"></div>
+
+        <div id="sectionHome">
+            <div id="homeTextCenter">
+                <div id="HomeTextSetting" class="settingTreeButtons"  onclick="showElement('HomeTextSettings')">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                {{#each homeTextData}}
+                <input type="hidden" value="{{this._id}}" id="homeTextData_id">
+                <h1 id="homeTextFirst">{{this.first}}</h1>
+                <h3 id="homeTextSecond">{{this.second}}</h3>
+                <p id="homeTextThird">{{this.third}}</p>
+                {{/each}}
+                <form action="newwHomeText" method="POST" id='HomeTextSettings' class="HomeTextSettings">
+                    <input type="hidden" value="{{this._id}}" name="_id" id="HomeTextSetting_id">
+                    <input name="first" value="{{this.first}}" id="HomeTextH1" class="HomeTextSettingInputs" placeholder="Main text">
+                    <input name="second" value="{{this.second}}" id="HomeTextH3" class="HomeTextSettingInputs" placeholder="Secondary text">
+                    <input name="third" value="{{this.third}}" id="HomeTextP" class="HomeTextSettingInputs" placeholder="Description">
+                    <button id="HomeTextSettingB" class="HomeTextSettingInputs" onclick="pleaseWait()">UPDATE INFO</button>
+                </form>
+            </div>
+
+            {{#each motionSpeedValue}}
+            <input type="hidden" value="{{this._id}}" id="homePicSpeed_id">
+            <input type="hidden" value="{{this.rangeVal}}" id="motionSpeedValue">
+            {{/each}}
+
+            <p id="homePicSlideToLeft"><</p>
+            <p id="homePicSlideToRight">></p>
+
+            <div id="sectionHomeSettingButton" class="settingTreeButtons" onclick="showElement('sectionHomeSettings')">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <div id="homePicSlide"></div>
+            <div id='sectionHomeSettings' class="sectionHomeSettingsId">
+                <p id="addHomePic" class="sectionHomeSettings">Add image</p>
+                <p id="homePicSpeed" class="sectionHomeSettings">Change motion speed</p>
+                <p id="deleteHomePic" class="sectionHomeSettings">Delete this image</p>
+                <input id="homePicSpeedRange" class="sectionHomeSettings" type="range" min=1 max=20>
+            </div>
+
+            <input type="hidden" value="{{homePicAllFileLength}}" id="homePicAllFileLength">
+
+            <form action="addHomePic" method="post" enctype="multipart/form-data" style="display: none">
+                <input type="file" name="file" id="addHomePicText">
+                <button id="addHomePicButton"></button>
+            </form>
+        </div>
+
+        <b id="homeLearnMore">Learn More</b>
+
+        <div id="section1">
+            {{#each imageSizeValue}}
+            <input type="hidden" value="{{this._id}}" id="section1Size_id">
+            <input type="hidden" value="{{this.sizeValue}}" id="section1SizeData">
+            {{/each}}
+
+            {{#each spaceValue}}
+            <input type="hidden" value="{{this._id}}" id="section1Space_id">
+            <input type="hidden" value="{{this.spacevalue}}" id="section1SpaceData">
+            {{/each}}
+
+            <span id="goldenMarkWrapper">
+                <span id="goldenMark">
+                    <h1>Mustafa Altaie</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur</p>
+                </span>
+            </span>
+
+            <div id='section1Settings' class="sectionHomeSettingsId">
+                <p id="addSection1" class="sectionHomeSettings">Add image</p>
+                <p id="section1Size" class="sectionHomeSettings" onclick="section1Space.style.display='none'">Change image zise</p>
+                <input id="section1SizeRange" class="sectionHomeSettings" type="range" min=50 max=1000>
+                <p id="section1Space" class="sectionHomeSettings" onclick="section1Size.style.display='none'">Change spaces</p>
+                <input id="section1SpaceRange" class="sectionHomeSettings" type="range" min=-100 max=200>
+            </div>
+
+            <div id="section1SettingButton" class="settingTreeButtons" onclick="showElement('section1Settings')">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <form action="addSection1Pic" method="post" enctype="multipart/form-data" style="display: none">
+                <input type="file" name="file" id="section1Pic">
+                <button id="section1PicBtn"></button>
+            </form>
+
+            <input type="hidden" value="{{section1ImagesDataLngth}}" id="section1ImagesDataLngth">
+            <div id="sectionOctogan"></div>
+            <textarea name="itemInformationChange" id="itemInformationChange"></textarea>
+        </div>
+
+        <div id="sectionProductsMain">
+            <div id="productNav">
+                <p id="allItems">All items</p>
+            </div>
+            <div id="sectionProductsSettingButton" class="settingTreeButtons" onclick="showElement('sectionProductsSettings')">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div id="sectionProductsSettings" class="sectionHomeSettingsId">
+                <p id="addItemBtn" class="sectionProductsSettings" onclick="menuSlider('addNewItemForm', 0, 1, 'unset'); itemCategory.focus(); sectionProductsSettings.style.display='none'; makeUniqueId(); fewLeft.value='0'; generatePromoCode()">Add item</p>
+                <p id="" class="sectionProductsSettings">Change image zise</p>
+                <p id="" class="sectionProductsSettings">Change spaces</p>
+            </div>
+
+            <form action="addNewItem" method="post" enctype="multipart/form-data" id="addNewItemForm">
+                <input type="hidden" name="_id" id="item_id">
+                <input name="itemCategory" class="addNewItemForm" id="itemCategory" placeholder="Item category">
+                <input name="itemName" class="addNewItemForm" id="itemName" placeholder="Item name">
+                <input type="number" name="itemPrise" class="addNewItemForm" id="itemPrise" placeholder="Item prise">
+                <input name="itemtext" class="addNewItemForm" id="itemtext" placeholder="Item description">
+                <p id="itemImageP" class="addNewItemForm">Add item image</p>
+                <input type="file" name="file" class="addNewItemForm" id="itemImage" style="display: none">
+                <input type="hidden" name="itemPromoCode" id="itemPromoCode">
+                <input type="hidden" name="itemUniqueId" id="itemUniqueId">
+                <input type="hidden" name="oldImage" id="oldImage">
+                <input type="hidden" name="fewLeft" id="fewLeft">
+                <input type="hidden" name="itemOldPrise" id="itemOldPrise">
+                <input type="hidden" name="itemNewPrise" id="itemNewPrise">
+                <input type="hidden" name="itemSaleAmount" id="itemSaleAmount">
+                <button id="createItemB" style="display: none"></button>
+            </form>
+
+            {{#each ItemDataList}}
+            <input type="hidden" value="{{this._id}}" class="ItemDataList_id">
+            <input type="hidden" value="{{this.itemCategory}}" class="ItemDataListItemCategory">
+            <input type="hidden" value="{{this.itemName}}" class="ItemDataListItemName">
+            <input type="hidden" value="{{this.itemPrise}}" class="ItemDataListItemPrise">
+            <input type="hidden" value="{{this.itemtext}}" class="ItemDataListItemtext">
+            <input type="hidden" value="{{this.itemUniqueId}}" class="ItemDataListUniqueId">
+            <input type="hidden" value="{{this.fewLeft}}" class="ItemDataListFewLeft">
+            <input type="hidden" value="{{this.itemOldPrise}}" class="ItemDataListOldPrise">
+            <input type="hidden" value="{{this.itemNewPrise}}" class="ItemDataListNewPrise">
+            <input type="hidden" value="{{this.itemSaleAmount}}" class="ItemDataListSaleAmount">
+            <input type="hidden" value="{{this.itemPromoCode}}" class="ItemDataListPromoCode">
+            {{/each}}
+
+            <div id="itemSettingMenu" class="sectionHomeSettingsId">
+                <p id="editItem" class="sectionProductsSettings">Edit item</p>
+                <p id="itemSaleBtn" class="sectionProductsSettings">Sale</p>
+                <input type="range" id="saleRange" max=99 min=1 value=1>
+                <p id="fewLeftBtn" class="sectionProductsSettings">Only few left in stock</p>
+                <p id="deleteItem" class="sectionProductsSettings">Delete item</p>
+            </div>
+
+            <div id="sectionProducts"></div>
+        </div>
+
+        <div id="sectionSpecialOffers">
+            <div id="sectionSpecialOffersButton" class="settingTreeButtons" onclick="showElement('specialOffersMenu'); specialOffersMenuCase = 1" style="top: 10px">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            {{#each NewOfferData}}
+            <input type="hidden" value="{{this._id}}" class="offerImage_idDb">
+            <input type="hidden" value="{{this.offerImageName}}" class="offerImageNameDB">
+            <input type="hidden" value="{{this.offerTitle}}" class="offerTitleDB">
+            <input type="hidden" value="{{this.offerText}}" class="offerTextDB">
+            {{/each}}
+
+            {{#each sliderWidthData}}
+            <input type="hidden" value="{{this._id}}" id="sliderWidth_id">
+            <input type="hidden" value="{{this.sliderWdth}}" id="sliderWidthData">
+            {{/each}}
+
+            {{#each sliderHeightData}}
+            <input type="hidden" value="{{this._id}}" id="sliderHeight_id">
+            <input type="hidden" value="{{this.sliderHght}}" id="sliderHeightData">
+            {{/each}}
+
+            <div id="specialOffersMenu" class="sectionHomeSettingsId" style="top: 10px">
+                <p id="addSliderItem" class="sectionProductsSettings" onclick="menuSlider('addNewOfferForm', 0, 1, 'unset'); specialOffersMenu.style.display = 'none'">Add item to the slider</p>
+                <p id="sliderWidth" class="sectionProductsSettings">Change slider width</p>
+                <input type="range" id="sliderWidthRange" class="sectionProductsSettings" min=20 max=100 style="display: none">
+                <p id="sliderHeight" class="sectionProductsSettings">Change slider height</p>
+                <input type="range" id="sliderHeightRange" class="sectionProductsSettings" min=500 max=800 style="display: none">
+                <p id="editSliderItem" class="sectionProductsSettings">Edit this item</p>
+                <p id="deleteSliderItem" class="sectionProductsSettings">Delete this item</p>
+            </div>
+
+            <form action="addNewOffer" method="post" enctype="multipart/form-data" id="addNewOfferForm">
+                <input type="hidden" name="_id" id="offerImage_id" class="addNewOfferForm">
+                <input type="file" name="file" id="offerImage" style="display: none">
+                <input type="hidden" name="offerImageName" id="offerImageName">
+                <input name="offerTitle" id="offerTitle" class="addNewOfferForm" placeholder="Title">
+                <input name="offerText" id="offerText" class="addNewOfferForm" placeholder="Description">
+                <p id="newOfferSubmit" class="addNewOfferForm">Add Image</p>
+                <button id="newOfferSubmitBtn" style="display: none"></button>
+            </form>
+
+            <div id="specialOfferWrapperMain">
+                <div id="specialOfferWrapper"></div>
+            </div>
+            
+            <div id="specialOfferChannels"></div>
+        </div>
+
+        <div id="fotterDiv">
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero at soluta quaerat consequatur ipsum quis quibusdam necessitatibus cum nulla voluptatum quasi quos aut enim totam repellendus, a ducimus praesentium magnam.</p>
+            </div>
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero at soluta quaerat consequatur ipsum quis quibusdam necessitatibus cum nulla voluptatum quasi quos aut enim totam repellendus, a ducimus praesentium magnam.</p>
+            </div>
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero at soluta quaerat consequatur ipsum quis quibusdam necessitatibus cum nulla voluptatum quasi quos aut enim totam repellendus, a ducimus praesentium magnam.</p>
+            </div>
+            <div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero at soluta quaerat consequatur ipsum quis quibusdam necessitatibus cum nulla voluptatum quasi quos aut enim totam repellendus, a ducimus praesentium magnam.</p>
+            </div>
+        </div>
+
+        <h1 id="pleaseWaitText">Please wait</h1>
+    </body>
+
+    <style>
+        @media only screen and (max-width: 1000px){
+            *{
+                overflow-x: hidden;
+                overflow-y: unset;
+            }
+            ::-webkit-scrollbar{
+                display: none;
+            }
+            body nav{
+                padding: 120px;
+            }
+            body #navLogo{
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 45px 0 0 0;
+            }
+            body #navLogo img{
+                height: 150px;
+            }
+            body #navB{
+                display: block;
+            }
+            body #navOptions{
+                position: fixed;
+                flex-direction: column;
+                width: 100%;
+                right: 0;
+                top: 210px;
+                background: rgba(0, 0, 0, 0);
+                display: none;
+            }
+            body #navOptions p{
+                font-size: 60px;
+                padding: 70px 0;
+                margin: -1px 0;
+                background: #111;
+                width: 100%;
+            }
+            body #cartIcon{
+                display: none;
+            }
+            body #navSettingBtn{
+                font-size: 150px;
+                right: 30px;
+            }
+            body #navSetting p, body #navSettingText{
+                padding: 50px 180px;
+                font-size: 40px;
+            }
+            body #navForm{
+                position: fixed;
+                width: 80%;
+                height: 150px;
+            }
+            body #navTitle, body #navTitleB{
+                font-size: 50px;
+                padding: 0 0 0 140px;
+            }
+            body #navTitleB{
+                padding: 28px 0;
+            }
+            body #contentSetting{
+                width: 80%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            body #contentSetting p{
+                font-size: 50px;
+                padding: 50px 0;
+            }
+            body #newContentForm{
+                width: 80%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            body #newContentForm p, body .contentInfo{
+                padding: 20px 0;
+                font-size: 50px;
+            }
+            body #contentList{
+                width: 800px;
+                right: unset;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            body #contentList p{
+                padding: 50px 0;
+                font-size: 60px;
+            }
+            body .contentTitleStng{
+                top: 0;
+                padding: 0 40px 40px 40px;
+                font-size: 120px;
+            }
+            body .deleteCntnt{
+                width: 50px;
+                height: 50px;
+                left: 40px;
+            }
+            body .homePic{
+                object-position: right 100%;
+            }
+            body .settingTreeButtons{
+                width: 100px;
+                height: 100px;
+                padding: 30px 0 30px 60px;
+                top: 270px;
+                left: 40px;
+            }
+            body .settingTreeButtons > div{
+                width: 25px;
+                height: 25px;
+                margin: 7px;
+            }
+            body .sectionHomeSettingsId{
+                left: 50%;
+                transform: translateX(-50%);
+                width: 700px;
+                top: 450px;
+            }
+            body .sectionHomeSettingsId p{
+                padding: 30px;
+                font-size: 50px;
+            }
+            body #homePicSpeedRange{
+                margin: 50px;
+                width: 500px;
+            }
+            body .sectionHomeSettingsId p:hover{
+                background: #222;
+                padding: 30px;
+            }
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Barlow Semi Condensed', sans-serif;
+            font-size: 18px;
+            outline: none;
+            user-select: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        body{
+            background: #111;
+        }
+        #xxx{
+            z-index: 200;
+            position: fixed;
+            width: 100%;
+            height: 2px;
+        }
+        #yyy{
+            background: #f70;
+            height: 100%;
+        }
+
+        body::-webkit-scrollbar{
+            background: #111;
+            width: 15px;
+        }
+        body::-webkit-scrollbar-thumb{
+            background: #045;
+            border: solid 2px #111;
+            padding: 0 1px;
+            border-radius: 15px;
+        }
+        body::-webkit-scrollbar-thumb:hover{
+            background: #067;
+        }
+        body input[type="range"]{
+            -webkit-appearance: none;
+            width: 90%;
+            height: 5px;
+            background: linear-gradient(to right, #079, #910);
+        }
+        nav{
+            position: relative;
+            background: #111;
+            color: #fff;
+            border-bottom: solid 1px #333;
+            display: flex;
+            padding: 50px;
+        }
+        #navLogo{
+            top: 0;
+            left: 0;
+            position: absolute;
+            padding: 25px;
+        }
+        #navLogo img{
+            height: 55px;
+            pointer-events: none;
+        }
+        #navB{
+            display: none;
+        }
+        #navOptions{
+            z-index: 100;
+            position: absolute;
+            background: #111;
+            display: flex;
+            right: 70px;
+            top: 20px;
+            align-items: center;
+            transition: 0.2s;
+        }
+        #navOptions p{
+            padding: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            text-align: center;
+            border-right: solid 1px #333;
+            transition: 0.05s;
+        }
+        #navOptions p:hover{
+            transform: translateY(-3px);
+            color: rgb(240, 190, 73);
+        }
+        #cartIcon{
+            width: 40px;
+            padding: 10px;
+            border-right: solid 1px #333;
+            filter: grayscale(100%) brightness(150%);
+            transition: 0.1s;
+        }
+        #cartIcon:hover{
+            transform: translateY(-3px);
+            filter: grayscale(0%);
+        }
+        #navForm{
+            z-index: 200;
+            position: absolute;
+            width: 160px;
+            height: 45px;
+            display: none;
+        }
+        #navTitle, #navTitleB{
+            width: 100%;
+            height: 100%;
+            font-weight: bold;
+            border-radius: 100px;
+            border: solid 1px #000;
+            text-align: center;
+            padding: 0 0 0 40px;
+        }
+        #navTitleB{
+            width: 40%;
+            height: 50%;
+            transform: translate(5%, -107%);
+            background: #000;
+            color: #fff;
+            font-weight: normal;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+        #navSettingBtn{
+            position: absolute;
+            right: 0;
+            top: 15px;
+            font-family: 'Times New Roman', Times, serif;
+            padding: 0 20px 20px 20px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transform: rotate(270deg);
+        }
+        #navSettingBtn:hover{
+            color: #0af;
+        }
+        #navSetting{
+            z-index: 100;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: none;
+        }
+        #navSetting p, #navSettingText{
+            background: #aaa;
+            border-bottom: solid 1px #000;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #navSettingText{
+            background: #fff;
+            cursor: unset;
+            display: none;
+        }
+        #contentSetting{
+            z-index: 100;
+            position: absolute;
+            display: none;
+        }
+        #contentSetting p{
+            padding: 10px 20px;
+            background: #aaa;
+            border-bottom: solid 1px #000;
+            font-weight: bold;
+            text-align: center;
+        }
+        #newContentForm{
+            z-index: 100;
+            position: absolute;
+            display: none;
+            width: 200px;
+            flex-direction: column;
+            align-items: center;
+        }
+        #newContentForm p, .contentInfo{
+            background: #aaa;
+            width: 100%;
+            text-align: center;
+            border: solid 1px #000;
+            margin-top: -1px;
+            padding: 10px 20px;
+            font-weight: bold;
+            display: none;
+        }
+        #newContentForm p{
+            display: block;
+        }
+        .contentInfo{
+            background: #fff;
+            display: block;
+        }
+        #contentDescription{
+            min-width: 100%;
+            max-width: 100%;
+            min-height: 50px;
+            max-height: 150px;
+        }
+        #contentList{
+            z-index: 100;
+            position: absolute;
+            width: 200px;
+            right: 140px;
+            pointer-events: none;
+        }
+        #contentList p{
+            position: relative;
+            background: #111;
+            color: #fff;
+            border-bottom: solid 1px #333;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            transition: transform 0.3s, opacity 0.3s, margin 0.1s;
+        }
+        #contentList p:hover{
+            margin: 0 -5px;
+            color: #2df;
+        }
+        .contentTitleStng{
+            position: absolute;
+            right: 0;
+            top: 8px;
+            transform: rotate(270deg);
+            padding: 0 11px 5px 11px;
+            cursor: pointer;
+        }
+        .deleteCntnt{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+            padding: 10px;
+            display: none;
+        }
+
+        #homeTextCenter{
+            z-index: 90;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 450px;
+        }
+        #homeTextCenter > h1{
+            font-size: 50px;
+        }
+        #homeTextCenter > h3{
+            font-size: 30px;
+            margin: 5px 0 10px 0;
+            border-bottom: solid 1px #000;
+        }
+        #homeTextCenter > p{
+            font-size: 20px;
+        }
+        #HomeTextSetting{
+            background: unset;
+            top: 0;
+            left: -50px;
+        }
+        #HomeTextSetting > div{
+            background: #000;
+        }
+        #HomeTextSettings{
+            position: absolute;
+            width: 350px;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+        .HomeTextSettingInputs{
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            border: solid 1px #000;
+            margin-top: -1px;
+        }
+        #HomeTextSettingB{
+            background: #067;
+            color: white;
+        }
+        #HomeTextSettingB:hover{
+            background: #09b;
+        }
+
+        #homeLearnMore{
+            z-index: 100;
+            position: absolute;
+            left: 50%;
+            top: 80%;
+            transform: translateX(-50%);
+            background: #000;
+            color: #ddd;
+            padding: 10px 30px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #homePicSlideToLeft, #homePicSlideToRight{
+            z-index: 100;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            color: #ddd;
+            font-size: 70px;
+            border-radius: 50%;
+            text-align: center;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        #homePicSlideToRight{
+            right: 0;
+        }
+        #homePicSlideToLeft:hover, #homePicSlideToRight:hover{
+            background: rgba(0, 0, 0, 0.6);
+        }
+        #homePicSlideToLeft:hover{
+            width: 40px;
+            padding: 0 50px 0 10px;
+        }
+        #homePicSlideToRight:hover{
+            width: 40px;
+            padding: 0 10px 0 50px;
+        }
+
+        #homePicSlide{
+            position: relative;
+            height: 100%;
+            display: flex;
+            background: #111;
+        }
+        #deleteHomePic:hover{
+            background: #d20;
+        }
+        .homePic{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: left 0%;
+            opacity: 0;
+            pointer-events: none;
+            transition: object-position 20s, opacity 4s;
+        }
+        .settingTreeButtons{
+            z-index: 90;
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            padding: 20px 10px 20px 30px;
+            top: 110px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .settingTreeButtons:hover{
+            background:rgba(0, 0, 0, 0.7);
+            transform: rotate(90deg);
+        }
+        .settingTreeButtons > div{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 2px;
+            pointer-events: none;
+        }
+        .sectionHomeSettingsId{
+            z-index: 100;
+            position: absolute;
+            width: 240px;
+            background: #111;
+            top: 110px;
+            left: 10px;
+            display: none;
+        }
+        .sectionHomeSettingsId p{
+            color: #ddd;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        #homePicSpeedRange{
+            margin: 15px 0 25px 15px;
+            display: none;
+        }
+        .sectionHomeSettingsId p:hover{
+            background: #222;
+            padding: 15px 15px 15px 10px;
+        }
+
+        #section1{
+            position: relative;
+        }
+        #sectionOctogan{
+            background: #252525;
+            padding: 100px 200px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        #sectionOctogan > div{
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(-45deg);
+            filter: drop-shadow(0 0 1px #fff);
+            transition: transform 0.1s, opacity 0.2s;
+        }
+        #sectionOctogan > div:hover{
+            transform: rotate(-50deg);
+        }
+        .deleteSection1Img{
+            position: absolute;
+            padding: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.7);
+            width: 20px;
+            transform: rotate(45deg);
+            filter: brightness(150%) grayscale(100%);
+            display: none;
+        }
+        #sectionOctogan > div:hover > img{
+            display: block;
+        }
+        .sectionOctoganImage{
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+        #goldenMarkWrapper{
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 200px;
+            height: 100px;
+            transform: translateX(-100%);
+            display: flex;
+            align-items: flex-end;
+            overflow-y: hidden;
+        }
+        #goldenMark{
+            position: absolute;
+            width: 150px;
+            height: 75px;
+            padding: 100px 25px 25px 25px;
+            background: rgb(180, 96, 0);
+            border-radius: 50%;
+            text-align: center;
+            text-shadow: 1px 1px 1px rgb(250, 168, 74);
+        }
+        #goldenMark > h1{
+            font-size: 22px;
+            text-shadow: -1px -1px 1px hsl(32, 95%, 60%);
+        }
+
+        #section1SettingButton{
+            top: 10px;
+            background: unset;
+        }
+
+        #section1Settings{
+            top: 20px;
+            background: #a50;
+        }
+        #section1Settings > p{
+            background: #a50;
+        }
+        #section1Settings > p:hover{
+            background: #b60;
+        }
+        #section1SpaceRange, #section1SizeRange{
+            margin: 10px 0 25px 15px;
+            width: 90%;
+            display: none;
+        }
+
+        .itemsDemo{
+            position: relative;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            height: 600px;
+        }
+        .itemInformation{
+            position: absolute;
+            font-size: 30px;
+            background: #252525;
+            color: #ddd;
+            width: 60%;
+            padding: 40px 20% 100px 20%;
+            text-align: center;
+            bottom: 0;
+        }
+
+        #itemInformationChange{
+            z-index: 100;
+            position: fixed;
+            max-width: 80%;
+            max-height: 80%;
+            min-width: 20%;
+            min-height: 20%;
+            padding: 2%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        #sectionProductsMain{
+            position: relative;
+        }
+        #sectionProductsSettings{
+            right: 20px;
+            left: unset;
+            top: 20px;
+        }
+        #sectionProductsSettings > p{
+            background: hsl(60, 12%, 20%);
+            color: #fff;
+        }
+        #sectionProductsSettings > p:hover{
+            background: hsl(60, 12%, 15%);
+        }
+        #sectionProductsSettingButton{
+            left: unset;
+            right: 20px;
+            top: 20px;
+            background: unset;
+        }
+        #productNav{
+            z-index: 50;
+            position: absolute;
+            display: flex;
+        }
+        #productNav p, .subProductNav > b{
+            padding: 20px 30px;
+            text-align: center;
+            margin: 0 -1px 0 0;
+            background: hsl(60, 12%, 25%);
+            border: solid 1px #000;
+            color: #fff;
+            transition: 0.05s;
+            font-size: 22px;
+        }
+        #productNav p:hover, .subProductNav > b:hover{
+            background: hsl(60, 12%, 30%);
+        }
+
+        .subProductNav{
+            z-index: 50;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+        }
+        .subProductNav > b{
+            padding: 20px 0;
+            font-weight: normal;
+            margin: -1px 0 0 0;
+        }
+
+        #sectionProducts{
+            position: relative;
+            max-height: 600px;
+            min-height: 500px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            background: #151515;
+            padding: 140px 20px 100px 20px;
+            overflow-y: scroll;
+        }
+        #sectionProducts::-webkit-scrollbar{
+            width: 10px;
+        }
+        #sectionProducts::-webkit-scrollbar-thumb{
+            background: hsl(60, 12%, 20%);
+            border-radius: 10px;
+        }
+        #sectionProducts::-webkit-scrollbar-thumb:hover{
+            background: hsl(60, 12%, 30%);
+        }
+
+        #sectionProducts > div{
+            position: relative;
+            text-align: center;
+            width: 250px;
+            padding: 15px;
+            height: 370px;
+            background: hsl(60, 12%, 30%);
+            color: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        #sectionProducts > div:hover{
+            background: hsl(60, 12%, 35%);
+        }
+        #sectionProducts > div:hover > .promoCode{
+            background: hsl(60, 12%, 35%);
+        }
+        #sectionProducts > div > h1{
+            position: relative;
+            color: #000;
+            margin: 20px 0 20px 10px;
+            float: left;
+            font-size: 25px;
+        }
+        #sectionProducts del{
+            color: #710;
+            font-size: 25px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        #sectionProducts del:before{
+            position: absolute;
+            content: "";
+            left: -5px;
+            top: 50%;
+            right: 55%;
+            border-top: 1px solid;
+            border-color: inherit;
+            transform: rotate(-30deg);
+        }
+        #sectionProducts > div > img{
+            width: 100%;
+            height: 250px;
+            pointer-events: none;
+            object-fit: cover;
+        }
+        #sectionProducts > div > p{
+            height: 60px;
+            overflow-y: scroll;
+            text-shadow: 1px 1px 1px #000;
+            word-spacing: 1.5px;
+        }
+        #sectionProducts > div > p::-webkit-scrollbar{
+            display: none;
+        }
+        #sectionProducts > div > b{
+            background: #111;
+            padding: 6px 10px;
+            margin: 20px 10px 20px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            color: hsl(60, 12%, 50%);
+            float: right;
+        }
+        #sectionProducts > div > b:hover{
+            background: hsl(60, 15%, 15%);
+        }
+        #sectionProducts > div > h2{
+            position: absolute;
+            top: 5px;
+            right: 0;
+            color: #000;
+            padding: 0;
+            transform: rotate(90deg) translateY(-44%);
+            cursor: pointer;
+            font-size: 50px;
+        }
+        #sectionProducts > div > h2:hover{
+            color: #5f0;
+        }
+        #sectionProducts > div > h3, #sectionProducts > div > h4{
+            z-index: 10;
+            position: absolute;
+            background: #a30;
+            color: #fff;
+            padding: 5px 10px;
+            transform: skewY(-7deg);
+            top: 8px;
+            left: 0;
+            font-weight: normal;
+        }
+        #sectionProducts > div > h4{
+            background: #370;
+        }
+        .promoCode{
+            position: absolute;
+            top: 15px;
+            right: 10px;
+            font-weight: normal;
+            background: hsl(60, 12%, 30%);
+            padding: 5px 10px;
+            pointer-events: none;
+        }
+
+        #addNewItemForm{
+            z-index: 100;
+            position: absolute;                     
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+        }
+        .addNewItemForm{
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            border: solid 1px #000;
+            margin-top: -1px;
+            font-size: 22px;
+            transition: opacity 0.3s, transform 0.4s;
+        }
+        #itemImageP{
+            background: hsl(60, 20%, 20%);
+            color: #fff;
+        }
+        #itemImageP:hover{
+            background: hsl(60, 20%, 30%);
+        }
+
+        #itemSettingMenu{
+            background: hsl(60, 12%, 20%);
+        }
+        #itemSettingMenu > p{
+            background: hsl(60, 12%, 20%);
+        }
+        #itemSettingMenu > p:hover{
+            background: hsl(60, 12%, 30%);
+        }
+
+        #itemSettingMenu > #deleteItem:hover{
+            background: #d20;
+        }
+        #saleRange{
+            margin-left: 5%;
+            display: none;
+        }
+
+        #addNewOfferForm{
+            z-index: 100;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+        }
+        .addNewOfferForm{
+            width: 100%;
+            padding: 10px 0;
+            border: solid 1px #000;
+            margin-bottom: -1px;
+            text-align: center;
+            transition: opacity 0.3s, transform 0.4s;
+        }
+        #newOfferSubmit{
+            background: #aaa;
+        }
+        #newOfferSubmit:hover{
+            padding: 7px 0 13px 0;
+        }
+        #sectionSpecialOffers{
+            position: relative;
+            background: linear-gradient(#222, #131313);
+        }
+        #sliderWidthRange, #sliderHeightRange{
+            margin: 15px 0 15px 10px;
+        }
+        #sliderWidthRange::-webkit-slider-thumb, #sliderHeightRange::-webkit-slider-thumb{
+            -webkit-appearance: none;
+            border-radius: 50%;
+            height: 25px;
+            width: 25px;
+            border: solid 4px #444;
+            background: #010;
+        }
+        #sliderWidthRange::-webkit-slider-thumb:active, #sliderHeightRange::-webkit-slider-thumb:active{
+            background: #3f0;
+        }
+        #deleteSliderItem:hover{
+            background: #d20;
+        }
+        #specialOfferWrapperMain{
+            position: relative;
+            width: 1000px;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+        #specialOfferWrapperMain::-webkit-scrollbar{
+            display: none;
+        }
+        #specialOfferWrapper{
+            position: relative;
+            display: flex;
+        }
+        #specialOfferWrapper > div{
+            position: relative;
+        }
+        .specialOfferImage{
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .specialOfferInfo{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80%;
+            padding: 40px 10%;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .specialOfferInfo > h1{
+            font-size: 50px;
+            font-weight: normal;
+        }
+        .specialOfferInfo > p{
+            font-size: 25px;
+            margin: 30px 0 55px 0;
+        }
+        .specialOfferInfo > b{
+            font-size: 30px;
+            background: #3a0;
+            padding: 10px 30px;
+            font-weight: normal;
+            cursor: pointer;
+            border-radius: 50px;
+        }
+        .specialOfferInfo > b:hover{
+            background: #4c0;
+        }
+        #specialOfferChannels{
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+        }
+        #specialOfferChannels > div{
+            width: 15px;
+            height: 15px;
+            margin: 0 4px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: 70px;
+            transition: margin-top 0.1s, transform 0.03s;
+        }
+        #specialOfferChannels > div:hover{
+            transform: translateY(-2px);
+        }
+
+        #fotterDiv{
+            position: relative;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            padding: 100px 0;
+        }
+        #fotterDiv > div{
+            width: 10%;
+            padding: 0 5%;
+            color: #ddd;
+        }
+
+        #pleaseWaitText{
+            z-index: 500;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: hsl(76, 24%, 60%);
+            background: #111;
+            padding: 70px;
+            white-space: nowrap;
+            font-weight: normal;
+            border-radius: 30px;
+            display: none;
+        }
+
+    </style>
+
+    <script>
+
+        function runMustafaBtn(){
+            var btnProperties = ({
+                zIndex: 10,
+                position: 'absolute',
+                idName: "navB",
+                place: 'nav',
+                color: '#ddd',
+                size: 150,
+                top: '40px',
+                left: '40px',
+                speed: 0.3
+            });
+            mustafaButton(btnProperties);
+        }
+        runMustafaBtn();
+
+        function pleaseWait(){
+            pleaseWaitText.style.display = 'block';
+            document.getElementsByTagName('body')[0].style.pointerEvents = 'none';
+        }
+
+
+        sectionHome.style.height = document.documentElement.clientHeight - document.documentElement.clientHeight/4 + 'px';
+
+        var currentHomePicN;
+
+        var homePicCounter = 0;
+        var homePicCounterI = 0;
+
+        if(document.querySelectorAll('#motionSpeedValue').length == 0)
+        var homePicSliderSpeed = 500;
+        else
+        var homePicSliderSpeed = motionSpeedValue.value * 100;
+        homePicSpeedRange.value = homePicSliderSpeed/100;
+
+        if(document.querySelectorAll('#section1SizeData').length == 0)
+        section1SizeRange.value = 100;
+        else
+        section1SizeRange.value = section1SizeData.value;
+
+        if(document.querySelectorAll('#section1SpaceData').length == 0)
+        section1SpaceRange.value = 20;
+        else
+        section1SpaceRange.value = section1SpaceData.value;
+
+        for(i = 0; i < homePicAllFileLength.value; i++){
+            var img = document.createElement('img');
+            img.className = "homePic";
+            img.id = "homePic" + i;
+            img.src = "/homePics/homePic" + i + ".jpg";
+            homePicSlide.appendChild(img);
+        }
+
+        for(i = 0; i < document.getElementsByClassName('homePic').length; i++)
+        document.getElementsByClassName('homePic')[i].style.transition = 'object-position ' + homePicSliderSpeed/100*2 + 's, opacity ' + homePicSliderSpeed/100/2 + 's';
+
+        if(document.getElementsByClassName('homePic').length > 1){
+            setInterval(function(){
+                if(pausePlayHomePic == 1){
+                    homePicCounterI++;
+                    if(homePicCounterI >= 10){
+                        homePicCounterI = 0;
+                        homePicCounter++;
+                        if(homePicCounter >= document.getElementsByClassName('homePic').length){
+                            homePicCounter = 0;
+                        }
+                        homePicSlider(homePicCounter);
+                    }
+                }
+            }, homePicSliderSpeed);
+        }
+        else{
+            homePicSlideToLeft.style.display = "none";
+            homePicSlideToRight.style.display = "none";
+            setInterval(function(){
+                document.getElementsByClassName('homePic')[0].style.objectPosition = 'left 100%';
+                homePicCounter++;
+                if(homePicCounter > 1){
+                    homePicCounter = 0;
+                    document.getElementsByClassName('homePic')[0].style.objectPosition = 'left 0%';
+                }
+            }, homePicSliderSpeed*10);
+        }
+
+        function homePicSlider(n){
+            for(i = 0; i < document.getElementsByClassName('homePic').length; i++){
+                if(window.matchMedia("(max-width: 1000px)").matches)
+                document.getElementsByClassName('homePic')[i].style.objectPosition = 'right 100%';
+                else
+                document.getElementsByClassName('homePic')[i].style.objectPosition = 'left 0%';
+                document.getElementsByClassName('homePic')[i].style.opacity = 0;
+            }
+            if(window.matchMedia("(max-width: 1000px)").matches)
+            document.getElementsByClassName('homePic')[n].style.objectPosition = 'left 100%';
+            else
+            document.getElementsByClassName('homePic')[n].style.objectPosition = 'right 100%';
+            document.getElementsByClassName('homePic')[n].style.opacity = 1;
+            currentHomePicN = n;
+        }
+        setTimeout(function(){homePicSlider(0)}, 10);
+
+        document.getElementById('homePicSlideToLeft').onclick = function(){
+            if(homePicCounter == 0) homePicCounter = document.getElementsByClassName('homePic').length;
+            homePicCounterI = 0;
+            homePicCounter--;
+            homePicSlider(homePicCounter);
+        }
+
+        document.getElementById('homePicSlideToRight').onclick = function(){
+            homePicCounterI = 0;
+            homePicCounter++;
+            if(homePicCounter >= document.getElementsByClassName('homePic').length) homePicCounter = 0;
+            homePicSlider(homePicCounter);
+        }
+
+
+        var pausePlayHomePic = 1;
+        var oldH1Text;
+
+        document.getElementById('homePicSlide').onclick = function(){
+            if(document.getElementsByClassName('homePic').length > 1){
+                if(pausePlayHomePic == 1){
+                    pausePlayHomePic = 0;
+                    for(i = 0; i < document.getElementsByClassName('homePic').length; i++){
+                        document.getElementsByClassName('homePic')[i].style.transition = '0s';
+                        document.getElementsByClassName('homePic')[i].style.objectPosition = 'unset';
+                    }
+                    oldH1Text = homeTextCenter.getElementsByTagName('H1')[0].innerHTML;
+                    homeTextCenter.getElementsByTagName('H1')[0].innerHTML = "Paused";
+                }
+                else{
+                    homeTextCenter.getElementsByTagName('H1')[0].innerHTML = oldH1Text;
+                    pausePlayHomePic = 1;
+                    for(i = 0; i < document.getElementsByClassName('homePic').length; i++)
+                    document.getElementsByClassName('homePic')[i].style.transition = 'object-position ' + motionSpeedValue.value*2 + 's, opacity ' + motionSpeedValue.value/2 + 's';
+                    homePicSlideToRight.click();
+                }
+            }
+        }
+
+
+        document.getElementById('addHomePic').onclick = function(){
+            addHomePicText.click();
+        }
+
+        document.getElementById('addHomePicText').onchange = function(){
+            if(imageType.includes(addHomePicText.value.substr(addHomePicText.value.length - 4, addHomePicText.value.length))){
+                pleaseWait();
+                addHomePicButton.click();
+            }
+            else alert(addHomePicText.value.substr(addHomePicText.value.length - 4, addHomePicText.value.length));
+        }
+
+        document.getElementById('deleteHomePic').onclick = function(){
+            pleaseWait();
+            window.location.href = "deleteHomePic/" + currentHomePicN + '/' + (homePicAllFileLength.value-1);
+        }
+
+        HomeTextSetting_id.value = homeTextData_id.value;
+        HomeTextH1.value = homeTextFirst.innerHTML;
+        HomeTextH3.value = homeTextSecond.innerHTML;
+        HomeTextP.value = homeTextThird.innerHTML;
+
+        function showElement(n){
+            document.getElementById(n).style.display = "block";
+        }
+
+        document.getElementById('homePicSpeedRange').oninput = function(){
+            homePicSpeed.innerHTML = "Change to: " + homePicSpeedRange.value + ' second';
+        }
+
+        document.getElementById('section1SpaceRange').oninput = function(){
+            section1Space.innerHTML = "Submit changes to: " + section1SpaceRange.value + ' px';
+            sectionOctoganImageSpace(section1SpaceRange.value);
+        }
+
+        document.getElementById('section1SizeRange').oninput = function(){
+            section1Size.innerHTML = "Submit changes to: " + section1SizeRange.value + ' px';
+            sectionOctoganImageSize(section1SizeRange.value);
+        }
+
+
+        document.addEventListener('scroll', function(){
+            if(window.matchMedia("(max-width: 1000px)").matches){
+                if(navBCase == 1)
+                navB.click();
+                navBCase = 0;
+            }
+            scrollPercentage();
+
+            var nm = 0;
+
+            if(document.documentElement.scrollTop >= document.body.scrollHeight - 722 - fotterDiv.offsetHeight){
+                var loop = setInterval(function(){
+                    document.getElementById('specialoffer' + nm).style.marginTop = 0;
+                    nm++;
+                    if(nm >= document.getElementsByClassName('offerImage_idDb').length){
+                        clearInterval(loop);
+                    }
+                }, 50);
+            }
+        });
+
+        function scrollPercentage(){
+            var pageHeight = document.body.scrollHeight - document.documentElement.clientHeight;
+            var currentScroll = document.documentElement.scrollTop;
+            var a = 100 / (pageHeight / currentScroll);
+            yyy.style.width = a + '%';
+        }
+        scrollPercentage();
+
+
+
+        var currentBtnInnerHTML = '';
+        var navBCase = 0;
+        var currentItemInfoN;
+
+        document.addEventListener('click', function(evt){
+            if(evt.target.id == "navB"){
+                if(navBCase == 0){
+                    navBCase = 1;
+                    navOptions.style.display = "flex";
+                }
+                else{
+                    navBCase = 0;
+                    navOptions.style.display = "none";
+                }
+            }
+            else if(navBCase == 1){
+                navB.click();
+                navBCase = 0;
+            }
+            if(evt.target.className == "deleteCntnt"){
+                document.getElementById(evt.target.id.substr(0, evt.target.id.length-6)).style.transform = "translate(100%, 100%) rotate(70deg)";
+                document.getElementById(evt.target.id.substr(0, evt.target.id.length-6)).style.opacity = 0;
+                setTimeout(function(){
+                    pleaseWait();
+                    document.getElementById(evt.target.id.substr(0, evt.target.id.length-6)).style.display = "none";
+                    window.location.href = ('/deleteContent/' + document.getElementById(evt.target.id).idAddress + '/' + document.getElementById(evt.target.id).uniqueNumber);
+                }, 300);
+            }
+
+            if(document.querySelectorAll('#' + evt.target.id + 'Range').length > 0){
+                if(currentBtnInnerHTML == ''){
+                    currentBtnInnerHTML = document.getElementById(evt.target.id).innerHTML;
+                    showElement(evt.target.id + 'Range');
+                }
+                else if(document.getElementById(evt.target.id).innerHTML != currentBtnInnerHTML){
+                    if(document.querySelectorAll('#'+evt.target.id+'_id').length > 0)
+                    window.location.href = evt.target.id + '/' + document.getElementById(evt.target.id+'_id').value + '/' + document.getElementById(evt.target.id+'Range').value;
+                    else
+                    window.location.href = evt.target.id + '/' + '1' + '/' + document.getElementById(evt.target.id+'Range').value;
+                    pleaseWait();
+                }
+            }
+
+            if(evt.target.className == "deleteSection1Img"){
+                document.getElementById(evt.target.id+'Div').style.transform = 'rotate(100deg)';
+                document.getElementById(evt.target.id+'Div').style.opacity = 0;
+                setTimeout(function(){
+                    pleaseWait();
+                    window.location.href = 'eleteSection1Image/' + evt.target.id.substr(17, evt.target.id.length);
+                }, 100);
+            }
+
+            if(evt.target.innerHTML == 'Learn more'){
+                window.location.href = 'products/' + evt.target.id;
+            }
+        });
+
+        document.addEventListener('mousedown', function(evt){
+            if(evt.target.className == "navTap"){
+                navChangeOrRemoveCase = 'update';
+                if(window.matchMedia('(min-width: 1000px)').matches)
+                navChangeOrRemove('block', evt.target.id, navOptions.offsetHeight + 20, event.clientX - navForm.offsetWidth/2);
+                else
+                navChangeOrRemove('block', evt.target.id, 0, 0);
+            }
+            else if(evt.target.id == "navTitle"
+            || evt.target.id == "navTitleB"
+            || evt.target.id == "deleteNav"){
+                navForm.style.display = "block";
+            }
+            else{
+                navChangeOrRemoveCase = 'add';
+                navChangeOrRemove('none', "", 0, 0);
+            }
+
+            if(evt.target.id != 'navContentTextNav'
+            && evt.target.id != 'addContent'
+            && evt.target.id != 'showMenu'){
+                contentSetting.style.display = "none";
+            }
+
+            if(evt.target.id != "navSettingBtn"
+            && evt.target.id != "chngCntntBtn"
+            && evt.target.id != "navSettingText"
+            && evt.target.id != "addNewNavBtn"){
+                navSetting.style.display = "none";
+                navSettingText.style.display = "none";
+                navSettingText.value = "";
+                addNewNavBtn.innerHTML = "Add new nav";
+            }
+
+            if(evt.target.id != 'addContent'
+            && evt.target.className != 'contentInfo'
+            && evt.target.id != 'newContentB'
+            && evt.target.className != "contentTitleStng"){
+                newContentForm.style.display = "none";
+                newContentB.innerHTML = "Add Image";
+                newContentB.style.background = "#aaa";
+                contentTitle.value = "";
+                content_id.value = "";
+                contentPrise.value = "";
+                contentImage.value = "";
+                newContentUniqueNumber.value = "";
+                contentDescription.value = "";
+            }
+
+            if(evt.target.id != 'showMenu'
+            && evt.target.className != "contentTitles"
+            && evt.target.className != "contentTitle"
+            && evt.target.className != 'contentInfo'
+            && evt.target.className != "deleteCntnt"
+            && evt.target.className != "contentTitleStng"){
+                showMenuF(100, 0, 'none');
+                for(i = 0; i < document.getElementsByClassName('deleteCntnt').length; i++){
+                    document.getElementsByClassName('deleteCntnt')[i].style.display = "none";
+                }
+            }
+
+            if(evt.target.className != "sectionHomeSettings"
+            && evt.target.id != 'sectionHomeSettingButton'
+            && evt.target.id != 'sectionHomeSettings'){
+                sectionHomeSettings.style.display = "none";
+                homePicSpeedRange.style.display = "none";
+                homePicSpeedRange.value = motionSpeedValue.value;
+                currentBtnInnerHTML = '';
+                homePicSpeed.innerHTML = 'Change motion speed';
+            }
+
+            if(evt.target.id != "section1SettingButton"
+            && evt.target.className != "sectionHomeSettings"
+            && evt.target.id != 'section1Settings'){
+                section1Settings.style.display = "none";
+                section1SizeRange.style.display = "none";
+                section1SpaceRange.style.display = "none";
+                section1SizeRange.value = section1SizeData.value;
+                section1SpaceRange.value = section1SpaceData.value;
+                currentBtnInnerHTML = '';
+                section1Size.innerHTML = 'Change image zise';
+                section1Space.innerHTML = 'Change spaces';
+                section1Space.style.display = 'block';
+                section1Size.style.display = 'block';
+                sectionOctoganImageSize(section1SizeRange.value);
+                sectionOctoganImageSpace(section1SpaceRange.value);
+            }
+
+            if(evt.target.id != "HomeTextSetting"
+            && evt.target.className != "HomeTextSettingInputs"){
+                HomeTextSettings.style.display = "none";
+            }
+
+            if(evt.target.className == 'itemInformation'
+            || evt.target.id == "itemInformationChange"){
+                itemInformationChange.style.display = "block";
+                if(evt.target.className == 'itemInformation')
+                currentItemInfoN = evt.target.id.substr(15, evt.target.id.length)
+                itemInformationChange.value = document.getElementById('itemInformation' + currentItemInfoN).innerHTML;
+            }
+            else
+            itemInformationChange.style.display = "none";
+
+            if(evt.target.className != "addNewItemForm"
+            && evt.target.id != 'addItemBtn'
+            && evt.target.id != 'itemSaleBtn'){
+                menuSlider('addNewItemForm', 50, 0, 'none');
+                for(i = 0; i < addNewItemForm.getElementsByTagName('input').length; i++)
+                addNewItemForm.getElementsByTagName('input')[i].value = '';
+                itemImageP.innerHTML = "Add item image";
+                addItemPerm = 0;
+            }
+
+            if(evt.target.id != "sectionProductsSettingButton"
+            && evt.target.className != "sectionProductsSettings")
+            sectionProductsSettings.style.display = "none";
+
+            if(evt.target.className != 'sectionProductsSettings'
+            && evt.target.id != 'specialOffersMenu'
+            && specialOffersMenuCase == 1){
+                specialOffersMenuCase = 0;
+                specialOffersMenu.style.display = "none";
+                sliderWidthRange.style.display = "none";
+                sliderHeightRange.style.display = "none";
+                sliderWidth.style.display = 'block';
+                sliderHeight.style.display = 'block';
+                if(document.querySelectorAll('#sliderWidth_id').length > 0)
+                sliderWidthRange.value = sliderWidthData.value;
+                sliderHeightRange.value = sliderHeightData.value;
+                specialOfferWrapperMain.style.width = sliderWidthData.value + '%';
+                specialOfferWrapperMain.style.height = sliderHeightData.value + 'px';
+                specialOfferImageWidth();
+                specialOfferImageHeight();
+                sliderWidth.innerHTML = 'Change slider width';
+                sliderHeight.innerHTML = 'Change slider height';
+                selectSpecialOffer(currentSliderStop);
+            }
+
+            if(evt.target.id != 'addNewOfferForm'
+            && evt.target.className != 'addNewOfferForm'){
+                menuSlider('addNewOfferForm', 50, 0, 'none');
+                offerImage.value = '';
+                newOfferSubmit.innerHTML = "Add Image";
+                newOfferSubmit.style.background = "#aaa";
+                for(i = 0; i < addNewOfferForm.getElementsByTagName('input').length; i++)
+                addNewOfferForm.getElementsByTagName('input')[i].value = '';
+            }
+        });
+
+        var navChangeOrRemoveCase = 'add';
+
+        function navChangeOrRemove(stl, nvId, nvFrmT, nvFrmL){
+            navForm.style.display = stl;
+            if(nvId){
+                nav_id.value = document.getElementById(nvId).idAddress;
+                navTitle.value = document.getElementById(nvId).innerHTML;
+            }
+            else{
+                nav_id.value = "";
+                navTitle.value = "";
+            }
+            navForm.style.left = nvFrmL + 'px';
+            navForm.style.top = nvFrmT + 'px';
+            if(navChangeOrRemoveCase == "add"){
+                navTitleB.innerHTML = "Add";
+                navTitleB.style.background = "#000";
+            }
+            else{
+                navTitleB.innerHTML = "Update";
+                navTitleB.style.background = "#050";
+            }
+        }
+
+
+        for(i = 0; i < document.getElementsByClassName('navbarTitle').length; i++){
+            createNav(i);
+        }
+
+        function createNav(n){
+            if(n == 0){
+                var home = document.createElement('p');
+                home.innerHTML = "Home";
+                navOptions.appendChild(home);
+            }
+            var p = document.createElement('p');
+            p.className = "navTap";
+            p.id = "navTap" + n;
+            p.idAddress = document.getElementsByClassName('navbar_id')[n].value;
+            p.innerHTML = document.getElementsByClassName('navbarTitle')[n].value;
+            navOptions.appendChild(p);
+            if(n >= document.getElementsByClassName('navbarTitle').length-1){
+                var pp = document.createElement('p');
+                pp.innerHTML = navContentText.value;
+                pp.id = 'navContentTextNav';
+                pp.style.color = "#2df";
+                navOptions.appendChild(pp);
+                var cart = document.createElement('img');
+                cart.id = "cartIcon";
+                cart.src = 'images/cart.png';
+                navOptions.appendChild(cart);
+            }
+        }
+
+
+        document.getElementById('navTitleB').onclick = function(){
+            if(navTitle.value != ""){
+                pleaseWait();
+                navTitleBtb.click();
+            }
+            else{
+                navTitle.focus();
+            }
+            if(navTitleB.innerHTML == "Delete"){
+                pleaseWait();
+                window.location.href = "/deleteNav/" + nav_id.value;
+            }
+        }
+
+        document.getElementById('navTitle').oninput = function(){
+            if(navChangeOrRemoveCase == 'update'){
+                if(navTitle.value == ""){
+                    navTitleB.style.background = "#a00";
+                    navTitleB.innerHTML = "Delete";
+                }
+                else{
+                    navTitleB.innerHTML = "Update";
+                    navTitleB.style.background = "#050";
+                }
+            }
+        }
+
+        document.getElementById('navSettingBtn').onclick = function(){
+            navSetting.style.display = "block";
+        }
+
+        chngCntntBtn.innerHTML = "Change " + navContentText.value + " title";
+
+        document.getElementById('chngCntntBtn').onclick = function(){
+            navSettingText.style.display = 'block';
+            navSettingText.focus();
+        }
+
+        document.getElementById('navSettingText').oninput = function(){
+            contentNameText.value = navSettingText.value;
+            if(navSettingText.value != "") addNewNavBtn.innerHTML = "OK";
+            else addNewNavBtn.innerHTML = "Add new nav";
+        }
+
+        document.getElementById('addSection1').onclick = function(){
+            section1Pic.click();
+        }
+
+        document.getElementById('section1Pic').onchange = function(){
+            if(imageType.includes(section1Pic.value.substr(section1Pic.value.length-4, section1Pic.value.length))){
+                pleaseWait();
+                section1PicBtn.click();
+            }
+            else
+            alert('File in not image type!');
+        }
+
+        document.getElementById('addNewNavBtn').onclick = function(){
+            if(addNewNavBtn.innerHTML == "OK"){
+                pleaseWait();
+                contentNameB.click();
+            }
+            else{
+                if(window.matchMedia('(min-width: 1000px)').matches){
+                    navChangeOrRemove('block', "", navOptions.offsetHeight/2 - 5, navOptions.offsetLeft + navOptions.offsetWidth/1.6);
+                    navTitle.focus();
+                }
+                else
+                navChangeOrRemove('block', "", event.clientY + 20, 30);
+                navSetting.style.display = "none";
+            }
+        }
+
+        document.getElementById('navContentTextNav').onclick = function(){
+            contentSetting.style.display = "block";
+            if(window.matchMedia('(min-width: 1000px)').matches){
+                contentSetting.style.top = event.clientY + 30 + 'px';
+                contentSetting.style.left = event.clientX - contentSetting.offsetWidth/2 + 'px';
+            }
+            else contentSetting.style.top = event.clientY - contentSetting.offsetHeight + 'px';
+        }
+
+        addContent.innerHTML = 'Add ' + navContentText.value;
+
+        document.getElementById('addContent').onclick = function(){
+            contentSetting.style.display = "none";
+            addContentFn(30, -120);
+            contentTitle.focus();
+            newContentUniqueNumber.value = Math.ceil(Math.random()*999999999) + 1000000000;
+        }
+
+        function addContentFn(t, l){
+            newContentForm.style.display = "flex";
+            newContentForm.style.top = event.clientY + t + 'px';
+            if(window.matchMedia('(min-width: 1000px)').matches)
+            newContentForm.style.left = event.clientX - contentSetting.offsetWidth/2 + l + 'px';
+        }
+
+        var imageType = '.jpg jpeg .bmp .png .JPG JPEG .BMP .PNG';
+
+        document.getElementById('contentImage').onchange = function(){
+            if(contentImage.value != ""){
+                if(imageType.includes(contentImage.value.substr(contentImage.value.length-4, contentImage.value.length))){
+                    newContentB.innerHTML = "Submit";
+                    newContentB.style.background = "hsl(60, 40%, 40%)";
+                }
+                else alert('File must be image type');
+            }
+        }
+
+        document.getElementById('newContentB').onclick = function(){
+            if(newContentB.innerHTML == "Add Image")
+            contentImage.click();
+            else{
+                if(contentTitle.value != ""
+                && contentPrise.value != ""
+                && contentDescription.value != ""){
+                    pleaseWait();
+                    newContentBtn.click();
+                }
+            }
+        }
+
+        for(i = 0; i < document.getElementsByClassName('NewContentList_id').length; i++){
+            var p = document.createElement('p');
+            p.className = 'contentTitles';
+            p.id = "contentTitles" + i;
+            p.idAddress = document.getElementsByClassName('NewContentList_id')[i].value;
+            p.innerHTML = document.getElementsByClassName('contentTitle')[i].value;
+            p.title = document.getElementsByClassName('contentTitle')[i].value;
+            p.prise = document.getElementsByClassName('contentPrise')[i].value;
+            p.uniqueNumber = document.getElementsByClassName('newContentUniqueNumber')[i].value;
+            p.image = document.getElementsByClassName('contentTitle')[i].value;
+            p.description = document.getElementsByClassName('contentDescription')[i].value;
+                var stng = document.createElement('b');
+                stng.innerHTML = '...';
+                stng.id = "contentTitles" + i + 'Stng';
+                stng.className = 'contentTitleStng';
+            p.appendChild(stng);
+                var dlt = document.createElement('img');
+                dlt.src = "images/delete.png";
+                dlt.className = "deleteCntnt";
+                dlt.id = "contentTitles" + i + 'delete';
+                dlt.idAddress = document.getElementsByClassName('NewContentList_id')[i].value;
+                dlt.title = document.getElementsByClassName('contentTitle')[i].value;
+                dlt.uniqueNumber = document.getElementsByClassName('newContentUniqueNumber')[i].value;
+            p.appendChild(dlt);
+            contentList.appendChild(p);
+        }
+
+        document.getElementById('showMenu').onclick = function(){
+            contentSetting.style.display = "none";
+            showMenuF(0, 1, 'unset');
+        }
+
+        function showMenuF(n, o, p){
+            for(i = 0; i < contentList.childElementCount; i++){
+                contentList.style.pointerEvents = p;
+                contentList.getElementsByTagName('P')[i].style.opacity = o;
+                if(i % 2 == 0) contentList.getElementsByTagName('P')[i].style.transform = 'translateX(-' + n + 'px)';
+                else contentList.getElementsByTagName('P')[i].style.transform = 'translateX(' + n + 'px)';
+            }
+        }
+        showMenuF(100, 0, 'none');
+
+        document.getElementById('contentList').onclick = function(evt){
+            for(i = 0; i < document.getElementsByClassName('deleteCntnt').length; i++){
+                document.getElementsByClassName('deleteCntnt')[i].style.display = "none";
+            }
+            if(evt.target.className == "contentTitleStng"){
+                if(window.matchMedia('(min-width: 1000px)').matches)
+                addContentFn(-40, -360 - document.documentElement.clientWidth/20);
+                else
+                addContentFn(120, -360 - document.documentElement.clientWidth/20);
+                content_id.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).idAddress;
+                contentTitle.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).title;
+                contentPrise.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).prise;
+                contentDescription.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).description;
+                contentOldTitle.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).title;
+                newContentUniqueNumber.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).uniqueNumber;
+                newContentB.innerHTML = "Update content";
+                newContentB.style.background = '#079';
+                document.getElementById(evt.target.id.substr(0, evt.target.id.length-4) + 'delete').style.display = "block";
+            }
+        }
+
+
+        for(i = 0; i < section1ImagesDataLngth.value; i++){
+            var div = document.createElement('div');
+            div.id = 'deleteSection1Img' + i + 'Div';
+                var img = document.createElement('img');
+                img.src = 'section1Images/' + i + '.jpg';
+                img.className = 'sectionOctoganImage';
+            div.appendChild(img);
+                var img = document.createElement('img');
+                img.src = 'images/delete.png';
+                img.className = "deleteSection1Img";
+                img.id = 'deleteSection1Img' + i;
+            div.appendChild(img);
+            sectionOctogan.appendChild(div);
+        }
+
+
+        function sectionOctoganImageSize(n){
+            for(i = 0; i < sectionOctogan.childElementCount; i++){
+                document.getElementsByClassName('sectionOctoganImage')[i].style.width = n + 'px';
+                sectionOctogan.getElementsByTagName('div')[i].style.width = n + 'px';
+                document.getElementsByClassName('sectionOctoganImage')[i].style.height = n + 'px';
+                sectionOctogan.getElementsByTagName('div')[i].style.height = n + 'px';
+            }
+        }
+        sectionOctoganImageSize(section1SizeRange.value);
+
+
+        function sectionOctoganImageSpace(n){
+            for(i = 0; i < document.getElementsByClassName('sectionOctoganImage').length; i++){
+                sectionOctogan.getElementsByTagName('div')[i].style.margin = n + 'px';
+            }
+        }
+        sectionOctoganImageSpace(section1SpaceRange.value);
+
+
+        for(i = 0; i < homePicAllFileLength.value; i++){
+            var div = document.createElement('div');
+            div.id = 'section1Div' + i;
+            div.className = "itemsDemo";
+            div.style.backgroundImage = "url('homePics/homePic" + i + ".jpg')";
+                var p = document.createElement('p');
+                p.className = 'itemInformation';
+                p.id = "itemInformation" + i;
+                readFile(i, 'itemInformation');
+            div.appendChild(p);
+            section1.appendChild(div);
+        }
+
+        function readFile(n, e){
+            fetch("homePicsText/homePicText" + n + ".txt")
+            .then(function(response){
+                return response.text();
+            })
+            .then(function(text){
+                document.getElementsByClassName(e)[n].innerHTML = text;
+            });
+        }
+        readFile(0);
+
+        document.getElementById('itemInformationChange').onkeydown = function(e){
+            if(e.keyCode == 13){
+                pleaseWait();
+                window.location.href = 'itemInformationChange/' + currentItemInfoN + '/' + itemInformationChange.value;
+            }
+        }
+
+        document.getElementById('homeLearnMore').onclick = function(){
+            var scrollTopAmount = document.getElementById('section1Div' + currentHomePicN).offsetTop + document.getElementById('itemInformation' + currentHomePicN).offsetTop + document.getElementById('itemInformation' + currentHomePicN).offsetHeight/2;
+            window.scroll({
+                top: scrollTopAmount,
+                behavior: 'smooth'
+            });
+        }
+
+
+        function menuSlider(className, degree, opacityAmount, pointerEvt){
+            document.getElementById(className).style.pointerEvents = pointerEvt;
+            for(i = 0; i < document.getElementsByClassName(className).length; i++){
+                document.getElementsByClassName(className)[i].style.opacity = opacityAmount;
+                if(i % 2 == 0)   document.getElementsByClassName(className)[i].style.transform = "translateX(-" + degree + "%) rotate(-" + degree*0.5 + "deg)";
+                else             document.getElementsByClassName(className)[i].style.transform = "translateX(" + degree + "%) rotate(" + degree*0.5 + "deg)";
+            }
+        }
+        menuSlider('addNewItemForm', 50, 0, 'none');
+        menuSlider('addNewOfferForm', 50, 0, 'none');
+
+        var addItemPerm = 0;
+
+        document.getElementById('itemImageP').onclick = function(){
+            if(itemImageP.innerHTML == 'Add item image')
+            itemImage.click();
+            else{
+                noSpaceItem();
+                for(i = 0; i < document.getElementsByClassName('addNewItemForm').length-1; i++){
+                    if(document.getElementsByClassName('addNewItemForm')[i].value == ""){
+                        addItemPerm = 0;
+                        break;
+                    }
+                    else
+                    addItemPerm = 1;
+                }
+                if(addItemPerm == 1
+                && updateItemCase == 0){
+                    pleaseWait();
+                    menuSlider('addNewItemForm', 10, 0, 'none');
+                    createItemB.click();
+                }
+                else if(updateItemCase == 2
+                && addItemPerm == 1){
+                    pleaseWait();
+                    menuSlider('addNewItemForm', 10, 0, 'none');
+                    createItemB.click();
+                }
+            }
+        }
+
+        function noSpaceItem(){
+            itemCategory.value = itemCategory.value.replace(' ', '');
+            itemName.value = itemName.value.replace(' ', '');
+        }
+
+        document.getElementById('itemImage').onchange = function(){
+            if(imageType.includes(itemImage.value.substr(itemImage.value.length-4, itemImage.value.length))){
+                itemImageP.innerHTML = "Submit";
+            }
+            else alert('File must be image type');
+        }
+
+        function createItem(){
+            for(i = 0; i < document.getElementsByClassName('ItemDataList_id').length; i++){
+                var div = document.createElement('div');
+                var itmCat = document.getElementsByClassName('ItemDataListItemCategory')[i].value;
+                div.id = itmCat + document.querySelectorAll('.' + itmCat).length;
+                div.className = itmCat;
+                div.idAddress = document.getElementsByClassName('ItemDataList_id')[i].value;
+                div.uniqImgId = document.getElementsByClassName('ItemDataListUniqueId')[i].value;
+                div.category = itmCat;
+                div.name = document.getElementsByClassName('ItemDataListItemName')[i].value;
+                div.prise = document.getElementsByClassName('ItemDataListItemPrise')[i].value;
+                div.text = document.getElementsByClassName('ItemDataListItemtext')[i].value;
+                div.image = 'ItemImages/' + itmCat + div.name + div.uniqImgId + '.jpg';
+                div.fewLeft = document.getElementsByClassName('ItemDataListFewLeft')[i].value;
+                div.oldPrise = document.getElementsByClassName('ItemDataListOldPrise')[i].value;
+                div.newPrise = document.getElementsByClassName('ItemDataListNewPrise')[i].value;
+                div.saleAmount = document.getElementsByClassName('ItemDataListSaleAmount')[i].value;
+
+                    var fewLeftLabel = document.createElement('h3');
+                    fewLeftLabel.innerHTML = 'Only few left in stock';
+
+                    var oldPrs = document.createElement('h4');
+                    oldPrs.innerHTML = div.saleAmount + '% OFF';
+
+                    var h1 = document.createElement('h1');
+                    h1.innerHTML = div.prise + '$';
+
+                    if(div.newPrise != ''){
+                        div.prise = div.newPrise;
+                        h1.innerHTML = '<del>' + div.oldPrise + '$' + '</del>' + div.prise + '$';
+                    }
+
+                    var img = document.createElement('img');
+                    img.src = 'ItemImages/' + itmCat + div.name + div.uniqImgId + '.jpg';
+
+                    var p = document.createElement('p');
+                    p.innerHTML = div.text;
+
+                    var b = document.createElement('b');
+                    b.id = itmCat + div.name + div.uniqImgId;
+                    b.innerHTML = "Learn more";
+
+                    var h2 = document.createElement('h2');
+                    h2.innerHTML = '...';
+                    h2.className = 'itemSettingBtn';
+                    h2.id = div.id + 'btn';
+
+                    var h5 = document.createElement('h5');
+                    h5.className = 'promoCode';
+                    h5.innerHTML = document.getElementsByClassName('ItemDataListPromoCode')[i].value;
+
+                div.appendChild(img);
+                div.appendChild(p);
+                div.appendChild(h1);
+                div.appendChild(b);
+                div.appendChild(h2);
+                div.appendChild(h5);
+                if(div.fewLeft == 1){
+                    div.appendChild(fewLeftLabel);
+                    oldPrs.style.top = '40px';
+                }
+                if(div.saleAmount != '')
+                div.appendChild(oldPrs);
+                sectionProducts.appendChild(div);
+            }
+        }
+        createItem();
+
+        if(sectionProducts.childElementCount == 0){
+            productNav.style.display = "none";
+            sectionProducts.style.padding = 0;
+        }
+
+        function createItemNav(){
+            for(i = 0; i < sectionProducts.childElementCount; i++){
+                var p = document.createElement('p');
+                p.id = sectionProducts.getElementsByTagName('DIV')[i].category;
+                p.innerHTML = sectionProducts.getElementsByTagName('DIV')[i].className;
+                p.style.textTransform = 'capitalize';
+                p.className = sectionProducts.getElementsByTagName('DIV')[i].className;
+                if(productNav.querySelectorAll('.' + sectionProducts.getElementsByTagName('DIV')[i].className).length == 0)
+                productNav.appendChild(p);
+            }
+        }
+        createItemNav();
+
+
+        var createdSubNavCase = 0;
+
+        function createSubNav(classNam){
+            var div = document.createElement('div');
+            div.className = 'subProductNav';
+            var nmOfP = document.getElementsByClassName(classNam);
+            for(i = 1; i < nmOfP.length; i++){
+                var b = document.createElement('b');
+                b.innerHTML = nmOfP[i].name;
+                b.className = nmOfP[i].name;
+                if(div.getElementsByClassName(nmOfP[i].name).length == 0)
+                div.appendChild(b);
+            }
+            sectionProductsMain.appendChild(div);
+            createdSubNavCase = 1;
+        }
+
+
+        var updateItemCase = 0;
+        var currentItemIdAddress;
+        var currentItemImage;
+
+        function editItemFunction(n){
+            item_id.value = document.getElementById(n).idAddress;
+            itemCategory.value = document.getElementById(n).category;
+            itemName.value = document.getElementById(n).name;
+            itemPrise.value = document.getElementById(n).prise;
+            itemtext.value = document.getElementById(n).text;
+            itemUniqueId.value = document.getElementById(n).uniqImgId;
+            oldImage.value = itemCategory.value + itemName.value + itemUniqueId.value;
+            fewLeft.value = document.getElementById(n).fewLeft;
+            itemOldPrise.value = document.getElementById(n).oldPrise;
+            itemNewPrise.value = document.getElementById(n).newPrise;
+            itemSaleAmount.value = document.getElementById(n).saleAmount;
+            generatePromoCode();
+            if(fewLeft.value == 1)
+            fewLeftBtn.style.color = '#2d0';
+            else
+            fewLeftBtn.style.color = '#ddd';
+            itemImageP.innerHTML = "Update item info";
+            updateItemCase = 1;
+            currentItemIdAddress = item_id.value;
+            currentItemImage = document.getElementById(n).image;
+        }
+
+        sectionProducts.addEventListener('click', function(evt){
+            if(evt.target.className == "itemSettingBtn"){
+                itemSettingMenu.style.display = "block";
+                editItemFunction(evt.target.id.substr(0, evt.target.id.length-3));
+                itemSettingMenu.style.left = document.getElementById(evt.target.id.substr(0, evt.target.id.length-3)).offsetLeft + 20 + 'px';
+                itemSettingMenu.style.top = event.clientY - (document.documentElement.scrollHeight - document.documentElement.scrollTop - 722) + fotterDiv.offsetHeight + itemSettingMenu.offsetHeight/2 + 15 + sectionSpecialOffers.offsetHeight + 'px';
+                currentItemId = evt.target.id.substr(0, evt.target.id.length-3);
+                saleRange.value = 1;
+                itemSaleBtn.innerHTML = 'Sale';
+                if(document.getElementById(evt.target.id.substr(0, evt.target.id.length-3)).oldPrise != ''){
+                    itemSaleBtn.innerHTML = 'Unsale Item';
+                    itemSaleBtn.style.color = '#2d0';
+                }
+                else{
+                    itemSaleBtn.innerHTML = 'Sale';
+                    itemSaleBtn.style.color = '#ddd';
+                }
+                saleRange.style.display = "none";
+            }
+            if(evt.target.className != "itemSettingBtn"
+            && evt.target.className != "sectionProductsSettings")
+            itemSettingMenu.style.display = "none";
+        });
+
+        var currentItemId = '';
+
+
+        document.getElementById('editItem').onclick = function(){
+            editItemFunction(currentItemId);
+            if(itemSaleBtn.innerHTML != 'Unsale Item'){
+                menuSlider('addNewItemForm', 2, 1, 'unset');
+                addNewItemForm.style.top = event.clientY + addNewItemForm.offsetHeight/2 + 'px';
+                itemSettingMenu.style.display = "none";
+            }
+            else alert("The item that on sale can't be edited");
+        }
+
+        document.getElementById('itemSaleBtn').onclick = function(){
+            if(itemSaleBtn.innerHTML == 'Sale'){
+                saleRange.style.display = "block";
+            }
+            else if(itemSaleBtn.innerHTML == 'Unsale Item'){
+                pleaseWait();
+                itemOldPrise.value = '';
+                itemNewPrise.value = '';
+                itemSaleAmount.value = '';
+                itemPrise.value = document.getElementById(currentItemId).oldPrise;
+                createItemB.click();
+            }
+            else{
+                pleaseWait();
+                createItemB.click();
+            }
+        }
+
+        document.getElementById('saleRange').oninput = function(){
+            editItemFunction(currentItemId);
+            itemSaleBtn.innerHTML = saleRange.value + '% >> ' + Math.ceil(itemPrise.value - (itemPrise.value * saleRange.value)/100) + '$';
+            itemOldPrise.value = itemPrise.value;
+            itemNewPrise.value = Math.ceil(itemPrise.value - (itemPrise.value * saleRange.value)/100);
+            itemSaleAmount.value = saleRange.value;
+            itemPrise.value = itemNewPrise.value;
+        }
+
+        document.getElementById('deleteItem').onclick = function(){
+            pleaseWait();
+            window.location.href = "deleteItem" + '/' + currentItemIdAddress + '/' + currentItemImage.slice(11, currentItemImage.length-4);
+        }
+
+        document.addEventListener('input', function(evt){
+            if(updateItemCase == 1) updateItemCase = 2;
+        });
+
+        document.getElementById('fewLeftBtn').onclick = function(){
+            editItemFunction(currentItemId);
+            if(fewLeft.value == 1)
+            fewLeft.value = 0;
+            else fewLeft.value = 1;
+            pleaseWait();
+            createItemB.click();
+        }
+
+
+
+        function makeUniqueId(){
+            var unqId = Math.ceil(Math.random()*999999999);
+            itemUniqueId.value = 1000000000 + unqId;
+        }
+
+
+        var chosenCategory;
+        var chosenItemName;
+
+        function showSubNav(html, id, clas){
+            createSubNav(html);
+            document.getElementsByClassName('subProductNav')[0].style.left = document.getElementById(id).offsetLeft + 'px';
+            document.getElementsByClassName('subProductNav')[0].style.top = document.getElementById(id).offsetHeight - 1 + 'px';
+            document.getElementsByClassName('subProductNav')[0].style.width = document.getElementById(id).offsetWidth + 'px';
+            chosenCategory = clas;
+        }
+
+
+        sectionProductsMain.addEventListener('mousemove', function(evt){
+            if(evt.target.tagName == "P"){
+                if(createdSubNavCase == 1)
+                document.getElementsByClassName('subProductNav')[0].remove();
+                showSubNav(evt.target.innerHTML, evt.target.id, evt.target.className);
+            }
+            else if(evt.target.tagName != "B"){
+                document.getElementsByClassName('subProductNav')[0].remove();
+                createdSubNavCase = 0;
+            }
+        });
+
+        sectionProductsMain.addEventListener('click', function(evt){
+            if(evt.target.tagName == "P"
+            && evt.target.parentNode.id == 'productNav'){
+                if(createdSubNavCase == 1)
+                document.getElementsByClassName('subProductNav')[0].remove();
+                showSubNav(evt.target.innerHTML, evt.target.id, evt.target.className);
+                showSelectedItem();
+            }
+            else if(evt.target.id != "sectionProductsMain"){
+                document.getElementsByClassName('subProductNav')[0].remove();
+                createdSubNavCase = 0;
+            }
+
+            if(evt.target.id == "allItems"){
+                for(i = 0; i < sectionProducts.childElementCount; i++)
+                sectionProducts.getElementsByTagName('div')[i].style.display = "block";
+            }
+
+            if(evt.target.tagName == "B"){
+                chosenItemName = evt.target.className;
+                showSelectedItem(1);
+            }
+        });
+
+        function showSelectedItem(n){
+            for(i = 0; i < sectionProducts.childElementCount; i++)
+            sectionProducts.getElementsByTagName('div')[i].style.display = "none";
+            for(i = 0; i < sectionProducts.getElementsByClassName(chosenCategory).length; i++){
+                if(!n)
+                sectionProducts.getElementsByClassName(chosenCategory)[i].style.display = "block";
+                if(sectionProducts.getElementsByClassName(chosenCategory)[i].name == chosenItemName)
+                sectionProducts.getElementsByClassName(chosenCategory)[i].style.display = "block";
+            }
+        }
+
+        // -------------------- special offers add offer -------------------- //
+
+        document.getElementById('newOfferSubmit').onclick = function(){
+            if(newOfferSubmit.innerHTML == 'Add Image')
+            offerImage.click();
+            else{
+                pleaseWait();
+                newOfferSubmitBtn.click();
+                menuSlider('addNewOfferForm', 50, 0, 'none');
+            }
+        }
+
+        document.getElementById('offerImage').onchange = function(){
+            if(imageType.includes(offerImage.value.substr(offerImage.value.length-4, offerImage.value.length))){
+                newOfferSubmit.innerHTML = "Submit";
+                newOfferSubmit.style.background = "hsl(60, 40%, 40%)";
+                offerImageName.value = 1000000000 + Math.ceil(Math.random()*999999999);
+            }
+            else alert('File must be image type');
+        }
+
+        // -------------------- special offers menu and settings -------------------- //
+
+        var specialOffersMenuCase = 0;
+        var currentSliderStop = 0;
+
+        document.getElementById('editSliderItem').onclick = function(){
+            menuSlider('addNewOfferForm', 0, 1, 'unset');
+            specialOffersMenu.style.display = 'none';
+            newOfferSubmit.innerHTML = 'Update offer';
+            offerImage_id.value = document.getElementById('offer' + parseInt(chosenOffer+1)).idAddress;
+            offerTitle.value = document.getElementById('offer' + parseInt(chosenOffer+1)).title;
+            offerText.value = document.getElementById('offer' + parseInt(chosenOffer+1)).text;
+            offerImageName.value = document.getElementById('offer' + parseInt(chosenOffer+1)).imageName;
+        }
+
+        document.getElementById('deleteSliderItem').onclick = function(){
+            pleaseWait();
+            window.location.href = '/deleteOffer/' + document.getElementById('offer' + parseInt(chosenOffer+1)).idAddress + '/' + document.getElementById('offer' + parseInt(chosenOffer+1)).imageName;
+        }
+
+        document.getElementById('sliderWidthRange').oninput = function(){
+            sliderWidth.innerHTML = 'Change to: ' + sliderWidthRange.value + '%';
+            specialOfferWrapperMain.style.width = sliderWidthRange.value + '%';
+            specialOfferImageWidth();
+            specialOfferWrapper.style.transition = '0s';
+            selectSpecialOffer(0);
+        }
+
+        document.getElementById('sliderWidth').onclick = function(){
+            sliderHeight.style.display = 'none';
+            if(sliderWidth.innerHTML != 'Change slider width'){
+                if(document.querySelectorAll('#sliderWidth_id').length == 0)
+                window.location.href = "/sliderWidth/" + '1/' + sliderWidthRange.value;
+                else
+                window.location.href = "/sliderWidth/" + sliderWidth_id.value + '/' + sliderWidthRange.value;
+                pleaseWait();
+            }
+            else{
+                if(document.querySelectorAll('#sliderWidth_id').length > 0)
+                sliderWidthRange.value = sliderWidthData.value;
+            }
+        }
+
+
+        document.getElementById('sliderHeightRange').oninput = function(){
+            sliderHeight.innerHTML = 'Change to: ' + sliderHeightRange.value + 'px';
+            specialOfferWrapperMain.style.height = sliderHeightRange.value + 'px';
+            specialOfferImageHeight();
+            document.documentElement.scrollTop = document.documentElement.scrollHeight - fotterDiv.offsetHeight - 722;
+        }
+
+        document.getElementById('sliderHeight').onclick = function(){
+            sliderWidth.style.display = 'none';
+            if(sliderHeight.innerHTML != 'Change slider height'){
+                if(document.querySelectorAll('#sliderHeight_id').length == 0)
+                window.location.href = "/sliderHeight/" + '1/' + sliderHeightRange.value;
+                else
+                window.location.href = "/sliderHeight/" + sliderHeight_id.value + '/' + sliderHeightRange.value;
+                pleaseWait();
+            }
+            else{
+                if(document.querySelectorAll('#sliderHeight_id').length > 0)
+                sliderHeightRange.value = sliderHeightData.value;
+            }
+        }
+
+        // -------------------- Create slider from incoming data from mongoose -------------------- //
+
+        for(i = 0; i < document.getElementsByClassName('offerImage_idDb').length; i++){
+            var div = document.createElement('div');
+            div.id = 'offer' + parseInt(i + 1);
+            div.idAddress = document.getElementsByClassName('offerImage_idDb')[i].value;
+            div.title = document.getElementsByClassName('offerTitleDB')[i].value;
+            div.text = document.getElementsByClassName('offerTextDB')[i].value;
+            div.imageName = document.getElementsByClassName('offerImageNameDB')[i].value;
+                var img = document.createElement('img');
+                img.src = 'section offer images/' + document.getElementsByClassName('offerImageNameDB')[i].value + '.jpg';
+                img.className = 'specialOfferImage';
+                var div2 = document.createElement('div');
+                div2.className = 'specialOfferInfo';
+                    var h1 = document.createElement('h1');
+                    h1.innerHTML = document.getElementsByClassName('offerTitleDB')[i].value;
+                    var p = document.createElement('p');
+                    p.innerHTML = document.getElementsByClassName('offerTextDB')[i].value;
+                    var b = document.createElement('b');
+                    b.innerHTML = 'Learn More';
+                div2.appendChild(h1);
+                div2.appendChild(p);
+                div2.appendChild(b);
+            div.appendChild(img);
+            if(h1.innerHTML != '' && p.innerHTML != '')
+            div.appendChild(div2);
+            specialOfferWrapper.appendChild(div);
+        }
+
+        for(i = 0; i < document.getElementsByClassName('offerImage_idDb').length; i++){
+            var div = document.createElement('div');
+            div.id = 'specialoffer' + i;
+            div.className = 'specialoffer';
+            specialOfferChannels.appendChild(div);
+        }
+
+        // -------------------- special offers -------------------- //
+
+        specialOfferWrapperMain.style.width = sliderWidthData.value + '%';
+        specialOfferWrapperMain.style.height = sliderHeightData.value + 'px';
+
+        var chosenOffer;
+
+
+        function specialOfferImageWidth(){
+            for(i = 0; i < document.getElementsByClassName('specialOfferImage').length; i++)
+            document.getElementsByClassName('specialOfferImage')[i].style.width = specialOfferWrapperMain.offsetWidth + 'px';
+        }
+        specialOfferImageWidth();
+
+        function specialOfferImageHeight(){
+            for(i = 0; i < document.getElementsByClassName('specialOfferImage').length; i++)
+            document.getElementsByClassName('specialOfferImage')[i].style.height = specialOfferWrapperMain.offsetHeight + 'px';
+        }
+        specialOfferImageHeight();
+
+
+        function selectSpecialOffer(n){
+            chosenOffer = n/specialOfferWrapperMain.offsetWidth;
+            specialOfferWrapper.style.left = -n + 'px';
+            for(i = 0; i < specialOfferChannels.childElementCount; i++)
+            specialOfferChannels.getElementsByTagName('div')[i].style.background = '#777';
+            document.getElementById('specialoffer' + n/specialOfferWrapperMain.offsetWidth).style.background = '#f20';
+            currentSliderStop = n;
+        }
+        selectSpecialOffer(0);
+
+
+        document.getElementById('specialOfferChannels').onclick = function(evt){
+            if(evt.target.className == 'specialoffer'){
+                var n = evt.target.id.substr(12, evt.target.id.length);
+                selectSpecialOffer(n*specialOfferWrapperMain.offsetWidth);
+            }
+        }
+
+
+        var specialOfferWrapperMovePerm = 0;
+        var currentLeft = 0;
+
+        document.getElementById('specialOfferWrapper').addEventListener('mousedown', function(evt){
+            specialOfferWrapperMovePerm = 1;
+            currentLeft = specialOfferWrapper.offsetLeft - event.clientX;
+            specialOfferWrapper.style.left = event.clientX + currentLeft + 'px';
+            document.addEventListener('mousemove', function(){
+                specialOfferWrapper.style.transition = '0s';
+                if(specialOfferWrapperMovePerm == 1)
+                specialOfferWrapper.style.left = event.clientX + currentLeft + 'px';
+                if(specialOfferWrapper.offsetLeft > 0)
+                specialOfferWrapper.style.left = 0;
+                if(specialOfferWrapper.offsetLeft < -(specialOfferChannels.childElementCount-1)*specialOfferWrapperMain.offsetWidth)
+                specialOfferWrapper.style.left = -(specialOfferChannels.childElementCount-1)*specialOfferWrapperMain.offsetWidth + 'px';
+            });
+        });
+
+        document.addEventListener('mouseup', function(evt){
+            specialOfferWrapper.style.transition = '0.2s';
+            specialOfferWrapperMovePerm = 0;
+            var moveRatio = Math.round((specialOfferChannels.childElementCount*specialOfferWrapperMain.offsetWidth - ((specialOfferChannels.childElementCount-1)*specialOfferWrapperMain.offsetWidth - (specialOfferWrapper.offsetLeft*-1)))/specialOfferWrapperMain.offsetWidth);
+            selectSpecialOffer((moveRatio - 1) * specialOfferWrapperMain.offsetWidth);
+        });
+
+        function generatePromoCode(){
+            var rnd1 = Math.ceil(Math.random()*9999);
+            var rnd2 = Math.ceil(Math.random()*8);
+            rnd2 = rnd2.toString() + 1000;
+            itemPromoCode.value = rnd1 + parseInt(rnd2);
+        }
+
+    </script>
+</html>
