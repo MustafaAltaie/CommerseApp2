@@ -7,11 +7,11 @@
     <body>
         <div id="itemInfo">
             <div id="imageWrapper">
-                <img src="../otherImages/1988829362.jpg">
+                <img src="../otherImages/1610076837.jpg">
             </div>
             <div id="infoWrapper">
-                <h1>600$</h1>
-                <p>Lenovo laptop. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <h1>700$</h1>
+                <p>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
                 <input type="number" min=1 value=1 id="nmbrOfItms">
                 <b>Add to cart</b>
             </div>
@@ -82,13 +82,14 @@
         document.addEventListener("click", function(evt){
             if(evt.target.tagName == "B"){
                 infoWrapper.style.pointerEvents = "none";
-                window.location.href = "/addToCart/1988829362/" + nmbrOfItms.value + "/600/" + "Lenovo laptop. Lorem ipsum dolor sit amet consectetur adipisicing elit.";
+                var newItem = "1610076837," + nmbrOfItms.value + ",700," + 17443 + ".";
                 if(localStorage.MustafaAltaiePage == undefined) localStorage.MustafaAltaiePage = "";
-                localStorage.MustafaAltaiePage += "1988829362,";
+                localStorage.MustafaAltaiePage += newItem;
+                window.location.href = "/products";
             }
         });
 
-        var prise = 600;
+        var prise = 700;
 
         document.addEventListener("change", function(evt){
             if(evt.target.tagName == "INPUT"){

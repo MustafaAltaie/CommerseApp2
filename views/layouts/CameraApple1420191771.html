@@ -82,9 +82,10 @@
         document.addEventListener("click", function(evt){
             if(evt.target.tagName == "B"){
                 infoWrapper.style.pointerEvents = "none";
-                window.location.href = "/addToCart/CameraApple1420191771/" + nmbrOfItms.value + "/599/" + "Apple Camera. Lorem ipsum dolor sit amet consectetur adipisicing elit./" + 73971;
+                var newItem = "CameraApple1420191771," + nmbrOfItms.value + ",599," + 62648 + ".";
                 if(localStorage.MustafaAltaiePage == undefined) localStorage.MustafaAltaiePage = "";
-                localStorage.MustafaAltaiePage += "CameraApple1420191771,";
+                localStorage.MustafaAltaiePage += newItem;
+                window.location.href = "/products";
             }
         });
 

@@ -14,7 +14,8 @@ var newContent = new mongoose.Schema({
     contentTitle: {type: String},
     contentPrise: {type: String},
     contentDescription: {type: String},
-    newContentUniqueNumber: {type: String}
+    newContentUniqueNumber: {type: String},
+    promocode: {type: String}
 });
 mongoose.model('contentList', newContent);
 
@@ -71,20 +72,10 @@ var sliderHeightAmount = new mongoose.Schema({
 });
 mongoose.model('sliderHeight', sliderHeightAmount);
 
-var inCart = new mongoose.Schema({
-    imageName: {type: String},
-    amount: {type: String},
-    prise: {type: String},
-    details: {type: String},
-    promoCode: {type: String}
-});
-mongoose.model('cartItem', inCart);
-
 var client1 = new mongoose.Schema({
     totalPrice: {type: String},
     itemPrises: {type: String},
     itemImages: {type: String},
-    itemTexts: {type: String},
     itemAmounts: {type: String},
     cardNumber: {type: String},
     cardholder: {type: String},

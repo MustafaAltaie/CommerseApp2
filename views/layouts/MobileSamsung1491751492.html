@@ -82,9 +82,10 @@
         document.addEventListener("click", function(evt){
             if(evt.target.tagName == "B"){
                 infoWrapper.style.pointerEvents = "none";
-                window.location.href = "/addToCart/MobileSamsung1491751492/" + nmbrOfItms.value + "/600/" + "SAMSUNG MOBILE. Lorem ipsum dolor sit amet consectetur adipisicing elit./" + 13411;
+                var newItem = "MobileSamsung1491751492," + nmbrOfItms.value + ",600,"+11980+".";
                 if(localStorage.MustafaAltaiePage == undefined) localStorage.MustafaAltaiePage = "";
-                localStorage.MustafaAltaiePage += "MobileSamsung1491751492,";
+                localStorage.MustafaAltaiePage += newItem;
+                window.location.href = "/products";
             }
         });
 

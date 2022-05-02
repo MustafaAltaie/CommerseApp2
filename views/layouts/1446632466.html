@@ -7,11 +7,11 @@
     <body>
         <div id="itemInfo">
             <div id="imageWrapper">
-                <img src="../otherImages/1972101113.jpg">
+                <img src="../otherImages/1446632466.jpg">
             </div>
             <div id="infoWrapper">
-                <h1>899$</h1>
-                <p>ACER LAPTOP</p>
+                <h1>500$</h1>
+                <p>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
                 <input type="number" min=1 value=1 id="nmbrOfItms">
                 <b>Add to cart</b>
             </div>
@@ -82,13 +82,14 @@
         document.addEventListener("click", function(evt){
             if(evt.target.tagName == "B"){
                 infoWrapper.style.pointerEvents = "none";
-                window.location.href = "/addToCart/1972101113/" + nmbrOfItms.value + "/899/" + "ACER LAPTOP";
+                var newItem = "1446632466," + nmbrOfItms.value + ",500," + 16147 + ".";
                 if(localStorage.MustafaAltaiePage == undefined) localStorage.MustafaAltaiePage = "";
-                localStorage.MustafaAltaiePage += "1972101113,";
+                localStorage.MustafaAltaiePage += newItem;
+                window.location.href = "/products";
             }
         });
 
-        var prise = 899;
+        var prise = 500;
 
         document.addEventListener("change", function(evt){
             if(evt.target.tagName == "INPUT"){

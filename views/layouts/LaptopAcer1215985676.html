@@ -82,9 +82,10 @@
         document.addEventListener("click", function(evt){
             if(evt.target.tagName == "B"){
                 infoWrapper.style.pointerEvents = "none";
-                window.location.href = "/addToCart/LaptopAcer1215985676/" + nmbrOfItms.value + "/19999/" + "Acer Laptop. Lorem ipsum dolor sit amet consectetur adipisicing elit./" + 60684;
+                var newItem = "LaptopAcer1215985676," + nmbrOfItms.value + ",19999,"+85867+".";
                 if(localStorage.MustafaAltaiePage == undefined) localStorage.MustafaAltaiePage = "";
-                localStorage.MustafaAltaiePage += "LaptopAcer1215985676,";
+                localStorage.MustafaAltaiePage += newItem;
+                window.location.href = "/products";
             }
         });
 

@@ -56,6 +56,7 @@
             <input type="hidden" name="contentOldRouter" id="contentOldRouter" class="contentInfo">
             <input type="hidden" name="contentOldTitle" id="contentOldTitle" class="contentInfo">
             <input type="hidden" name="newContentUniqueNumber" id="newContentUniqueNumber">
+            <input type="" name="promocode" id="newContentPromocode" class="contentInfo">
             <p id="newContentB">Add Image</p>
             <button id="newContentBtn" style="display: none"></button>
         </form>
@@ -66,6 +67,7 @@
         <input type="hidden" value="{{this.contentPrise}}" class="contentPrise">
         <input type="hidden" value="{{this.contentDescription}}" class="contentDescription">
         <input type="hidden" value="{{this.newContentUniqueNumber}}" class="newContentUniqueNumber">
+        <input type="hidden" value="{{this.promocode}}" class="newContentPromocode">
         {{/each}}
 
         <div id="contentList"></div>
@@ -1218,6 +1220,8 @@
         #deleteSliderItem:hover{
             background: #d20;
         }
+
+
         #specialOfferWrapperMain{
             position: relative;
             width: 1000px;
@@ -1893,6 +1897,7 @@
             newContentForm.style.top = event.clientY + t + 'px';
             if(window.matchMedia('(min-width: 1000px)').matches)
             newContentForm.style.left = event.clientX - contentSetting.offsetWidth/2 + l + 'px';
+            newContentPromocode.value = Math.ceil(Math.random()*9999) + 10000;
         }
 
         var imageType = '.jpg jpeg .bmp .png .JPG JPEG .BMP .PNG';
@@ -1931,6 +1936,7 @@
             p.uniqueNumber = document.getElementsByClassName('newContentUniqueNumber')[i].value;
             p.image = document.getElementsByClassName('contentTitle')[i].value;
             p.description = document.getElementsByClassName('contentDescription')[i].value;
+            p.promocode = document.getElementsByClassName('newContentPromocode')[i].value;
                 var stng = document.createElement('b');
                 stng.innerHTML = '...';
                 stng.id = "contentTitles" + i + 'Stng';
@@ -1977,6 +1983,7 @@
                 contentDescription.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).description;
                 contentOldTitle.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).title;
                 newContentUniqueNumber.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).uniqueNumber;
+                newContentPromocode.value = document.getElementById(evt.target.id.substr(0, evt.target.id.length-4)).promocode;
                 newContentB.innerHTML = "Update content";
                 newContentB.style.background = '#079';
                 document.getElementById(evt.target.id.substr(0, evt.target.id.length-4) + 'delete').style.display = "block";
