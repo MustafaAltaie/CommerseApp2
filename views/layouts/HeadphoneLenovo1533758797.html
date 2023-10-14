@@ -10,7 +10,7 @@
                 <img src="../ItemImages/HeadphoneLenovo1533758797.jpg">
             </div>
             <div id="infoWrapper">
-                <h1><del>199</del>100$</h1>
+                <h1><del></del>199$</h1>
                 <p>Lenovo Headphone. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 <input type="number" min=1 value=1 id="nmbrOfItms">
                 <b>Add to cart</b>
@@ -82,14 +82,14 @@
         document.addEventListener("click", function(evt){
             if(evt.target.tagName == "B"){
                 infoWrapper.style.pointerEvents = "none";
-                var newItem = "HeadphoneLenovo1533758797," + nmbrOfItms.value + ",100," + 27621 + ".";
+                var newItem = "HeadphoneLenovo1533758797," + nmbrOfItms.value + ",199," + 17356 + ".";
                 if(localStorage.MustafaAltaiePage == undefined) localStorage.MustafaAltaiePage = "";
                 localStorage.MustafaAltaiePage += newItem;
                 window.location.href = "/products";
             }
         });
 
-        var prise = 100;
+        var prise = 199;
 
         document.addEventListener("change", function(evt){
             if(evt.target.tagName == "INPUT"){
